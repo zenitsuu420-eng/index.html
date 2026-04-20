@@ -41,23 +41,7 @@ body {
   to{transform:scale(1);}
 }
 
-input,button{
-  padding:10px;
-  border-radius:10px;
-  border:none;
-  margin-top:10px;
-}
-
-button{
-  background:#00c9ff;
-  color:white;
-  cursor:pointer;
-}
-
-.hidden{display:none;}
-
 h1{font-size:26px;}
-
 p{min-height:60px}
 
 /* ❤️ hearts */
@@ -95,15 +79,7 @@ p{min-height:60px}
 <source src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_d1d2b2c4f3.mp3">
 </audio>
 
-<div class="box" id="login">
-  <h2>🔒 Enter Password</h2>
-  <input type="password" id="pass">
-  <br>
-  <button onclick="unlock()">Open Surprise 🎁</button>
-  <p id="msg"></p>
-</div>
-
-<div class="box hidden" id="main">
+<div class="box">
   <h1>🎉 Happy Birthday <span id="name"></span> ❤️</h1>
   <p id="text"></p>
 </div>
@@ -111,12 +87,10 @@ p{min-height:60px}
 <script>
 
 let gfName = "Riya";
-let passwordKey = "1234";
-
 document.getElementById("name").innerText = gfName;
 
 let msg = `😂 Hey ${gfName}!  
-Tum toh meri Netflix ho... bina subscription ke bhi love chal rha hai 😆❤️  
+Tum meri life ka most funny + lovely glitch ho 😆❤️  
 Happy Birthday jaan 🎂🔥`;
 
 let i=0;
@@ -129,25 +103,16 @@ function typing(){
   }
 }
 
-function unlock(){
-  let p = document.getElementById("pass").value;
+/* start everything automatically */
+window.onload = () => {
+  typing();
+  hearts();
+  memes();
+  fireworksLoop();
 
-  if(p === passwordKey){
-    document.getElementById("login").style.display="none";
-    document.getElementById("main").classList.remove("hidden");
-
-    let music = document.getElementById("music");
-    music.volume=0.7;
-    music.play().catch(()=>alert("Tap screen to play music 🎵"));
-
-    typing();
-    hearts();
-    memes();
-    fireworksLoop();
-
-  } else {
-    document.getElementById("msg").innerHTML="❌ Wrong password 😂 try again";
-  }
+  let music = document.getElementById("music");
+  music.volume=0.7;
+  music.play().catch(()=>console.log("Tap screen for music"));
 }
 
 /* ❤️ hearts */
@@ -163,19 +128,19 @@ function hearts(){
   },300);
 }
 
-/* 😂 meme popups */
-let memes = [
-"😂 Love error 404 not found… just kidding ❤️",
-"🤣 Tum meri WiFi ho… bina password connect ❤️",
-"😂 CPU bhi overheat ho gaya tumhe dekh ke 🔥",
-"🤣 Dil crash ho gaya… restart in love mode ❤️"
+/* 😂 memes */
+let memesList = [
+"😂 Tum meri RAM ho… bina tumhare system hang 😆",
+"🤣 Love.exe has started successfully ❤️",
+"😂 Tum offline ho tab bhi dil online rehta hai",
+"🤣 Warning: too much cuteness detected 💥"
 ];
 
 function memes(){
   setInterval(()=>{
     let m=document.createElement("div");
     m.className="meme";
-    m.innerHTML=memes[Math.floor(Math.random()*memes.length)];
+    m.innerHTML=memesList[Math.floor(Math.random()*memesList.length)];
     m.style.left=Math.random()*80+"vw";
     m.style.top=Math.random()*80+"vh";
     document.body.appendChild(m);
@@ -196,9 +161,6 @@ function fireworksLoop(){
 }
 
 </script>
-
-</body>
-</html>
 
 </body>
 </html>
