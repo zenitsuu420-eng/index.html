@@ -1,152 +1,204 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Special Surprise ❤️</title>
+<meta charset="UTF-8">
+<title>Ultimate Surprise ❤️</title>
 
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: Arial;
-      overflow: hidden;
-      background: linear-gradient(-45deg, #ff4d6d, #7b2ff7, #00c9ff, #ffcc70);
-      background-size: 400% 400%;
-      animation: bg 10s ease infinite;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-    }
+<style>
+body {
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  font-family: Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: linear-gradient(-45deg,#ff4d6d,#7b2ff7,#00c9ff,#ffcc70);
+  background-size:400% 400%;
+  animation:bg 8s ease infinite;
+  color:white;
+}
 
-    @keyframes bg {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+@keyframes bg {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
 
-    .box {
-      text-align: center;
-      background: rgba(0,0,0,0.5);
-      padding: 25px;
-      border-radius: 15px;
-      width: 85%;
-      max-width: 420px;
-      box-shadow: 0 0 25px rgba(255,255,255,0.3);
-      z-index: 2;
-    }
+.box {
+  background: rgba(0,0,0,0.6);
+  padding:25px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:420px;
+  box-shadow:0 0 30px rgba(255,255,255,0.3);
+  animation:pop 0.8s ease;
+}
 
-    input {
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      margin-top: 10px;
-      text-align: center;
-      width: 80%;
-    }
+@keyframes pop {
+  from{transform:scale(0);}
+  to{transform:scale(1);}
+}
 
-    button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      background: #00c9ff;
-      color: white;
-      cursor: pointer;
-    }
+input,button{
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  margin-top:10px;
+}
 
-    .hidden { display: none; }
+button{
+  background:#00c9ff;
+  color:white;
+  cursor:pointer;
+}
 
-    h1 { font-size: 28px; }
+.hidden{display:none;}
 
-    p { font-size: 16px; min-height: 60px; }
+h1{font-size:26px;}
 
-    /* hearts */
-    .heart {
-      position: absolute;
-      color: red;
-      font-size: 18px;
-      animation: float 6s linear infinite;
-    }
+p{min-height:60px}
 
-    @keyframes float {
-      0% {transform: translateY(100vh) scale(0);}
-      100% {transform: translateY(-10vh) scale(1.5);}
-    }
-  </style>
+/* ❤️ hearts */
+.heart,.meme {
+  position:absolute;
+  font-size:20px;
+  animation:float 6s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh) scale(0);}
+  100%{transform:translateY(-10vh) scale(1.5);}
+}
+
+/* 🎆 fireworks */
+.firework{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:yellow;
+  border-radius:50%;
+  animation:boom 1s ease-out forwards;
+}
+
+@keyframes boom{
+  0%{transform:scale(1);opacity:1;}
+  100%{transform:scale(15);opacity:0;}
+}
+</style>
 </head>
 
 <body>
 
-<!-- 🎵 MUSIC -->
 <audio id="music" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_d1d2b2c4f3.mp3?filename=romantic-music-ambient-11075.mp3">
+<source src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_d1d2b2c4f3.mp3">
 </audio>
 
-<!-- LOGIN -->
-<div class="box" id="loginBox">
+<div class="box" id="login">
   <h2>🔒 Enter Password</h2>
-  <input type="password" id="pass" placeholder="Enter password">
+  <input type="password" id="pass">
   <br>
-  <button onclick="unlock()">Unlock Surprise</button>
+  <button onclick="unlock()">Open Surprise 🎁</button>
   <p id="msg"></p>
 </div>
 
-<!-- SURPRISE -->
-<div class="box hidden" id="surpriseBox">
+<div class="box hidden" id="main">
   <h1>🎉 Happy Birthday <span id="name"></span> ❤️</h1>
   <p id="text"></p>
 </div>
 
 <script>
-  // 💖 CHANGE HERE
-  let gfName = "GF_NAME";
-  let passwordKey = "love123";
 
-  document.getElementById("name").innerText = gfName;
+let gfName = "Riya";
+let passwordKey = "1234";
 
-  // typing message
-  let msg = gfName + " 💖 Tum meri life ka sabse special insaan ho 😘 Happy Birthday jaan 🎂❤️";
-  let i = 0;
+document.getElementById("name").innerText = gfName;
 
-  function typing() {
-    if(i < msg.length) {
-      document.getElementById("text").innerHTML += msg.charAt(i);
-      i++;
-      setTimeout(typing, 50);
-    }
+let msg = `😂 Hey ${gfName}!  
+Tum toh meri Netflix ho... bina subscription ke bhi love chal rha hai 😆❤️  
+Happy Birthday jaan 🎂🔥`;
+
+let i=0;
+
+function typing(){
+  if(i<msg.length){
+    document.getElementById("text").innerHTML += msg.charAt(i);
+    i++;
+    setTimeout(typing,40);
   }
+}
 
-  function unlock() {
-    let pass = document.getElementById("pass").value;
+function unlock(){
+  let p = document.getElementById("pass").value;
 
-    if(pass === passwordKey) {
-      document.getElementById("loginBox").style.display = "none";
-      document.getElementById("surpriseBox").classList.remove("hidden");
+  if(p === passwordKey){
+    document.getElementById("login").style.display="none";
+    document.getElementById("main").classList.remove("hidden");
 
-      document.getElementById("music").play();
-      typing();
-      startHearts();
-    } else {
-      document.getElementById("msg").innerHTML = "❌ Wrong Password!";
-    }
+    let music = document.getElementById("music");
+    music.volume=0.7;
+    music.play().catch(()=>alert("Tap screen to play music 🎵"));
+
+    typing();
+    hearts();
+    memes();
+    fireworksLoop();
+
+  } else {
+    document.getElementById("msg").innerHTML="❌ Wrong password 😂 try again";
   }
+}
 
-  // ❤️ floating hearts
-  function startHearts() {
-    setInterval(() => {
-      let heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-      document.body.appendChild(heart);
+/* ❤️ hearts */
+function hearts(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤️";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*3+3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  },300);
+}
 
-      setTimeout(() => heart.remove(), 6000);
-    }, 300);
-  }
+/* 😂 meme popups */
+let memes = [
+"😂 Love error 404 not found… just kidding ❤️",
+"🤣 Tum meri WiFi ho… bina password connect ❤️",
+"😂 CPU bhi overheat ho gaya tumhe dekh ke 🔥",
+"🤣 Dil crash ho gaya… restart in love mode ❤️"
+];
+
+function memes(){
+  setInterval(()=>{
+    let m=document.createElement("div");
+    m.className="meme";
+    m.innerHTML=memes[Math.floor(Math.random()*memes.length)];
+    m.style.left=Math.random()*80+"vw";
+    m.style.top=Math.random()*80+"vh";
+    document.body.appendChild(m);
+    setTimeout(()=>m.remove(),3000);
+  },2000);
+}
+
+/* 🎆 fireworks */
+function fireworksLoop(){
+  setInterval(()=>{
+    let f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*100+"vh";
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1000);
+  },400);
+}
+
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
