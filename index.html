@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Special Surprise ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial;
+      overflow: hidden;
+      background: linear-gradient(-45deg, #ff4d6d, #7b2ff7, #00c9ff, #ffcc70);
+      background-size: 400% 400%;
+      animation: bg 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    @keyframes bg {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .box {
+      text-align: center;
+      background: rgba(0,0,0,0.5);
+      padding: 25px;
+      border-radius: 15px;
+      width: 85%;
+      max-width: 420px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.3);
+      z-index: 2;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      margin-top: 10px;
+      text-align: center;
+      width: 80%;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #00c9ff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hidden { display: none; }
+
+    h1 { font-size: 28px; }
+
+    p { font-size: 16px; min-height: 60px; }
+
+    /* hearts */
+    .heart {
+      position: absolute;
+      color: red;
+      font-size: 18px;
+      animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+      0% {transform: translateY(100vh) scale(0);}
+      100% {transform: translateY(-10vh) scale(1.5);}
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/02/22/audio_d1d2b2c4f3.mp3?filename=romantic-music-ambient-11075.mp3">
+</audio>
+
+<!-- LOGIN -->
+<div class="box" id="loginBox">
+  <h2>🔒 Enter Password</h2>
+  <input type="password" id="pass" placeholder="Enter password">
+  <br>
+  <button onclick="unlock()">Unlock Surprise</button>
+  <p id="msg"></p>
+</div>
+
+<!-- SURPRISE -->
+<div class="box hidden" id="surpriseBox">
+  <h1>🎉 Happy Birthday <span id="name"></span> ❤️</h1>
+  <p id="text"></p>
+</div>
+
+<script>
+  // 💖 CHANGE HERE
+  let gfName = "GF_NAME";
+  let passwordKey = "love123";
+
+  document.getElementById("name").innerText = gfName;
+
+  // typing message
+  let msg = gfName + " 💖 Tum meri life ka sabse special insaan ho 😘 Happy Birthday jaan 🎂❤️";
+  let i = 0;
+
+  function typing() {
+    if(i < msg.length) {
+      document.getElementById("text").innerHTML += msg.charAt(i);
+      i++;
+      setTimeout(typing, 50);
+    }
+  }
+
+  function unlock() {
+    let pass = document.getElementById("pass").value;
+
+    if(pass === passwordKey) {
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("surpriseBox").classList.remove("hidden");
+
+      document.getElementById("music").play();
+      typing();
+      startHearts();
+    } else {
+      document.getElementById("msg").innerHTML = "❌ Wrong Password!";
+    }
+  }
+
+  // ❤️ floating hearts
+  function startHearts() {
+    setInterval(() => {
+      let heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
