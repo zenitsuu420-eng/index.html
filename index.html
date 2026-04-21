@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Love ❤️</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+<title>My Love ❤️ ULTRA CINEMATIC EDITION</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
 
 <style>
-body {
+body{
   margin:0;
   font-family:Poppins;
   overflow:hidden;
@@ -15,105 +14,181 @@ body {
   color:white;
 }
 
-/* Pages */
-.page {
+/* LOADER */
+#loader{
+  position:fixed;
+  width:100%;
+  height:100vh;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  z-index:999;
+}
+.spinner{
+  width:60px;
+  height:60px;
+  border:5px solid #333;
+  border-top:5px solid #ff4d6d;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* BACKGROUND STARS */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  animation:twinkle 3s infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:0.2}
+  50%{opacity:1}
+}
+
+.page{
   position:absolute;
   width:100%;
   height:100vh;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   flex-direction:column;
-  transition:1s;
-}
-.hidden {opacity:0; pointer-events:none;}
-
-h1 {
-  font-size:50px;
+  transition:1s ease;
   text-align:center;
 }
+.hidden{opacity:0; pointer-events:none; transform:scale(0.95)}
 
-.glow {
+h1{font-size:55px;}
+.glow{
   color:#ff4d6d;
-  text-shadow:0 0 20px #ff4d6d;
+  text-shadow:0 0 20px #ff4d6d,0 0 60px #ff2e63;
 }
 
-button {
-  padding:12px 25px;
+button{
+  padding:14px 30px;
   border:none;
-  border-radius:25px;
-  background:#ff4d6d;
+  border-radius:40px;
+  background:linear-gradient(45deg,#ff4d6d,#ff2e63,#ff8fa3);
   color:white;
+  font-weight:700;
   cursor:pointer;
   margin-top:20px;
+  box-shadow:0 0 20px #ff4d6d;
 }
+button:hover{transform:scale(1.1)}
 
-/* input */
-input {
-  padding:10px;
+input{
+  padding:12px;
   border-radius:10px;
   border:none;
+  outline:none;
 }
 
-/* slideshow */
-.gallery img {
-  width:260px;
-  border-radius:20px;
+/* HEART */
+.heart{
+  position:absolute;
+  animation:float 6s linear forwards;
+}
+@keyframes float{
+  0%{transform:translateY(100vh); opacity:1}
+  100%{transform:translateY(-10vh); opacity:0}
+}
+
+/* CINEMATIC OVERLAY */
+#fade{
+  position:fixed;
+  width:100%;
+  height:100vh;
+  background:black;
+  opacity:0;
+  pointer-events:none;
+  transition:0.8s;
+  z-index:998;
+}
+
+/* MUSIC CONTROL */
+#musicBtn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:10px 15px;
+  border-radius:50px;
+  background:#ff4d6d;
+  cursor:pointer;
+  z-index:1000;
+}
+
+/* GALLERY 3D */
+.gallery img{
+  width:320px;
+  border-radius:25px;
   position:absolute;
   opacity:0;
   transition:1s;
+  box-shadow:0 0 40px #ff4d6d;
 }
-.gallery img.active {opacity:1;}
+.gallery img.active{opacity:1; transform:scale(1.1)}
 
-/* hearts */
-.heart {
+/* CONFETTI */
+.confetti{
   position:absolute;
-  animation:float 5s linear infinite;
+  width:8px;
+  height:8px;
+  animation:fall 4s linear forwards;
 }
-@keyframes float {
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-10vh);}
+@keyframes fall{
+  0%{transform:translateY(-10vh) rotate(0)}
+  100%{transform:translateY(110vh) rotate(720deg);opacity:0}
 }
 
-/* fade */
-.fade {
-  animation:fade 2s;
-}
-@keyframes fade {
-  from{opacity:0;}
-  to{opacity:1;}
-}
+.fade{animation:fade 1.5s}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
 </style>
 </head>
 
 <body>
 
-<audio autoplay loop>
+<div id="loader">
+  <div class="spinner"></div>
+  <p>Loading Love Story...</p>
+</div>
+
+<div id="fade"></div>
+
+<audio id="music" autoplay loop>
   <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b9b2c.mp3">
 </audio>
 
-<!-- PAGE 1 LOCK -->
+<div id="musicBtn" onclick="toggleMusic()">🎵</div>
+
+<!-- PAGE 1 -->
 <div id="p1" class="page fade">
-  <h1>🔐 Enter Love Code</h1>
-  <input id="pass" placeholder="Enter code">
-  <button onclick="check()">Unlock ❤️</button>
+  <h1 class="glow">💖 CINEMATIC LOVE STORY</h1>
+  <button onclick="next(1)">Begin Journey</button>
 </div>
 
-<!-- PAGE 2 INTRO -->
+<!-- PAGE 2 -->
 <div id="p2" class="page hidden">
-  <h1 class="glow" id="name"></h1>
-  <p>Something special is waiting for you 💖</p>
-  <button onclick="next(2)">Start</button>
+  <h1>Enter Name ❤️</h1>
+  <input id="nameInput" placeholder="Her Name">
+  <button onclick="setName()">Continue</button>
 </div>
 
-<!-- PAGE 3 STORY -->
+<!-- PAGE 3 -->
 <div id="p3" class="page hidden">
-  <h1 id="typing"></h1>
-  <button onclick="next(3)">Next</button>
+  <h1 id="showName" class="glow"></h1>
+  <p>From strangers to forever ❤️</p>
+  <button onclick="next(3)">Next Scene</button>
 </div>
 
-<!-- PAGE 4 GALLERY -->
+<!-- PAGE 4 -->
 <div id="p4" class="page hidden">
+  <h1>Memories Reel 📸</h1>
   <div class="gallery">
     <img src="https://picsum.photos/300?1" class="active">
     <img src="https://picsum.photos/300?2">
@@ -122,73 +197,103 @@ input {
   <button onclick="next(4)">Next</button>
 </div>
 
-<!-- PAGE 5 FINAL -->
+<!-- PAGE 5 -->
 <div id="p5" class="page hidden">
-  <h1>🎂 Happy Birthday ❤️</h1>
-  <p>You are my world 🌍💖</p>
-  <button onclick="next(5)">Final Message 💌</button>
+  <h1 class="glow">💖 Final Emotion</h1>
+  <p>Every moment with you is magic ✨</p>
+  <button onclick="finalScene()">Reveal</button>
 </div>
 
-<!-- PAGE 6 MESSAGE -->
+<!-- PAGE 6 -->
 <div id="p6" class="page hidden">
-  <h1>I Love You Forever ❤️</h1>
-  <p>Thank you for being in my life 💖</p>
-  <button onclick="share()">Share 💬</button>
+  <h1 class="glow">🎂 HAPPY BIRTHDAY LOVE ❤️</h1>
+  <p>You are my forever universe 🌍</p>
+  <button onclick="share()">Share Love</button>
 </div>
 
 <script>
-let gfName="Riya ❤️";
-let password="1234";
+let music=document.getElementById("music");
 
-function check(){
-  if(document.getElementById("pass").value===password){
-    next(1);
-    document.getElementById("name").innerText=gfName;
-  } else alert("Wrong 😢");
+window.onload=()=>{
+  setTimeout(()=>document.getElementById("loader").style.display="none",2000);
+  createStars();
+}
+
+function createStars(){
+  for(let i=0;i<80;i++){
+    let s=document.createElement("div");
+    s.className="star";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    document.body.appendChild(s);
+  }
 }
 
 function next(n){
-  document.getElementById("p"+n).classList.add("hidden");
-  document.getElementById("p"+(n+1)).classList.remove("hidden");
+  transition(()=>{
+    document.getElementById("p"+n).classList.add("hidden");
+    document.getElementById("p"+(n+1)).classList.remove("hidden");
+  });
 }
 
-/* typing */
-let text="From strangers to everything... you became my happiness ❤️";
-let i=0;
-function type(){
-  if(i<text.length){
-    document.getElementById("typing").innerHTML+=text[i];
-    i++;
-    setTimeout(type,40);
-  }
+function setName(){
+  let name=document.getElementById("nameInput").value;
+  document.getElementById("showName").innerText="My Love " + name + " ❤️";
+  next(2);
 }
-type();
 
-/* hearts */
+function transition(cb){
+  let f=document.getElementById("fade");
+  f.style.opacity=1;
+  setTimeout(()=>{
+    cb();
+    f.style.opacity=0;
+  },500);
+}
+
+/* MUSIC */
+function toggleMusic(){
+  if(music.paused) music.play();
+  else music.pause();
+}
+
+/* HEARTS */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
   h.innerHTML="❤️";
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(20+Math.random()*30)+"px";
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),5000);
-},300);
+  setTimeout(()=>h.remove(),6000);
+},250);
 
-/* gallery */
+/* GALLERY */
 let imgs=document.querySelectorAll(".gallery img");
 let idx=0;
 setInterval(()=>{
-  imgs[idx].classList.remove("active");
-  idx=(idx+1)%imgs.length;
-  imgs[idx].classList.add("active");
+  if(imgs.length){
+    imgs[idx].classList.remove("active");
+    idx=(idx+1)%imgs.length;
+    imgs[idx].classList.add("active");
+  }
 },2000);
 
-/* share */
+/* FINAL SCENE */
+function finalScene(){
+  next(5);
+  for(let i=0;i<100;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*100+"vw";
+    c.style.background=["#ff4d6d","gold","white"][Math.floor(Math.random()*3)];
+    document.body.appendChild(c);
+    setTimeout(()=>c.remove(),4000);
+  }
+}
+
+/* SHARE */
 function share(){
-  let msg="Hey ❤️ open this surprise!";
-  let url=window.location.href;
-  window.open("https://wa.me/?text="+encodeURIComponent(msg+" "+url));
+  window.open("https://wa.me/?text="+encodeURIComponent("❤️ Watch this cinematic love story " + window.location.href));
 }
 </script>
 
