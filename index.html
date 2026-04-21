@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>For My Love ❤️</title>
+<title>Secret Surprise ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
 
@@ -11,145 +11,182 @@ body {
   margin:0;
   font-family:Poppins;
   overflow:hidden;
+  background:black;
+  color:white;
 }
 
 /* Pages */
 .page {
-  height:100vh;
+  position:absolute;
   width:100%;
+  height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
-  position:absolute;
-  top:0;
-  left:0;
   transition:1s;
 }
+.hidden {opacity:0; pointer-events:none;}
 
-/* Hidden pages */
-.hidden { opacity:0; pointer-events:none; }
+h1 {font-size:55px; text-align:center;}
+p {font-size:20px; text-align:center; max-width:500px;}
 
-/* Page backgrounds */
-#p1 { background:white; }
-#p2 { background:#ffe6eb; }
-#p3 { background:#fff0f5; }
-#p4 { background:#ffe6f0; }
-#p5 { background:#fff; }
-
-/* Text */
-h1 {
-  font-size:60px;
-  margin:0;
-}
-
-p {
-  font-size:20px;
-  max-width:500px;
-  text-align:center;
-}
-
-/* Button */
 button {
-  margin-top:30px;
   padding:12px 25px;
   border:none;
   background:#ff4d6d;
   color:white;
   border-radius:25px;
+  margin-top:20px;
   cursor:pointer;
+}
+
+/* Input */
+input {
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  text-align:center;
 }
 
 /* Hearts */
 .heart {
   position:absolute;
-  color:red;
   animation: float 5s linear infinite;
 }
-
 @keyframes float {
-  0% { transform:translateY(100vh); opacity:1;}
-  100% { transform:translateY(-10vh); opacity:0;}
+  0% {transform:translateY(100vh); opacity:1;}
+  100% {transform:translateY(-10vh); opacity:0;}
 }
 
-/* Typewriter */
-.type {
-  border-right:2px solid black;
-  white-space:nowrap;
-  overflow:hidden;
+/* Slideshow */
+.slideshow img {
+  width:250px;
+  border-radius:20px;
+  display:none;
+}
+.slideshow img.active {
+  display:block;
+}
+
+/* Fireworks */
+canvas {
+  position:absolute;
+  top:0;
+  left:0;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
 <audio autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
 
-<!-- PAGE 1 -->
+<!-- PAGE 1 PASSWORD -->
 <div id="p1" class="page">
-  <h1>IT'S YOUR DAY.. 🎁</h1>
-  <p>So I made something special for you ❤️</p>
-  <button onclick="next(1)">Start 💖</button>
+  <h1>Enter Secret Code 🔐</h1>
+  <input id="pass" placeholder="Enter code">
+  <button onclick="check()">Unlock ❤️</button>
 </div>
 
 <!-- PAGE 2 -->
 <div id="p2" class="page hidden">
-  <h1 class="type" id="typing"></h1>
-  <button onclick="next(2)">Next ➡️</button>
+  <h1 id="name"></h1>
+  <p>Welcome to your surprise 💖</p>
+  <button onclick="next(2)">Start</button>
 </div>
 
-<!-- PAGE 3 -->
+<!-- PAGE 3 TYPE -->
 <div id="p3" class="page hidden">
-  <h1>You are my everything 💕</h1>
-  <p>Every moment with you is special 💖</p>
-  <button onclick="next(3)">Next ➡️</button>
+  <h1 id="typing"></h1>
+  <button onclick="next(3)">Next</button>
 </div>
 
-<!-- PAGE 4 -->
+<!-- PAGE 4 SLIDESHOW -->
 <div id="p4" class="page hidden">
-  <h1>I Love You ❤️</h1>
-  <p>Forever & Always 💫</p>
-  <button onclick="next(4)">Final Surprise 🎂</button>
+  <div class="slideshow">
+    <img src="https://i.imgur.com/1.jpg" class="active">
+    <img src="https://i.imgur.com/2.jpg">
+    <img src="https://i.imgur.com/3.jpg">
+  </div>
+  <button onclick="next(4)">Next</button>
 </div>
 
-<!-- PAGE 5 -->
+<!-- PAGE 5 FINAL -->
 <div id="p5" class="page hidden">
+  <canvas id="fire"></canvas>
   <h1>🎂 Happy Birthday My Love 🎂</h1>
-  <p>Stay happy, keep smiling, I love you forever ❤️</p>
+  <p>I Love You Forever ❤️</p>
 </div>
 
 <script>
+let gfName = "Riya ❤️"; // CHANGE NAME
+let password = "1234"; // CHANGE PASSWORD
+
+function check(){
+  let val = document.getElementById("pass").value;
+  if(val === password){
+    next(1);
+    document.getElementById("name").innerText = gfName;
+  } else {
+    alert("Wrong Password 😢");
+  }
+}
+
 function next(n){
   document.getElementById("p"+n).classList.add("hidden");
   document.getElementById("p"+(n+1)).classList.remove("hidden");
 }
 
 /* TYPEWRITER */
-let text = "From the day you came into my life... everything changed ❤️";
-let i = 0;
+let text="From the moment you came into my life... everything became beautiful ❤️";
+let i=0;
 function type(){
-  if(i < text.length){
-    document.getElementById("typing").innerHTML += text.charAt(i);
+  if(i<text.length){
+    document.getElementById("typing").innerHTML+=text.charAt(i);
     i++;
-    setTimeout(type,50);
+    setTimeout(type,40);
   }
 }
 type();
 
 /* HEARTS */
 setInterval(()=>{
-  let heart = document.createElement("div");
+  let heart=document.createElement("div");
   heart.className="heart";
-  heart.style.left=Math.random()*100+"vw";
   heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
   heart.style.fontSize=(20+Math.random()*30)+"px";
   document.body.appendChild(heart);
-
   setTimeout(()=>heart.remove(),5000);
 },300);
+
+/* SLIDESHOW */
+let slides=document.querySelectorAll(".slideshow img");
+let index=0;
+setInterval(()=>{
+  slides[index].classList.remove("active");
+  index=(index+1)%slides.length;
+  slides[index].classList.add("active");
+},2000);
+
+/* FIREWORKS SIMPLE */
+let c=document.getElementById("fire");
+let ctx=c.getContext("2d");
+c.width=window.innerWidth;
+c.height=window.innerHeight;
+
+function fire(){
+  ctx.fillStyle="rgba(0,0,0,0.2)";
+  ctx.fillRect(0,0,c.width,c.height);
+  for(let i=0;i<50;i++){
+    ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
+    ctx.fillRect(Math.random()*c.width,Math.random()*c.height,3,3);
+  }
+}
+setInterval(fire,50);
 </script>
 
 </body>
