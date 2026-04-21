@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Secret Surprise ❤️</title>
+<title>My Love ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
 
@@ -28,52 +28,60 @@ body {
 }
 .hidden {opacity:0; pointer-events:none;}
 
-h1 {font-size:55px; text-align:center;}
-p {font-size:20px; text-align:center; max-width:500px;}
+h1 {
+  font-size:50px;
+  text-align:center;
+}
+
+.glow {
+  color:#ff4d6d;
+  text-shadow:0 0 20px #ff4d6d;
+}
 
 button {
   padding:12px 25px;
   border:none;
+  border-radius:25px;
   background:#ff4d6d;
   color:white;
-  border-radius:25px;
-  margin-top:20px;
   cursor:pointer;
+  margin-top:20px;
 }
 
-/* Input */
+/* input */
 input {
   padding:10px;
   border-radius:10px;
   border:none;
-  text-align:center;
 }
 
-/* Hearts */
+/* slideshow */
+.gallery img {
+  width:260px;
+  border-radius:20px;
+  position:absolute;
+  opacity:0;
+  transition:1s;
+}
+.gallery img.active {opacity:1;}
+
+/* hearts */
 .heart {
   position:absolute;
-  animation: float 5s linear infinite;
+  animation:float 5s linear infinite;
 }
 @keyframes float {
-  0% {transform:translateY(100vh); opacity:1;}
-  100% {transform:translateY(-10vh); opacity:0;}
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
 }
 
-/* Slideshow */
-.slideshow img {
-  width:250px;
-  border-radius:20px;
-  display:none;
+/* fade */
+.fade {
+  animation:fade 2s;
 }
-.slideshow img.active {
-  display:block;
-}
-
-/* Fireworks */
-canvas {
-  position:absolute;
-  top:0;
-  left:0;
+@keyframes fade {
+  from{opacity:0;}
+  to{opacity:1;}
 }
 </style>
 </head>
@@ -81,58 +89,62 @@ canvas {
 <body>
 
 <audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_115b9b9b2c.mp3">
 </audio>
 
-<!-- PAGE 1 PASSWORD -->
-<div id="p1" class="page">
-  <h1>Enter Secret Code 🔐</h1>
+<!-- PAGE 1 LOCK -->
+<div id="p1" class="page fade">
+  <h1>🔐 Enter Love Code</h1>
   <input id="pass" placeholder="Enter code">
   <button onclick="check()">Unlock ❤️</button>
 </div>
 
-<!-- PAGE 2 -->
+<!-- PAGE 2 INTRO -->
 <div id="p2" class="page hidden">
-  <h1 id="name"></h1>
-  <p>Welcome to your surprise 💖</p>
+  <h1 class="glow" id="name"></h1>
+  <p>Something special is waiting for you 💖</p>
   <button onclick="next(2)">Start</button>
 </div>
 
-<!-- PAGE 3 TYPE -->
+<!-- PAGE 3 STORY -->
 <div id="p3" class="page hidden">
   <h1 id="typing"></h1>
   <button onclick="next(3)">Next</button>
 </div>
 
-<!-- PAGE 4 SLIDESHOW -->
+<!-- PAGE 4 GALLERY -->
 <div id="p4" class="page hidden">
-  <div class="slideshow">
-    <img src="https://i.imgur.com/1.jpg" class="active">
-    <img src="https://i.imgur.com/2.jpg">
-    <img src="https://i.imgur.com/3.jpg">
+  <div class="gallery">
+    <img src="https://picsum.photos/300?1" class="active">
+    <img src="https://picsum.photos/300?2">
+    <img src="https://picsum.photos/300?3">
   </div>
   <button onclick="next(4)">Next</button>
 </div>
 
 <!-- PAGE 5 FINAL -->
 <div id="p5" class="page hidden">
-  <canvas id="fire"></canvas>
-  <h1>🎂 Happy Birthday My Love 🎂</h1>
-  <p>I Love You Forever ❤️</p>
+  <h1>🎂 Happy Birthday ❤️</h1>
+  <p>You are my world 🌍💖</p>
+  <button onclick="next(5)">Final Message 💌</button>
+</div>
+
+<!-- PAGE 6 MESSAGE -->
+<div id="p6" class="page hidden">
+  <h1>I Love You Forever ❤️</h1>
+  <p>Thank you for being in my life 💖</p>
+  <button onclick="share()">Share 💬</button>
 </div>
 
 <script>
-let gfName = "Riya ❤️"; // CHANGE NAME
-let password = "1234"; // CHANGE PASSWORD
+let gfName="Riya ❤️";
+let password="1234";
 
 function check(){
-  let val = document.getElementById("pass").value;
-  if(val === password){
+  if(document.getElementById("pass").value===password){
     next(1);
-    document.getElementById("name").innerText = gfName;
-  } else {
-    alert("Wrong Password 😢");
-  }
+    document.getElementById("name").innerText=gfName;
+  } else alert("Wrong 😢");
 }
 
 function next(n){
@@ -140,53 +152,44 @@ function next(n){
   document.getElementById("p"+(n+1)).classList.remove("hidden");
 }
 
-/* TYPEWRITER */
-let text="From the moment you came into my life... everything became beautiful ❤️";
+/* typing */
+let text="From strangers to everything... you became my happiness ❤️";
 let i=0;
 function type(){
   if(i<text.length){
-    document.getElementById("typing").innerHTML+=text.charAt(i);
+    document.getElementById("typing").innerHTML+=text[i];
     i++;
     setTimeout(type,40);
   }
 }
 type();
 
-/* HEARTS */
+/* hearts */
 setInterval(()=>{
-  let heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="❤️";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.fontSize=(20+Math.random()*30)+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),5000);
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(20+Math.random()*30)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),5000);
 },300);
 
-/* SLIDESHOW */
-let slides=document.querySelectorAll(".slideshow img");
-let index=0;
+/* gallery */
+let imgs=document.querySelectorAll(".gallery img");
+let idx=0;
 setInterval(()=>{
-  slides[index].classList.remove("active");
-  index=(index+1)%slides.length;
-  slides[index].classList.add("active");
+  imgs[idx].classList.remove("active");
+  idx=(idx+1)%imgs.length;
+  imgs[idx].classList.add("active");
 },2000);
 
-/* FIREWORKS SIMPLE */
-let c=document.getElementById("fire");
-let ctx=c.getContext("2d");
-c.width=window.innerWidth;
-c.height=window.innerHeight;
-
-function fire(){
-  ctx.fillStyle="rgba(0,0,0,0.2)";
-  ctx.fillRect(0,0,c.width,c.height);
-  for(let i=0;i<50;i++){
-    ctx.fillStyle="hsl("+Math.random()*360+",100%,50%)";
-    ctx.fillRect(Math.random()*c.width,Math.random()*c.height,3,3);
-  }
+/* share */
+function share(){
+  let msg="Hey ❤️ open this surprise!";
+  let url=window.location.href;
+  window.open("https://wa.me/?text="+encodeURIComponent(msg+" "+url));
 }
-setInterval(fire,50);
 </script>
 
 </body>
