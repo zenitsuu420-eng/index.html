@@ -2,141 +2,154 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise ❤️</title>
+<title>For My Love ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700&display=swap" rel="stylesheet">
 
 <style>
 body {
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
+  margin:0;
+  font-family:Poppins;
+  overflow:hidden;
 }
 
-/* Background grid */
-.container {
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(#eee 1px, transparent 1px),
-                    linear-gradient(90deg, #eee 1px, transparent 1px);
-  background-size: 40px 40px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Pages */
+.page {
+  height:100vh;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  position:absolute;
+  top:0;
+  left:0;
+  transition:1s;
 }
 
-/* Flowers decoration */
-.flower {
-  position: absolute;
-  width: 100px;
-  animation: float 6s infinite ease-in-out;
-}
+/* Hidden pages */
+.hidden { opacity:0; pointer-events:none; }
 
-.flower.top-left { top: 20px; left: 20px; }
-.flower.bottom-right { bottom: 20px; right: 20px; }
+/* Page backgrounds */
+#p1 { background:white; }
+#p2 { background:#ffe6eb; }
+#p3 { background:#fff0f5; }
+#p4 { background:#ffe6f0; }
+#p5 { background:#fff; }
 
-/* Main text */
-.text-box {
-  text-align: center;
-  animation: fadeIn 2s ease-in-out;
-}
-
+/* Text */
 h1 {
-  font-size: 60px;
-  font-weight: 700;
-  color: black;
-  animation: pop 1.5s ease;
+  font-size:60px;
+  margin:0;
 }
 
 p {
-  font-size: 18px;
-  color: #555;
-  margin-top: 10px;
-  animation: fadeIn 3s ease;
+  font-size:20px;
+  max-width:500px;
+  text-align:center;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Button */
+button {
+  margin-top:30px;
+  padding:12px 25px;
+  border:none;
+  background:#ff4d6d;
+  color:white;
+  border-radius:25px;
+  cursor:pointer;
 }
 
-@keyframes pop {
-  0% { transform: scale(0); }
-  100% { transform: scale(1); }
+/* Hearts */
+.heart {
+  position:absolute;
+  color:red;
+  animation: float 5s linear infinite;
 }
 
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
+  0% { transform:translateY(100vh); opacity:1;}
+  100% { transform:translateY(-10vh); opacity:0;}
 }
 
-/* Next page button */
-button {
-  margin-top: 30px;
-  padding: 12px 25px;
-  border: none;
-  background: #ff4d6d;
-  color: white;
-  font-size: 16px;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #ff1e4d;
+/* Typewriter */
+.type {
+  border-right:2px solid black;
+  white-space:nowrap;
+  overflow:hidden;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- MUSIC -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
+</audio>
 
-  <!-- Decorative Images -->
-  <img src="https://i.imgur.com/3ZQ3ZQp.png" class="flower top-left">
-  <img src="https://i.imgur.com/3ZQ3ZQp.png" class="flower bottom-right">
+<!-- PAGE 1 -->
+<div id="p1" class="page">
+  <h1>IT'S YOUR DAY.. 🎁</h1>
+  <p>So I made something special for you ❤️</p>
+  <button onclick="next(1)">Start 💖</button>
+</div>
 
-  <!-- Text -->
-  <div class="text-box">
-    <h1>IT'S YOUR DAY..</h1>
-    <p>And I made something special for you ❤️</p>
+<!-- PAGE 2 -->
+<div id="p2" class="page hidden">
+  <h1 class="type" id="typing"></h1>
+  <button onclick="next(2)">Next ➡️</button>
+</div>
 
-    <button onclick="nextPage()">Click Me 💖</button>
-  </div>
+<!-- PAGE 3 -->
+<div id="p3" class="page hidden">
+  <h1>You are my everything 💕</h1>
+  <p>Every moment with you is special 💖</p>
+  <button onclick="next(3)">Next ➡️</button>
+</div>
 
+<!-- PAGE 4 -->
+<div id="p4" class="page hidden">
+  <h1>I Love You ❤️</h1>
+  <p>Forever & Always 💫</p>
+  <button onclick="next(4)">Final Surprise 🎂</button>
+</div>
+
+<!-- PAGE 5 -->
+<div id="p5" class="page hidden">
+  <h1>🎂 Happy Birthday My Love 🎂</h1>
+  <p>Stay happy, keep smiling, I love you forever ❤️</p>
 </div>
 
 <script>
-function nextPage(){
-  document.body.innerHTML = `
-  <div style="
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    background:#fff;
-    font-family:Poppins;
-    text-align:center;
-    animation:fadeIn 2s;">
-    
-    <h1 style="font-size:50px;">Happy Birthday My Love 🎂</h1>
-    <p style="max-width:500px;">
-      You are the most special person in my life ❤️  
-      Thank you for being with me always 💕  
-    </p>
-  </div>
-  `;
+function next(n){
+  document.getElementById("p"+n).classList.add("hidden");
+  document.getElementById("p"+(n+1)).classList.remove("hidden");
 }
+
+/* TYPEWRITER */
+let text = "From the day you came into my life... everything changed ❤️";
+let i = 0;
+function type(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(type,50);
+  }
+}
+type();
+
+/* HEARTS */
+setInterval(()=>{
+  let heart = document.createElement("div");
+  heart.className="heart";
+  heart.style.left=Math.random()*100+"vw";
+  heart.innerHTML="❤️";
+  heart.style.fontSize=(20+Math.random()*30)+"px";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),5000);
+},300);
 </script>
 
 </body>
