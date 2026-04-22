@@ -1,155 +1,17 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Wish For You!</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
-            color: #333;
-            overflow-x: hidden;
-        }
 
-        /* Floating Emojis Animation */
-        .emoji {
-            position: fixed;
-            top: -10%;
-            z-index: 999;
-            user-select: none;
-            pointer-events: none;
-            animation: fall linear forwards;
-        }
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday </title>
+    <script type="module" crossorigin src="/assets/index-Bg1leAGH.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-CMJSqPZj.css">
+  </head>
+  <body>
+    <div id="root"></div>
 
-        @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); }
-        }
-
-        section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            max-width: 90%;
-            width: 450px;
-        }
-
-        .meme-img {
-            width: 100%;
-            max-width: 300px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-
-        h1 { color: #d81b60; font-size: 2.5rem; }
-        p { font-size: 1.2rem; line-height: 1.6; }
-
-        .btn-scroll {
-            background: #d81b60;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            text-decoration: none;
-            margin-top: 20px;
-            transition: transform 0.3s;
-        }
-
-        .btn-scroll:hover { transform: scale(1.1); }
-
-        /* Smooth Scroll */
-        html { scroll-behavior: smooth; }
-    </style>
-</head>
-<body>
-
-    <section id="start">
-        <div class="card animate__animated animate__bounceIn">
-            <h1>Surprise Hai! 🎁</h1>
-            <p>Pehle apna naam likho:</p>
-            <input type="text" id="nameInput" style="padding:10px; border-radius:5px; border:1px solid #ccc; width:80%;" placeholder="Aapka Naam...">
-            <br>
-            <button class="btn-scroll" onclick="startMagic()">Magic Dekho ✨</button>
-        </div>
-    </section>
-
-    <section id="wish-section" style="display:none;">
-        <div class="card animate__animated animate__zoomIn">
-            <h1 id="displayName">Hi!</h1>
-            <p>Aapke liye ek bahut bada surprise hai... niche scroll karte rahiye!</p>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXN4bm94bm94bm94bm94bm94bm94bm94bm94bm94bm94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l0MYt5jPR6QX5pnqM/giphy.gif" class="meme-img" alt="Meme">
-            <br>
-            <a href="#message" class="btn-scroll">Aur Neeche Jao 👇</a>
-        </div>
-    </section>
-
-    <section id="message" style="display:none;">
-        <div class="card">
-            <h1>Special Message ❤️</h1>
-            <p>Zindagi mein aapko woh sab mile jo aap chahte ho. Haste raho, muskuraate raho!</p>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXN4bm94bm94bm94bm94bm94bm94bm94bm94bm94bm94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/KYElw07kzYURW/giphy.gif" class="meme-img">
-            <br>
-            <a href="#footer" class="btn-scroll">Bas Thoda Aur... 🏁</a>
-        </div>
-    </section>
-
-    <section id="footer" style="display:none;">
-        <div class="card animate__animated animate__jackInTheBox">
-            <h1>Party Time! 🥳</h1>
-            <p>Ab ye link apne doston ko bhi bhejo!</p>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXN4bm94bm94bm94bm94bm94bm94bm94bm94bm94bm94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/26tOZ42Mg6pbMUPHW/giphy.gif" class="meme-img">
-            <p><b>Happy Celebrations!</b></p>
-        </div>
-    </section>
-
-    <script>
-        function startMagic() {
-            const name = document.getElementById('nameInput').value;
-            if (name.trim() === "") {
-                alert("Naam toh likho dost!");
-                return;
-            }
-
-            document.getElementById('displayName').innerText = "Oye " + name + "!";
-            document.getElementById('wish-section').style.display = "flex";
-            document.getElementById('message').style.display = "flex";
-            document.getElementById('footer').style.display = "flex";
-
-            // Scroll to next section
-            window.location.hash = "wish-section";
-
-            // Start Floating Emojis
-            setInterval(createEmoji, 300);
-        }
-
-        function createEmoji() {
-            const emojis = ['❤️', '🎉', '✨', '🎈', '🔥', '😂', '🥳'];
-            const e = document.createElement('div');
-            e.className = 'emoji';
-            e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-            e.style.left = Math.random() * 100 + 'vw';
-            e.style.fontSize = Math.random() * 20 + 20 + 'px';
-            e.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.body.appendChild(e);
-
-            setTimeout(() => { e.remove(); }, 5000);
-        }
-    </script>
-</body>
+  </body>
 </html>
+
