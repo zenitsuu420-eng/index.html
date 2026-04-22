@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Sunflower & Lily 🌻💮</title>
+    <title>Answer Me! 🌻</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&family=Caveat:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&family=Caveat:wght@600&display=swap');
 
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
-            background: #fffef2; /* Warm cream background */
-            overflow: hidden;
+            background: #fffdf0; overflow: hidden;
         }
 
         .screen {
@@ -24,110 +23,109 @@
 
         .active { display: flex; }
 
-        /* --- Animations: Sunflowers & Lilies --- */
+        /* Floating Sunflowers & Lilies */
         .particle {
             position: fixed; top: -50px; z-index: 100; pointer-events: none;
             animation: fall linear forwards;
         }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* --- Letter Design --- */
-        .letter-container {
-            background: #fdfaf1;
-            padding: 40px;
-            max-width: 450px;
-            width: 85%;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1), inset 0 0 50px rgba(212, 160, 23, 0.05);
-            border: 1px solid #e8e4c9;
-            border-radius: 5px;
-            transform: rotate(-1deg);
+        /* --- QUESTION BOX --- */
+        .question-card {
+            background: white; padding: 40px; border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 2px solid #ffcc00;
         }
+        .btn-group { display: flex; gap: 20px; margin-top: 30px; }
+        .btn-yes { background: #4CAF50; color: white; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; font-size: 1.2rem; }
+        .btn-no { background: #f44336; color: white; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; font-size: 1.2rem; }
 
-        /* Letter Lines Effect */
-        .letter-container::before {
-            content: ''; position: absolute; top: 0; left: 30px;
-            height: 100%; width: 1px; background: rgba(255, 0, 0, 0.1);
-        }
-
-        .letter-text {
-            font-family: 'Caveat', cursive;
-            font-size: 1.5rem;
-            line-height: 1.4;
-            color: #3d3d3d;
-            text-align: left;
-            padding-left: 20px;
-        }
-
-        /* --- Photo Grid --- */
-        .photo-grid {
-            display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;
-            margin: 20px 0;
+        /* --- PHOTO GRID DESIGN --- */
+        .photo-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 900px;
+            perspective: 1000px;
         }
         .photo-card {
-            width: 120px; height: 150px; background: white; padding: 8px;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-            transform: rotate(var(--r));
-            animation: bounceIn 1s ease forwards;
+            background: white; padding: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: 0.5s; cursor: pointer;
         }
-        .photo-card img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-card:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 10; }
+        .photo-card img { width: 100%; height: 120px; object-fit: cover; }
 
-        /* --- Typography & Buttons --- */
-        h1 { font-family: 'Dancing Script', cursive; color: #b8860b; font-size: 2.8rem; }
-        .btn {
-            background: #ffcc00; color: #333; padding: 15px 30px;
-            border: none; border-radius: 50px; font-weight: bold;
-            cursor: pointer; margin-top: 20px; transition: 0.3s;
+        /* --- LETTER DESIGN --- */
+        .letter-paper {
+            background: #fdfaf1; padding: 40px; max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 2px solid #ffcc00; font-family: 'Caveat', cursive;
+            font-size: 1.5rem; text-align: left;
         }
-        .btn:hover { background: #d4a017; color: white; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .meme-gif { width: 220px; border-radius: 20px; border: 5px solid white; }
 
+        .meme-gif { width: 250px; border-radius: 15px; }
+        .btn-back { background: #333; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="screen active" id="s1">
+    <div class="screen active" id="ask">
+        <div class="question-card animate__animated animate__bounceIn">
+            <h1>Suno... Ek baat batao! 🤨</h1>
+            <p style="font-size: 1.3rem;">"Kya tum mujhse sach mein pyaar karti ho?"</p>
+            <div class="btn-group">
+                <button class="btn-yes" onclick="nextPage('s1')">Haan, Bohot! ❤️</button>
+                <button class="btn-no" onclick="nextPage('no-page')">Nahi toh! 😝</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="screen" id="no-page" style="background: #000; color: white;">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2Y1eHh6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/mlvseq9nOeZh6/giphy.gif" class="meme-gif">
+        <h1>Bohot Tezz ho rahi ho? 🤨</h1>
+        <p>"Itna gumaan? Jao pehle haan bol kar aao!"</p>
+        <button class="btn-back" onclick="nextPage('ask')">Galti ho gayi, Wapas Jao 🏃‍♀️</button>
+    </div>
+
+    <div class="screen" id="s1">
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcWswamFpbm9nd3pxZWt6bmZ4Zmc5dzBqNms5Z2h6cjZidGN0cyZlcD12MV9pbnRlcm5hbV9naWZfYnlfaWQmY3Q9Zw/3o7TKSjPqcKInJAALu/giphy.gif" class="meme-gif">
-        <h1>Oye Pagli! 🌻</h1>
-        <p>Ek secret bataun? Kisi ka bday hai aaj...</p>
-        <button class="btn" onclick="nextPage('s2')">Kiska? 🧐</button>
+        <h1>Good Choice! 😉</h1>
+        <p>Isi liye aaj tumhara din special banana toh banta hai...</p>
+        <button class="btn-yes" style="background: #ffcc00; color: #333;" onclick="nextPage('s2')">Surprise Dikhao ✨</button>
     </div>
 
     <div class="screen" id="s2">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2Y1eHh6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/mlvseq9nOeZh6/giphy.gif" class="meme-gif">
-        <p style="font-weight: 600; font-style: italic;">"Aaj World's Most Annoying Person ka bday hai!" 😂</p>
-        <p>Mazaak kar raha hoon, meri jaan ka bday hai!</p>
-        <button class="btn" onclick="nextPage('s3')">Gussa mat ho, aage chalo 🏃‍♂️</button>
+        <h1 style="margin-bottom: 30px;">My Beautiful Sunflower 🌻</h1>
+        <div class="photo-container">
+            <div class="photo-card" style="transform: rotate(-5deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(3deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(-2deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(4deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(-4deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(2deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(-6deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(5deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(-3deg);"><img src="https://via.placeholder.com/150"></div>
+        </div>
+        <p>In sab photos mein tum hi sabse pyaari ho!</p>
+        <button class="btn-yes" style="background: #ffcc00; color: #333;" onclick="nextPage('s3')">Read Letter 💌</button>
     </div>
 
     <div class="screen" id="s3">
-        <h1>Beautiful Memories ✨</h1>
-        <div class="photo-grid">
-            <div class="photo-card" style="--r: -5deg;"><img src="https://via.placeholder.com/120x150"></div>
-            <div class="photo-card" style="--r: 3deg;"><img src="https://via.placeholder.com/120x150"></div>
-            <div class="photo-card" style="--r: -2deg;"><img src="https://via.placeholder.com/120x150"></div>
+        <div class="letter-paper animate__animated animate__fadeInUp">
+            <h1>Dearest [GF Name], ❤️</h1>
+            <p>
+                Happy Birthday! 🌻<br><br>
+                Tum meri life ki wo <b>Lily</b> ho jiski khushboo se mera har din mehakta hai. 
+                Haan, tum thodi ziddi ho, thodi namuni ho, par tum jaisi bhi ho, sirf meri ho. 
+                <br><br>
+                Maine start mein pucha tha na? Pata hai tum "Yes" hi bologe kyunki mere jaisa handsome ladka kahan milega? 😂 
+                <br><br>
+                Hamesha aise hi muskurati rehna!
+                <br><br>
+                — Tera Sabse Pyara Pagal
+            </p>
         </div>
-        <p>Tum hamesha khilti raho, meri Sunflower!</p>
-        <button class="btn" onclick="nextPage('s4')">Read My Letter 💌</button>
-    </div>
-
-    <div class="screen" id="s4">
-        <div class="letter-container animate__animated animate__zoomIn">
-            <h1 style="font-size: 2rem; margin-bottom: 0;">Dearest [Name], ❤️</h1>
-            <div class="letter-text">
-                <br>
-                Happy Birthday to the girl who is a mix of a <b>Sunflower</b> (bright) and a <b>Lily</b> (pure and beautiful). 
-                <br><br>
-                Zindagi thodi zyada mazedaar ho gayi jab se tum aayi ho. Mana ki tum thodi ziddi ho, par meri sabse pyari 'Namuni' bhi toh tum hi ho! 
-                <br><br>
-                Hamesha aise hi muskurati rehna. I'll always be your biggest fan.
-                <br><br>
-                With all my love,
-                <br>
-                [Your Name]
-            </div>
-        </div>
-        <button class="btn" onclick="location.reload()">Wapas Dekho 🔄</button>
+        <button class="btn-back" onclick="location.reload()">Wapas Dekho 🔄</button>
     </div>
 
     <script>
@@ -136,16 +134,15 @@
             const next = document.getElementById(id);
             next.classList.add('active');
 
-            // Page 3 aur 4 pe Sunflowers aur Lilies ki baarish
-            if(id === 's3' || id === 's4') {
-                startRain();
+            if(id === 's2' || id === 's3') {
+                startFlowerRain();
             }
         }
 
-        function startRain() {
+        function startFlowerRain() {
             setInterval(() => {
                 const p = document.createElement('div');
-                const types = ['🌻', '🌸', '💮', '❤️', '✨']; // Sunflowers + Lilies + Hearts
+                const types = ['🌻', '🌸', '💮', '❤️']; // Sunflowers + Lilies + Hearts
                 p.classList.add('particle');
                 p.innerHTML = types[Math.floor(Math.random() * types.length)];
                 p.style.left = Math.random() * 100 + 'vw';
@@ -153,7 +150,7 @@
                 p.style.animationDuration = Math.random() * 3 + 2 + 's';
                 document.body.appendChild(p);
                 setTimeout(() => p.remove(), 4000);
-            }, 250);
+            }, 300);
         }
     </script>
 </body>
