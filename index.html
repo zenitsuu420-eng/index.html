@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise For You! 🎁</title>
+    <title>Sunflower Surprise 🌻</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap');
@@ -11,153 +11,133 @@
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
-            background: #ffe0f0;
-            overflow: hidden; /* Scroll band kar diya hai screens ke liye */
+            background: #fff9e6; /* Soft yellow cream background */
+            overflow: hidden;
+        }
+
+        /* 1. Background Animation */
+        .sunflower-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/cubes.png');
+            opacity: 0.3; z-index: -1;
         }
 
         .screen {
-            display: none; /* Sari screens pehle chhupi rahengi */
-            height: 100vh;
-            width: 100vw;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
+            display: none; height: 100vh; width: 100vw;
+            flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; padding: 20px;
             box-sizing: border-box;
-            background: linear-gradient(135deg, #fff5f8 0%, #ffe0f0 100%);
         }
 
-        .active { display: flex; } /* Jo screen active hogi woh dikhegi */
+        .active { display: flex; }
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .meme-box img {
-            width: 100%;
-            border-radius: 15px;
-            margin-bottom: 20px;
-        }
-
-        h1 { font-family: 'Dancing Script', cursive; color: #ff4d6d; font-size: 2.5rem; }
-        p { font-size: 1.1rem; color: #555; }
-
-        .btn {
-            background: #ff4d6d;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 15px;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
-        }
-
-        .btn:hover { transform: scale(1.05); background: #ff1a4a; }
-
-        /* Floating Hearts Animation */
-        .heart {
-            position: fixed; color: #ff4d6d;
-            animation: float 4s linear infinite;
+        /* 2. Floating Sunflowers */
+        .sunflower-particle {
+            position: fixed; top: -50px;
             z-index: 100; pointer-events: none;
+            animation: fall linear forwards;
         }
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
         }
+
+        /* 3. Photo Frame Animation */
+        .photo-container {
+            position: relative;
+            width: 220px; height: 280px;
+            margin: 20px auto;
+            border: 10px solid white;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            animation: floatPhoto 3s ease-in-out infinite;
+        }
+
+        @keyframes floatPhoto {
+            0%, 100% { transform: rotate(-3deg) translateY(0); }
+            50% { transform: rotate(3deg) translateY(-10px); }
+        }
+
+        .photo-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* 4. Text & Buttons */
+        h1 { font-family: 'Dancing Script', cursive; color: #d4a017; font-size: 3rem; }
+        .meme-text { font-style: italic; color: #7a5c00; font-weight: 600; }
+        
+        .btn {
+            background: #ffcc00; color: #333;
+            padding: 15px 35px; border: none; border-radius: 50px;
+            font-weight: bold; cursor: pointer; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(212, 160, 23, 0.3);
+            margin-top: 20px;
+        }
+
+        .btn:hover { background: #d4a017; color: white; transform: scale(1.1); }
+
+        .meme-gif { width: 250px; border-radius: 15px; margin-bottom: 15px; border: 5px solid #fff; }
     </style>
 </head>
 <body>
 
-    <div class="screen active" id="screen1">
-        <div class="card animate__animated animate__bounceIn">
-            <div class="meme-box">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcWswamFpbm9nd3pxZWt6bmZ4Zmc5dzBqNms5Z2h6cjZidGN0cyZlcD12MV9pbnRlcm5hbV9naWZfYnlfaWQmY3Q9Zw/3o7TKSjPqcKInJAALu/giphy.gif" alt="Funny Cat">
-            </div>
-            <h1>Oye Suno! 📢</h1>
-            <p>"Aaj kisi ka birthday hai... par mujhe yaad nahi aa raha kiska?" 🤔</p>
-            <button class="btn" onclick="nextScreen('screen2')">Yaad Dilao 🙄</button>
-        </div>
+    <div class="sunflower-bg"></div>
+
+    <div class="screen active" id="p1">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcWswamFpbm9nd3pxZWt6bmZ4Zmc5dzBqNms5Z2h6cjZidGN0cyZlcD12MV9pbnRlcm5hbV9naWZfYnlfaWQmY3Q9Zw/3o7TKSjPqcKInJAALu/giphy.gif" class="meme-gif">
+        <h1 class="animate__animated animate__swing">Oye Sun! 🌻</h1>
+        <p class="meme-text">"Sab kahte hain tum ek saal aur badi ho gayi..."</p>
+        <button class="btn" onclick="nextPage('p2')">Phir? 🤔</button>
     </div>
 
-    <div class="screen" id="screen2">
-        <div class="card animate__animated animate__fadeInRight">
-            <div class="meme-box">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdzR6NTV6N3B6NTV6N3B6NTV6N3B6NTV6N3B6NTV6N3B6NTV6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/mlvseq9nOeZh6/giphy.gif" alt="Thinking Meme">
-            </div>
-            <p>"Achha... toh tumhara bday hai? Mujhe laga aaj 'World Dusting Day' hai!" 😂</p>
-            <button class="btn" onclick="nextScreen('screen3')">Pito Mat, Aage Dekho! 👉</button>
-        </div>
+    <div class="screen" id="p2">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJueXN4bm94bm94bm94bm94bm94bm94bm94bm94bm94bm94JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/l0MYt5jPR6QX5pnqM/giphy.gif" class="meme-gif">
+        <p class="meme-text">"Par main kahta hoon, tum ek saal aur 'Namuni' ho gayi!" 😂</p>
+        <button class="btn" onclick="nextPage('p3')">Ab thappad mat maarna! 🏃‍♂️</button>
     </div>
 
-    <div class="screen" id="screen3">
-        <div class="card animate__animated animate__zoomIn">
-            <h1>Chalo Maze Band... 🤫</h1>
-            <p>Mazak ek taraf, par aaj sach mein ek bahut special insaan ka din hai.</p>
-            <button class="btn" onclick="nextScreen('screen4')">Ready? ✨</button>
+    <div class="screen" id="p3">
+        <h1 class="animate__animated animate__fadeIn">Like a Sunflower...</h1>
+        <div class="photo-container">
+            <img src="https://via.placeholder.com/220x280?text=Girl+Photo" alt="Your Photo">
         </div>
+        <p>Tum hamesha light ki taraf dekhti ho aur khilti ho! ✨</p>
+        <button class="btn" onclick="nextPage('p4')">Last Surprise ❤️</button>
     </div>
 
-    <div class="screen" id="screen4">
-        <div class="card animate__animated animate__jackInTheBox">
-            <h1>Memories 📸</h1>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-                <img src="https://via.placeholder.com/100" style="width:80px; height:80px; border-radius:10px; transform:rotate(-5deg); border:3px solid white;">
-                <img src="https://via.placeholder.com/100" style="width:80px; height:80px; border-radius:10px; transform:rotate(5deg); border:3px solid white;">
-                <img src="https://via.placeholder.com/100" style="width:80px; height:80px; border-radius:10px; transform:rotate(-3deg); border:3px solid white;">
-            </div>
-            <p>Har photo mein ek kahani hai...</p>
-            <button class="btn" onclick="nextScreen('screen5')">Final Surprise 💌</button>
+    <div class="screen" id="p4">
+        <h1 class="animate__animated animate__heartBeat">Happy Birthday! 🌻</h1>
+        <div style="background: white; padding: 20px; border-radius: 20px; max-width: 80%; line-height: 1.6;">
+            <p>Jaisa sunflower suraj ke bina adhoora hai, waise hi hamari dosti/life tumhare bina adhoori hai. <br>
+            Hamesha aise hi chamakti raho! Stay bright, stay happy!</p>
         </div>
-    </div>
-
-    <div class="screen" id="screen5">
-        <div class="card animate__animated animate__heartBeat">
-            <h1>My Letter ❤️</h1>
-            <p style="text-align: left; font-size: 0.9rem; line-height: 1.5;">
-                Happy Birthday to the most amazing girl! 🌸<br><br>
-                Tumhare sath har pal kisi adventure se kam nahi hota. Tumhari smile hi kaafi hai mera din banane ke liye. Hamesha aise hi pagal aur pyaari rehna!<br><br>
-                Stay blessed! ✨
-            </p>
-            <button class="btn" onclick="location.reload()">Start Again 🔄</button>
-        </div>
+        <button class="btn" onclick="location.reload()">Wapas Dekho 🔄</button>
     </div>
 
     <script>
-        // Function to switch between screens
-        function nextScreen(screenId) {
-            // Hide all screens
-            const screens = document.querySelectorAll('.screen');
-            screens.forEach(s => s.classList.remove('active'));
-
-            // Show target screen
-            document.getElementById(screenId).classList.add('active');
-
-            // Trigger Heart Rain if it's the last screen
-            if(screenId === 'screen5') {
-                setInterval(createHeart, 300);
+        function nextPage(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            
+            // Jab photo wala page aaye toh sunflower rain tez kar do
+            if(id === 'p3' || id === 'p4') {
+                setInterval(createSunflower, 200);
             }
         }
 
-        // Heart Animation Logic
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '❤️';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = Math.random() * 20 + 15 + 'px';
-            heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 4000);
+        function createSunflower() {
+            const flower = document.createElement('div');
+            flower.classList.add('sunflower-particle');
+            flower.innerHTML = '🌻'; // Aap yahan dusre symbols bhi daal sakte hain 🌸🌼
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.fontSize = Math.random() * 20 + 20 + 'px';
+            flower.style.animationDuration = Math.random() * 3 + 2 + 's';
+            flower.style.opacity = Math.random();
+            document.body.appendChild(flower);
+            
+            setTimeout(() => { flower.remove(); }, 5000);
         }
+
+        // Shuruat mein thode sunflowers
+        setInterval(createSunflower, 1000);
     </script>
 
 </body>
