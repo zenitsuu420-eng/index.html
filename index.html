@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Forever Sunflower 🌻</title>
+    <title>For My Sunshine, Forever 🌻</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&family=Caveat:wght@500;700&family=Special+Elite&display=swap');
 
+        /* Base Styles & Universal Vintage Background (from image_45.png) */
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
-            /* Super Cute Pastel Artistic Background */
-            background: #fff5f8;
-            background-image: 
-                radial-gradient(#ffcad4 20%, transparent 20%),
-                radial-gradient(#ffcad4 20%, transparent 20%);
-            background-size: 50px 50px;
-            background-position: 0 0, 25px 25px;
             overflow: hidden;
+            /* Vintage textured paper from image_45.png */
+            background: #fdfaf1 url('https://images.unsplash.com/photo-1594917631378-0131d258bd52?fm=jpg&q=60&w=1500') center/cover no-repeat;
+        }
+
+        /* Overall overlay for readability */
+        .page-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(253, 250, 241, 0.4); z-index: -1;
         }
 
         .screen {
@@ -28,49 +30,62 @@
             box-sizing: border-box; position: absolute;
         }
 
-        .active { display: flex; animation: fadeIn 0.8s ease-in-out; }
+        .active { display: flex; animation: pageReveal 0.8s ease; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pageReveal { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
+        /* Floating particles: Mix of flowers & hearts */
         .particle { position: fixed; top: -50px; z-index: 100; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* --- CUTE PHOTO CARDS (POLAROID) --- */
-        .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 800px; }
+        /* --- STYLISH PHOTO GRID (Bounce Animation) --- */
+        .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 800px; margin-bottom: 20px; }
         .polaroid {
             background: white; padding: 10px 10px 30px 10px;
             box-shadow: 0 10px 20px rgba(255, 182, 193, 0.4);
-            border: 1px solid #ffe5ec; transition: 0.4s;
+            border: 1px solid #ffe5ec; transition: 0.4s; animation: polaroidBounce 1s ease;
         }
+        @keyframes polaroidBounce { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
         .polaroid img { width: 120px; height: 140px; object-fit: cover; }
         .polaroid:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 5; border-color: #ffb3c1; }
 
-        /* --- HEART FRAME --- */
-        .heart-container {
-            width: 280px; height: 260px;
+        /* --- NEW BIRTHDAY PAGE DESIGN (Big & Cute) --- */
+        .birthday-main { display: flex; align-items: center; gap: 40px; max-width: 1000px; }
+        
+        /* 1. Heart Frame with Pulse & Glow */
+        .heart-photo {
+            width: 300px; height: 300px;
             background: #ff758f;
             clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
             display: flex; justify-content: center; align-items: center;
-            animation: pulse 2s infinite;
+            animation: pulseGlow 1.8s infinite;
         }
-        .heart-container img { width: 100%; height: 100%; object-fit: cover; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 117, 143, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 117, 143, 0.8); }
+        }
+        .heart-photo img { width: 90%; height: 90%; object-fit: cover; clip-path: inherit; }
 
-        /* --- WISHES PAGE DESIGN --- */
+        /* 2. Cake with Sparkles */
+        .cake-holder { position: relative; margin-top: -50px; }
+        .cake-holder img { width: 200px; animation: cakeAfloat 3s ease-in-out infinite; }
+        @keyframes cakeAfloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        /* --- WISHES DESIGN (Heart + Letter Box) --- */
         .wishes-layout { display: flex; align-items: center; gap: 40px; max-width: 1000px; }
-        .wish-letter-box {
-            background: #fff; padding: 30px; border-radius: 20px;
+        .wishes-letter-box {
+            background: white; padding: 30px; border-radius: 20px;
             box-shadow: 0 15px 35px rgba(255, 121, 198, 0.2);
-            border: 2px dashed #ffb3c1; position: relative;
-            text-align: left; font-family: 'Caveat', cursive;
+            border: 2px dashed #ffb3c1; text-align: left;
+            font-family: 'Caveat', cursive;
         }
 
-        /* --- VIDEO SPLIT --- */
+        /* --- VIDEO SPLIT LAYOUT --- */
         .split-box { display: flex; width: 95%; max-width: 1100px; gap: 20px; align-items: center; }
-        .video-player { flex: 1.2; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); height: 450px; border: 5px solid white; }
-        .deep-lines { flex: 1; text-align: left; padding: 20px; color: #5d4037; font-style: italic; }
+        .video-side { flex: 1.2; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); height: 450px; border: 5px solid white; }
+        .text-side { flex: 1; text-align: left; padding: 20px; color: #5d4037; font-style: italic; }
 
-        /* --- VINTAGE LETTER --- */
+        /* --- VINTAGE LETTER DESIGN --- */
         .vintage-letter {
             background: #fdf4e3; background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
             padding: 40px; max-width: 600px; width: 85%; height: 60vh; overflow-y: auto;
@@ -78,36 +93,41 @@
             font-family: 'Special Elite', cursive; text-align: left;
         }
 
-        .btn { background: #ff758f; color: white; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); }
+        .btn { background: #ff758f; color: white; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); transition: 0.3s; }
         .btn:hover { background: #ff4d6d; transform: scale(1.05); }
+        .meme-img { width: 220px; border-radius: 15px; margin-bottom: 20px; }
+
     </style>
 </head>
 <body>
 
+    <div class="page-overlay"></div>
+
     <div class="screen active" id="ask">
         <img src="https://media.giphy.com/media/MDJ9IbM9GXc9G/giphy.gif" style="width:200px; border-radius:50%">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem;">Accept the gift? 🌻</h1>
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem;">Please Accept! 🌻</h1>
+        <p style="color:#5d4037">A special surprise for my girl...</p>
         <div style="display:flex; gap:20px;">
-            <button class="btn" onclick="nextPage('yes-intro')">Yes, De do! ❤️</button>
-            <button class="btn" style="background:#ff4d6d" onclick="nextPage('no-page')">Nahi! 😝</button>
+            <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
+            <button class="btn" style="background:#ff4d6d" onclick="nextPage('no-page')">No 😝</button>
         </div>
     </div>
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
         <img src="https://media.giphy.com/media/6zdUOYH1nylIs/giphy.gif" style="width:250px;">
         <h1 style="color:#ff4d6d">HOW DARE YOU! 🔫</h1>
-        <p>Thaye-Thaye ho jayega, chup-chap 'Yes' dabao!</p>
-        <button class="btn" onclick="nextPage('ask')">Sorry, Galti ho gayi 🏃‍♀️</button>
+        <p>Thaye-Thaye incoming! Better press 'Yes' now!</p>
+        <button class="btn" onclick="nextPage('ask')">My mistake, Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
         <img src="https://media.giphy.com/media/KztT2c4u8mYYUiCiS7/giphy.gif" style="width:220px;">
-        <h1 style="color:#ff758f">I Knew It! My Good Girl 😉</h1>
-        <button class="btn" onclick="nextPage('gallery')">Dhamaka Dekho ✨</button>
+        <h1 style="color:#ff758f">Hehe, I knew it! 😉</h1>
+        <button class="btn" onclick="nextPage('gallery')">See Magic ✨</button>
     </div>
 
     <div class="screen" id="gallery">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem; margin-bottom:20px;">Your Beautiful Days 📸</h1>
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem; margin-bottom:20px;">Memories of You 📸</h1>
         <div class="photo-grid">
             <div class="polaroid" style="transform:rotate(-5deg)"><img src="https://via.placeholder.com/150"></div>
             <div class="polaroid" style="transform:rotate(3deg)"><img src="https://via.placeholder.com/150"></div>
@@ -119,46 +139,51 @@
             <div class="polaroid" style="transform:rotate(5deg)"><img src="https://via.placeholder.com/150"></div>
             <div class="polaroid" style="transform:rotate(-3deg)"><img src="https://via.placeholder.com/150"></div>
         </div>
-        <button class="btn" onclick="nextPage('wish-heart')">Next Surprise ✨</button>
+        <button class="btn" onclick="nextPage('wish-birthday')">Next Surprise ✨</button>
     </div>
 
-    <div class="screen" id="wish-heart">
-        <div class="heart-container animate__animated animate__zoomIn">
-            <img src="https://via.placeholder.com/300" alt="Special Photo">
+    <div class="screen" id="wish-birthday">
+        <div class="birthday-main">
+            <div class="heart-photo animate__animated animate__zoomIn">
+                <img src="https://via.placeholder.com/300" alt="Special Memory Photo">
+            </div>
+            <div style="text-align:left;">
+                <div class="cake-holder animate__animated animate__fadeInUp">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-vector%2F20230303%2Fourmid%2Fpngtree-3d-birthday-cake-illustration-png-image_6628283.png&f=1&nofb=1&ipt=b2447990be47475d4f3b70868a88a0b0d3e583d735165d70e4171d1a8e1e7798&ipo=images" alt="Birthday Cake">
+                </div>
+                <h1 class="animate__animated animate__fadeInLeft" style="font-family:'Dancing Script'; color:#ff4d6d; font-size:4.5rem; margin-top:0px; text-shadow: 2px 2px 5px rgba(0,0,0,0.1);">Happy Birthday! 🎂</h1>
+                <p style="font-size:1.4rem; color:#5d4037;">Today, the most beautiful soul was born. 🌸</p>
+            </div>
         </div>
-        <h1 class="animate__animated animate__bounceIn" style="font-family:'Dancing Script'; color:#ff4d6d; font-size:4rem; margin-top:20px;">Happy Birthday! 🎂</h1>
-        <p style="font-size:1.3rem; color:#5d4037;">To the most precious person in my world. 🌸</p>
-        <button class="btn" onclick="nextPage('wishes')">Wishes For You 🌟</button>
+        <button class="btn" onclick="nextPage('wishes')">Wishes for You 🌟</button>
     </div>
 
     <div class="screen" id="wishes">
         <div class="wishes-layout">
-            <div class="heart-container" style="width:220px; height:200px;">
-                <img src="https://via.placeholder.com/200">
+            <div class="heart-photo" style="width:250px; height:230px;">
+                <img src="https://via.placeholder.com/250">
             </div>
-            <div class="wish-letter-box animate__animated animate__fadeInRight">
-                <h2 style="margin-top:0; color:#ff4d6d;">For You, Always...</h2>
-                <p style="font-size:1.4rem; line-height:1.4;">
-                    "Meri bas yahi wish hai ki tumhari aankhon mein kabhi aansu na aayein, sivaye khushi ke. 
-                    Main har pal tumhare saath hoon, tumhare har sapne ko poora hote dekhne ke liye. 
-                    Tum meri life ki wo roshni ho jisne sab kuch badal diya." 🥺❤️
+            <div class="wishes-letter-box animate__animated animate__fadeInRight">
+                <h2 style="margin-top:0; color:#ff4d6d;">For My Love...🥺💖</h2>
+                <p style="font-size:1.5rem; line-height:1.5; color:#5d4037;">
+                    "Meri bas ek hi wish hai ki tumhari aankhon mein hamesha khushi ke hi aansu aayein. <br>
+                    Tumhari har ek zidd poori ho aur main har pal tumhare saath rahun, har ek sapne ko poora hote dekhne ke liye." 🥺❤️
                 </p>
             </div>
         </div>
-        <button class="btn" onclick="nextPage('video-page')">Something Special 🎵</button>
+        <button class="btn" onclick="nextPage('video-page')">Deep Message 🎵</button>
     </div>
 
     <div class="screen" id="video-page">
         <div class="split-box">
-            <div class="video-player">
+            <div class="video-side">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Sshz298Z-38?autoplay=0" frameborder="0" allowfullscreen></iframe>
             </div>
-            <div class="deep-lines">
-                <h2 style="font-family:'Dancing Script'; font-size:2.5rem; color:#ff758f;">Arz Kiya Hai...</h2>
-                <p style="font-size:1.2rem; line-height:1.6;">
-                    "I like me better when I'm with you... <br><br>
-                    Tumhare saath guzra har lamha ek kahani jaisa hai. Jaise Anuv Jain ke gaane hote hain—seedhe dil tak pahunchne wale. 
-                    Main bas yehi kehna chahta hoon ki tumhare bina sab kuch adhoora hai."
+            <div class="text-side animate__animated animate__fadeInRight">
+                <h2 style="font-family:'Dancing Script'; font-size:2.8rem; color:#ff758f;">I like me better when I'm with you...🥺💖</h2>
+                <p style="font-size:1.3rem; line-height:1.7;">
+                    "Jaise Anuv Jain apne gaano se humein emotional kar deta hai... waise hi mere liye tumhari presence hai. 
+                    Main bas yahi arz karna chahta hoon ki tumhare bina mere har din adhoore hain."
                 </p>
             </div>
         </div>
@@ -182,18 +207,26 @@
                 — Yours Forever ❤️
             </div>
         </div>
-        <button class="btn" style="background:#3e2723" onclick="location.reload()">See the magic again 🔄</button>
+        <button class="btn" style="background:#3e2723" onclick="location.reload()">Start the magic again 🔄</button>
     </div>
 
     <script>
         function nextPage(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            if(id !== 'ask' && id !== 'no-page') startFlowerRain();
+            // Trigger floating rain on special pages
+            if(['gallery', 'wish-birthday', 'wishes', 'video-page', 'final-letter'].includes(id)) {
+                startFlowerRain();
+            } else {
+                // stop rain if on intro pages
+                clearInterval(rainInterval);
+            }
         }
 
+        let rainInterval;
         function startFlowerRain() {
-            setInterval(() => {
+            clearInterval(rainInterval); // clear previous rain
+            rainInterval = setInterval(() => {
                 const p = document.createElement('div');
                 const types = ['🌻', '🌸', '💖', '✨', '🎈']; 
                 p.classList.add('particle');
