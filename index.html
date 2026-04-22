@@ -11,10 +11,13 @@
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
-            background: #fff9e6;
-            background-image: radial-gradient(#ffcc00 10%, transparent 11%), radial-gradient(#ffcc00 10%, transparent 11%), linear-gradient(135deg, #fff9e6 0%, #ffeaa7 100%);
-            background-size: 60px 60px;
-            background-position: 0 0, 30px 30px;
+            /* Super Cute Pastel Artistic Background */
+            background: #fff5f8;
+            background-image: 
+                radial-gradient(#ffcad4 20%, transparent 20%),
+                radial-gradient(#ffcad4 20%, transparent 20%);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
             overflow: hidden;
         }
 
@@ -25,147 +28,174 @@
             box-sizing: border-box; position: absolute;
         }
 
-        .active { display: flex; }
+        .active { display: flex; animation: fadeIn 0.8s ease-in-out; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .particle { position: fixed; top: -50px; z-index: 100; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* --- HEART PHOTO STYLE --- */
-        .heart-frame {
-            width: 250px; height: 250px;
-            background: #ff4d6d;
+        /* --- CUTE PHOTO CARDS (POLAROID) --- */
+        .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 800px; }
+        .polaroid {
+            background: white; padding: 10px 10px 30px 10px;
+            box-shadow: 0 10px 20px rgba(255, 182, 193, 0.4);
+            border: 1px solid #ffe5ec; transition: 0.4s;
+        }
+        .polaroid img { width: 120px; height: 140px; object-fit: cover; }
+        .polaroid:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 5; border-color: #ffb3c1; }
+
+        /* --- HEART FRAME --- */
+        .heart-container {
+            width: 280px; height: 260px;
+            background: #ff758f;
             clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
             display: flex; justify-content: center; align-items: center;
-            animation: pulse 1.5s infinite;
-            box-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
+            animation: pulse 2s infinite;
         }
-        .heart-frame img { width: 90%; height: 90%; object-fit: cover; clip-path: inherit; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        .heart-container img { width: 100%; height: 100%; object-fit: cover; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
-        /* --- VIDEO PAGE SPLIT --- */
-        .split-container { display: flex; width: 90%; max-width: 1000px; gap: 30px; align-items: center; }
-        .video-side { flex: 1; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.2); background: #000; height: 400px; }
-        .text-side { flex: 1; text-align: left; background: rgba(255, 255, 255, 0.7); padding: 30px; border-radius: 20px; }
+        /* --- WISHES PAGE DESIGN --- */
+        .wishes-layout { display: flex; align-items: center; gap: 40px; max-width: 1000px; }
+        .wish-letter-box {
+            background: #fff; padding: 30px; border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(255, 121, 198, 0.2);
+            border: 2px dashed #ffb3c1; position: relative;
+            text-align: left; font-family: 'Caveat', cursive;
+        }
+
+        /* --- VIDEO SPLIT --- */
+        .split-box { display: flex; width: 95%; max-width: 1100px; gap: 20px; align-items: center; }
+        .video-player { flex: 1.2; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); height: 450px; border: 5px solid white; }
+        .deep-lines { flex: 1; text-align: left; padding: 20px; color: #5d4037; font-style: italic; }
 
         /* --- VINTAGE LETTER --- */
         .vintage-letter {
-            background: #f4e4bc; background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            background: #fdf4e3; background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
             padding: 40px; max-width: 600px; width: 85%; height: 60vh; overflow-y: auto;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.3); border: 1px solid #d2b48c;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.2); border: 1px solid #d2b48c;
             font-family: 'Special Elite', cursive; text-align: left;
         }
 
-        /* Common Buttons */
-        .btn { background: #e67e22; color: white; padding: 15px 35px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; transition: 0.3s; }
-        .btn:hover { background: #d35400; transform: scale(1.05); }
-        .meme-img { width: 220px; border-radius: 15px; margin-bottom: 20px; }
+        .btn { background: #ff758f; color: white; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); }
+        .btn:hover { background: #ff4d6d; transform: scale(1.05); }
     </style>
 </head>
 <body>
 
     <div class="screen active" id="ask">
-        <img src="https://media.giphy.com/media/MDJ9IbM9GXc9G/giphy.gif" class="meme-img">
-        <h1 style="color: #d35400; font-family: 'Dancing Script';">Hi Birthday Girl! 🌻</h1>
-        <p>Will you accept my small gift?</p>
-        <div style="display: flex; gap: 15px;">
-            <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
-            <button class="btn" style="background:#c0392b" onclick="nextPage('no-page')">No 😝</button>
+        <img src="https://media.giphy.com/media/MDJ9IbM9GXc9G/giphy.gif" style="width:200px; border-radius:50%">
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem;">Accept the gift? 🌻</h1>
+        <div style="display:flex; gap:20px;">
+            <button class="btn" onclick="nextPage('yes-intro')">Yes, De do! ❤️</button>
+            <button class="btn" style="background:#ff4d6d" onclick="nextPage('no-page')">Nahi! 😝</button>
         </div>
     </div>
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
-        <img src="https://media.giphy.com/media/6zdUOYH1nylIs/giphy.gif" class="meme-img">
-        <h1 style="color:#e74c3c">HOW DARE YOU! 🔫</h1>
-        <p>Galti se No dab gaya na? Thik kar lo warna...</p>
-        <button class="btn" onclick="nextPage('ask')">Sorry, Wapas Jao 🏃‍♀️</button>
+        <img src="https://media.giphy.com/media/6zdUOYH1nylIs/giphy.gif" style="width:250px;">
+        <h1 style="color:#ff4d6d">HOW DARE YOU! 🔫</h1>
+        <p>Thaye-Thaye ho jayega, chup-chap 'Yes' dabao!</p>
+        <button class="btn" onclick="nextPage('ask')">Sorry, Galti ho gayi 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
-        <img src="https://media.giphy.com/media/KztT2c4u8mYYUiCiS7/giphy.gif" class="meme-img">
-        <h1>Hehe, chalo aage badhte hain! 😉</h1>
-        <button class="btn" onclick="nextPage('gallery')">See Memories 📸</button>
+        <img src="https://media.giphy.com/media/KztT2c4u8mYYUiCiS7/giphy.gif" style="width:220px;">
+        <h1 style="color:#ff758f">I Knew It! My Good Girl 😉</h1>
+        <button class="btn" onclick="nextPage('gallery')">Dhamaka Dekho ✨</button>
     </div>
 
     <div class="screen" id="gallery">
-        <h1 style="color: #d35400; font-family: 'Dancing Script';">Your Cute Moments 📸</h1>
-        <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:10px;">
-            <img src="https://via.placeholder.com/100" style="border:5px solid white">
-            <img src="https://via.placeholder.com/100" style="border:5px solid white">
-            <img src="https://via.placeholder.com/100" style="border:5px solid white">
-            <img src="https://via.placeholder.com/100" style="border:5px solid white">
-            <img src="https://via.placeholder.com/100" style="border:5px solid white">
-            <img src="https://via.placeholder.com/100" style="border:5px solid white">
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem; margin-bottom:20px;">Your Beautiful Days 📸</h1>
+        <div class="photo-grid">
+            <div class="polaroid" style="transform:rotate(-5deg)"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="transform:rotate(3deg)"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="transform:rotate(-2deg)"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="transform:rotate(4deg)"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="transform:rotate(-4deg)"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="transform:rotate(2deg)"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="transform:rotate(-6deg)"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="transform:rotate(5deg)"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="transform:rotate(-3deg)"><img src="https://via.placeholder.com/150"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-heart')">Next Surprise ✨</button>
     </div>
 
     <div class="screen" id="wish-heart">
-        <div style="display:flex; align-items:center; gap:40px; flex-wrap:wrap; justify-content:center;">
-            <div class="heart-frame">
-                <img src="https://via.placeholder.com/300" alt="Your Photo">
-            </div>
-            <div style="text-align:left; max-width:400px;">
-                <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3.5rem;">Happy Birthday!</h1>
-                <p style="font-size:1.2rem;">Aaj ka din utna hi khubsurat ho jitni tum ho. Is dil mein hamesha tumhari hi jagah rahegi.</p>
-            </div>
+        <div class="heart-container animate__animated animate__zoomIn">
+            <img src="https://via.placeholder.com/300" alt="Special Photo">
         </div>
-        <button class="btn" onclick="nextPage('wishes')">My Wishes For You 🌟</button>
+        <h1 class="animate__animated animate__bounceIn" style="font-family:'Dancing Script'; color:#ff4d6d; font-size:4rem; margin-top:20px;">Happy Birthday! 🎂</h1>
+        <p style="font-size:1.3rem; color:#5d4037;">To the most precious person in my world. 🌸</p>
+        <button class="btn" onclick="nextPage('wishes')">Wishes For You 🌟</button>
     </div>
 
     <div class="screen" id="wishes">
-        <h1 style="font-family:'Dancing Script'; color:#d35400;">My Wishes for You 🌟</h1>
-        <div style="background:white; padding:30px; border-radius:20px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
-            <ul style="text-align:left; font-size:1.2rem; line-height:2;">
-                <li>🌻 Hamesha Sunflower ki tarah khilti raho.</li>
-                <li>🌸 Tumhari smile kabhi kam na ho.</li>
-                <li>💖 Har wo cheez mile jo tum chahti ho.</li>
-                <li>🧿 Kisi ki nazar na lage meri namuni ko!</li>
-            </ul>
+        <div class="wishes-layout">
+            <div class="heart-container" style="width:220px; height:200px;">
+                <img src="https://via.placeholder.com/200">
+            </div>
+            <div class="wish-letter-box animate__animated animate__fadeInRight">
+                <h2 style="margin-top:0; color:#ff4d6d;">For You, Always...</h2>
+                <p style="font-size:1.4rem; line-height:1.4;">
+                    "Meri bas yahi wish hai ki tumhari aankhon mein kabhi aansu na aayein, sivaye khushi ke. 
+                    Main har pal tumhare saath hoon, tumhare har sapne ko poora hote dekhne ke liye. 
+                    Tum meri life ki wo roshni ho jisne sab kuch badal diya." 🥺❤️
+                </p>
+            </div>
         </div>
-        <button class="btn" onclick="nextPage('video-page')">A Message for You 🎵</button>
+        <button class="btn" onclick="nextPage('video-page')">Something Special 🎵</button>
     </div>
 
     <div class="screen" id="video-page">
-        <div class="split-container">
-            <div class="video-side">
+        <div class="split-box">
+            <div class="video-player">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Sshz298Z-38?autoplay=0" frameborder="0" allowfullscreen></iframe>
             </div>
-            <div class="text-side">
-                <h2 style="font-family:'Dancing Script'; color:#d35400;">I like me better when I'm with you...</h2>
-                <p>"Tumhare saath hone se main ek behtar insaan ban jata hoon. Ye video humari dosti aur pyaar ke naam!"</p>
+            <div class="deep-lines">
+                <h2 style="font-family:'Dancing Script'; font-size:2.5rem; color:#ff758f;">Arz Kiya Hai...</h2>
+                <p style="font-size:1.2rem; line-height:1.6;">
+                    "I like me better when I'm with you... <br><br>
+                    Tumhare saath guzra har lamha ek kahani jaisa hai. Jaise Anuv Jain ke gaane hote hain—seedhe dil tak pahunchne wale. 
+                    Main bas yehi kehna chahta hoon ki tumhare bina sab kuch adhoora hai."
+                </p>
             </div>
         </div>
-        <button class="btn" onclick="nextPage('letter')">Last Message for U! 💌</button>
+        <button class="btn" onclick="nextPage('final-letter')">Last Message for U! 💌</button>
     </div>
 
-    <div class="screen" id="letter">
+    <div class="screen" id="final-letter">
         <div class="vintage-letter animate__animated animate__fadeInUp">
-            <h1 style="color:#3e2723;">Last Message for U! ❤️</h1>
-            <div style="font-size:1.3rem; line-height:1.6; color:#3e2723;">
-                Dear [Name], <br><br>
-                Aaj tumhare bday par main ek promise karna chahta hoon. Main tumhe kabhi chodd kar nahi jaunga, chahe kuch bhi ho jaye. 
+            <h1 style="color:#3e2723; border-bottom:1px solid #d2b48c;">Last Message for U! ❤️</h1>
+            <div style="font-size:1.3rem; line-height:1.8; color:#3e2723;">
+                <br>
+                My Dearest [Name], <br><br>
+                Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
                 <br><br>
-                My love and my feelings for you will <b>never fade</b>. Not even a little bit. Tum meri life ka wo part ho jise main kabhi khona nahi chahta. 
+                Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>. Chahe waqt kaisa bhi ho, tum mujhe hamesha apne peeche khada paogi.
                 <br><br>
-                Hamesha aise hi saath rehna. I love you more than words can say.
+                <b>My love and my feelings for you will never fade, not even a little.</b> Ye waqt ke saath aur gehra hota jayega. 
                 <br><br>
-                — Forever Yours
+                Hamesha meri 'Namuni' banke rehna. 
+                <br><br>
+                — Yours Forever ❤️
             </div>
         </div>
-        <button class="btn" style="background:#3e2723" onclick="location.reload()">Restart 🔄</button>
+        <button class="btn" style="background:#3e2723" onclick="location.reload()">See the magic again 🔄</button>
     </div>
 
     <script>
         function nextPage(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            if(['wish-heart', 'wishes', 'video-page', 'letter'].includes(id)) startFlowerRain();
+            if(id !== 'ask' && id !== 'no-page') startFlowerRain();
         }
 
         function startFlowerRain() {
             setInterval(() => {
                 const p = document.createElement('div');
-                const types = ['🌻', '🌸', '💮', '❤️', '✨']; 
+                const types = ['🌻', '🌸', '💖', '✨', '🎈']; 
                 p.classList.add('particle');
                 p.innerHTML = types[Math.floor(Math.random() * types.length)];
                 p.style.left = Math.random() * 100 + 'vw';
