@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Answer Me! 🌻</title>
+    <title>Accept Your Gift! 🌻</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&family=Caveat:wght@600&display=swap');
@@ -30,102 +30,99 @@
         }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* --- QUESTION BOX --- */
-        .question-card {
-            background: white; padding: 40px; border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 2px solid #ffcc00;
+        /* --- GIFT BOX --- */
+        .card-box {
+            background: white; padding: 30px; border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            max-width: 400px;
         }
-        .btn-group { display: flex; gap: 20px; margin-top: 30px; }
-        .btn-yes { background: #4CAF50; color: white; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; font-size: 1.2rem; }
-        .btn-no { background: #f44336; color: white; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; font-size: 1.2rem; }
+        .btn-group { display: flex; gap: 20px; margin-top: 20px; justify-content: center; }
+        .btn-yes { background: #4CAF50; color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; }
+        .btn-no { background: #f44336; color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; }
 
-        /* --- PHOTO GRID DESIGN --- */
-        .photo-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            max-width: 900px;
-            perspective: 1000px;
+        /* --- PHOTO GALLERY --- */
+        .photo-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+            max-width: 800px; padding: 10px;
         }
         .photo-card {
-            background: white; padding: 8px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: 0.5s; cursor: pointer;
+            background: white; padding: 5px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
         }
         .photo-card:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 10; }
-        .photo-card img { width: 100%; height: 120px; object-fit: cover; }
+        .photo-card img { width: 100%; height: 110px; object-fit: cover; }
 
-        /* --- LETTER DESIGN --- */
+        /* --- LETTER --- */
         .letter-paper {
-            background: #fdfaf1; padding: 40px; max-width: 450px;
+            background: #fdfaf1; padding: 30px; max-width: 450px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border-left: 2px solid #ffcc00; font-family: 'Caveat', cursive;
-            font-size: 1.5rem; text-align: left;
+            border-left: 3px solid #ffcc00; font-family: 'Caveat', cursive;
+            font-size: 1.4rem; text-align: left;
         }
 
-        .meme-gif { width: 250px; border-radius: 15px; }
-        .btn-back { background: #333; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer; }
+        .meme-gif { width: 220px; border-radius: 15px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
     <div class="screen active" id="ask">
-        <div class="question-card animate__animated animate__bounceIn">
-            <h1>Suno... Ek baat batao! 🤨</h1>
-            <p style="font-size: 1.3rem;">"Kya tum mujhse sach mein pyaar karti ho?"</p>
+        <div class="card-box animate__animated animate__fadeIn">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3Y0eWpsbm53dnZ6eHR6eHR6eHR6eHR6eHR6eHR6eHR6eHR6eHImZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/MDJ9IbM9GXc9G/giphy.gif" class="meme-gif">
+            <h1>Please Accept This! 🌻</h1>
+            <p>"Tumhare liye ek chota sa gift hai, accept karogi?"</p>
             <div class="btn-group">
-                <button class="btn-yes" onclick="nextPage('s1')">Haan, Bohot! ❤️</button>
-                <button class="btn-no" onclick="nextPage('no-page')">Nahi toh! 😝</button>
+                <button class="btn-yes" onclick="nextPage('yes-intro')">Yes, De do! ❤️</button>
+                <button class="btn-no" onclick="nextPage('no-page')">Nahi chahiye 😝</button>
             </div>
         </div>
     </div>
 
-    <div class="screen" id="no-page" style="background: #000; color: white;">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2Y1eHh6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/mlvseq9nOeZh6/giphy.gif" class="meme-gif">
-        <h1>Bohot Tezz ho rahi ho? 🤨</h1>
-        <p>"Itna gumaan? Jao pehle haan bol kar aao!"</p>
-        <button class="btn-back" onclick="nextPage('ask')">Galti ho gayi, Wapas Jao 🏃‍♀️</button>
+    <div class="screen" id="no-page" style="background: #1a1a1a; color: white;">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN3Y0eWpsbm53dnZ6eHR6eHR6eHR6eHR6eHR6eHR6eHR6eHR6eHImZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/6zdUOYH1nylIs/giphy.gif" class="meme-gif">
+        <h1 style="color: #f44336;">HOW DARE YOU!! 🔫</h1>
+        <p>"Itni himmat? Chup-chap Yes dabao warna thaye-thaye!" 😂</p>
+        <button class="btn-yes" style="margin-top: 20px;" onclick="nextPage('ask')">Galti ho gayi, Wapas Jao 🏃‍♀️</button>
     </div>
 
-    <div class="screen" id="s1">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3ZhcWswamFpbm9nd3pxZWt6bmZ4Zmc5dzBqNms5Z2h6cjZidGN0cyZlcD12MV9pbnRlcm5hbV9naWZfYnlfaWQmY3Q9Zw/3o7TKSjPqcKInJAALu/giphy.gif" class="meme-gif">
-        <h1>Good Choice! 😉</h1>
-        <p>Isi liye aaj tumhara din special banana toh banta hai...</p>
-        <button class="btn-yes" style="background: #ffcc00; color: #333;" onclick="nextPage('s2')">Surprise Dikhao ✨</button>
+    <div class="screen" id="yes-intro">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2Y0eWpsbm53dnZ6eHR6eHR6eHR6eHR6eHR6eHR6eHR6eHR6eHImZXA9djFfaW50ZXJuYWxfZ2lmX2J5X2lkJmN0PWc/KztT2c4u8mYYUiCiS7/giphy.gif" class="meme-gif">
+        <h1>Hehe, I knew it! 😉</h1>
+        <p>Isi liye toh tum meri sabse pyari Sunflower ho!</p>
+        <button class="btn-yes" style="background: #ffcc00; color: #333;" onclick="nextPage('gallery')">Surprise Dekho ✨</button>
     </div>
 
-    <div class="screen" id="s2">
-        <h1 style="margin-bottom: 30px;">My Beautiful Sunflower 🌻</h1>
-        <div class="photo-container">
+    <div class="screen" id="gallery">
+        <h1>Your Beautiful Memories 📸</h1>
+        <div class="photo-grid">
             <div class="photo-card" style="transform: rotate(-5deg);"><img src="https://via.placeholder.com/150"></div>
             <div class="photo-card" style="transform: rotate(3deg);"><img src="https://via.placeholder.com/150"></div>
             <div class="photo-card" style="transform: rotate(-2deg);"><img src="https://via.placeholder.com/150"></div>
             <div class="photo-card" style="transform: rotate(4deg);"><img src="https://via.placeholder.com/150"></div>
             <div class="photo-card" style="transform: rotate(-4deg);"><img src="https://via.placeholder.com/150"></div>
             <div class="photo-card" style="transform: rotate(2deg);"><img src="https://via.placeholder.com/150"></div>
-            <div class="photo-card" style="transform: rotate(-6deg);"><img src="https://via.placeholder.com/150"></div>
-            <div class="photo-card" style="transform: rotate(5deg);"><img src="https://via.placeholder.com/150"></div>
             <div class="photo-card" style="transform: rotate(-3deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(5deg);"><img src="https://via.placeholder.com/150"></div>
+            <div class="photo-card" style="transform: rotate(-6deg);"><img src="https://via.placeholder.com/150"></div>
         </div>
-        <p>In sab photos mein tum hi sabse pyaari ho!</p>
-        <button class="btn-yes" style="background: #ffcc00; color: #333;" onclick="nextPage('s3')">Read Letter 💌</button>
+        <p>Sunflowers are pretty, but you are prettier! 🌻</p>
+        <button class="btn-yes" style="background: #ffcc00; color: #333;" onclick="nextPage('letter')">Last thing... 💌</button>
     </div>
 
-    <div class="screen" id="s3">
+    <div class="screen" id="letter">
         <div class="letter-paper animate__animated animate__fadeInUp">
-            <h1>Dearest [GF Name], ❤️</h1>
+            <h1>Dear [GF Name], ❤️</h1>
             <p>
                 Happy Birthday! 🌻<br><br>
-                Tum meri life ki wo <b>Lily</b> ho jiski khushboo se mera har din mehakta hai. 
-                Haan, tum thodi ziddi ho, thodi namuni ho, par tum jaisi bhi ho, sirf meri ho. 
+                Mana ki main thoda tang karta hoon, par dekha? Gun dikhate hi line par aa gayi! 😂 
                 <br><br>
-                Maine start mein pucha tha na? Pata hai tum "Yes" hi bologe kyunki mere jaisa handsome ladka kahan milega? 😂 
+                Tum meri life ki wo <b>Lily</b> ho jiski jagah koi nahi le sakta. Hamesha aise hi khilti rahena aur mere jokes par (chahe bure hon) hasti rehna.
                 <br><br>
-                Hamesha aise hi muskurati rehna!
+                Love you forever! 🌸
                 <br><br>
-                — Tera Sabse Pyara Pagal
+                — Tera Sabse Handsome Pagal
             </p>
         </div>
-        <button class="btn-back" onclick="location.reload()">Wapas Dekho 🔄</button>
+        <button class="btn-yes" style="background: #333; margin-top: 20px;" onclick="location.reload()">Start Over 🔄</button>
     </div>
 
     <script>
@@ -134,7 +131,7 @@
             const next = document.getElementById(id);
             next.classList.add('active');
 
-            if(id === 's2' || id === 's3') {
+            if(id === 'gallery' || id === 'letter') {
                 startFlowerRain();
             }
         }
@@ -142,7 +139,7 @@
         function startFlowerRain() {
             setInterval(() => {
                 const p = document.createElement('div');
-                const types = ['🌻', '🌸', '💮', '❤️']; // Sunflowers + Lilies + Hearts
+                const types = ['🌻', '🌸', '💮', '❤️', '✨']; 
                 p.classList.add('particle');
                 p.innerHTML = types[Math.floor(Math.random() * types.length)];
                 p.style.left = Math.random() * 100 + 'vw';
