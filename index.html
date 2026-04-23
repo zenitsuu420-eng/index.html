@@ -19,6 +19,8 @@
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
             background-color: var(--bg-color);
+            background-image: linear-gradient(90deg, rgba(255, 182, 193, 0.2) 50%, transparent 50%), linear-gradient(rgba(216, 191, 216, 0.2) 50%, transparent 50%);
+            background-size: 60px 60px;
         }
 
         .screen {
@@ -30,61 +32,51 @@
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* --- 1. My Honeybee Cutie: Side-by-Side 3D --- */
-        .gallery-3d {
-            display: flex; gap: 15px; perspective: 1200px;
-            flex-wrap: wrap; justify-content: center;
+        /* --- STAGE 1: 3D Floating Stack (Same as first code) --- */
+        .stack-3d {
+            position: relative; width: 200px; height: 200px;
+            perspective: 1000px; margin-bottom: 40px;
         }
 
-        .polaroid-3d {
+        .card-3d {
+            position: absolute; width: 100%; height: 100%;
             background: white; padding: 10px 10px 30px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            border-radius: 4px; transition: 0.5s;
-            animation: float 4s infinite ease-in-out;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-radius: 5px; transition: 0.8s ease;
+            transform-style: preserve-3d;
         }
 
-        .polaroid-3d img { width: 130px; height: 130px; object-fit: cover; }
+        .card-3d img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* 3D Tilting Effect */
-        .polaroid-3d:nth-child(odd) { transform: rotateY(-20deg) rotateZ(-2deg); }
-        .polaroid-3d:nth-child(even) { transform: rotateY(20deg) rotateZ(2deg); }
+        .c1 { transform: rotateY(-25deg) rotateX(10deg) translateZ(0px); animation: float1 4s infinite ease-in-out; }
+        .c2 { transform: rotateY(25deg) rotateX(-10deg) translateZ(-50px); animation: float2 5s infinite ease-in-out; }
+        .c3 { transform: rotateZ(10deg) translateZ(-100px); animation: float3 6s infinite ease-in-out; }
 
-        .polaroid-3d:hover {
-            transform: rotateY(0deg) scale(1.1) translateZ(50px);
-            z-index: 10;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
+        @keyframes float1 { 0%, 100% { transform: rotateY(-25deg) translateY(0); } 50% { transform: rotateY(-15deg) translateY(-20px); } }
+        @keyframes float2 { 0%, 100% { transform: rotateY(25deg) translateY(0); } 50% { transform: rotateY(15deg) translateY(20px); } }
+        @keyframes float3 { 0%, 100% { transform: rotateZ(10deg) translateX(0); } 50% { transform: rotateZ(5deg) translateX(15px); } }
 
-        /* --- 2. Happy Birthday: Artistic Handmade BG --- */
+        /* --- STAGE 2: Artistic Birthday & Beyond (Mixed Design) --- */
         .artistic-bg {
-            background: url('https://i.ibb.co/ed8ed8/image-ed8ed8.png'); /* Hand-drawn pattern */
+            background: url('https://i.ibb.co/ed8ed8/image-ed8ed8.png'); 
             background-size: cover;
             border: 15px solid #fff;
             border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><circle cx="25" cy="25" r="10" fill="%23ff758f"/></svg>') 30 round;
             padding: 20px; border-radius: 30px;
         }
 
-        .hb-title {
-            font-family: 'Dancing Script';
-            font-size: 3.5rem;
-            color: var(--dark-pink);
-            text-shadow: 3px 3px 0px rgba(255,255,255,0.8);
-            animation: bounceIn 1.5s, float 3s infinite;
-        }
-
-        .heart-frame {
+        .heart-box {
             width: 250px; height: 250px;
             background-color: var(--primary-pink);
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
             mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-            -webkit-mask-size: contain; mask-size: contain;
             -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            -webkit-mask-size: contain; mask-size: contain;
             display: flex; justify-content: center; align-items: center;
             animation: heartbeat 1.5s infinite;
         }
-        .heart-frame img { width: 100%; height: 100%; object-fit: cover; }
+        .heart-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- 3. Glimpses: Video Page --- */
         .video-box {
             border: 10px solid white; border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
@@ -92,7 +84,6 @@
             animation: fadeInUp 1s;
         }
 
-        /* --- 4. Wish: Emotional Page --- */
         .wish-container {
             background: rgba(255, 255, 255, 0.9);
             padding: 40px; border-radius: 20px;
@@ -102,22 +93,17 @@
             transform: rotate(-1deg);
         }
 
-        .wish-text {
-            font-family: 'Caveat'; font-size: 2.2rem;
-            line-height: 1.2; color: #3e2723;
-        }
+        .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 20px; font-weight: bold; }
 
-        .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 25px; font-weight: bold; }
-
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
     </style>
 </head>
 <body>
 
     <div class="screen active" id="ask">
         <img src="https://i.ibb.co/HLSBN13W/cute-cat.jpg" style="width:180px; border-radius:20px;">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">Ready for your gift? ✨</h1>
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">I have a surprise for you! ✨</h1>
         <div style="display:flex; gap:15px;">
             <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
             <button class="btn" style="background:#ff4d6d" onclick="nextPage('no-page')">No 😝</button>
@@ -125,35 +111,37 @@
     </div>
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
-        <h1 style="color:#ff4d6d; font-size: 2rem;">Thaye-Thaye incoming! 🔫</h1>
-        <button class="btn" onclick="nextPage('ask')">Okay, Sorry! 🏃‍♀️</button>
+        <img src="https://i.ibb.co/pvHDGLVc/angry-cat-sassy-cat.gif" style="width:250px;">
+        <h1 style="color:#ff4d6d; font-size: 2rem; margin-top: 20px;">AAYE HOW DARE YOU! 🔫</h1>
+        <p style="margin-top: 50px; font-weight: bold; color: yellow;">Thaye-Thaye incoming! Better press 'Yes' now!</p>
+        <button class="btn" onclick="nextPage('ask')">Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
-        <h1 style="color:#ff758f; font-family:'Dancing Script'; font-size: 3rem;">Hehe, Good Choice! 😉</h1>
-        <button class="btn" onclick="nextPage('honeybee')">See 3D Gallery 🐝</button>
+        <img src="https://i.ibb.co/TqbwNP65/cute-cat-cat-cute.gif" style="width:200px;">
+        <h1 style="color:#ff758f;">Hehe, I knew it! 😉</h1>
+        <button class="btn" onclick="nextPage('honeybee')">See Magic ✨</button>
     </div>
 
     <div class="screen" id="honeybee">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom: 20px;">My Honeybee Cutie 🐝💖</h1>
-        <div class="gallery-3d">
-            <div class="polaroid-3d"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
-            <div class="polaroid-3d"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
-            <div class="polaroid-3d"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
-            <div class="polaroid-3d"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom: 30px;">My Honeybee Cutie 🐝💖</h1>
+        <div class="stack-3d">
+            <div class="card-3d c1"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
+            <div class="card-3d c2"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
+            <div class="card-3d c3"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-birthday')">Next Magic ✨</button>
     </div>
 
     <div class="screen" id="wish-birthday">
         <div class="artistic-bg">
-            <h1 class="hb-title">Happy Birthday! madam jii 🎂</h1>
-            <div class="heart-frame animate__animated animate__pulse infinite">
+            <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:2.8rem;">Happy Birthday! madam jii 🎂</h1>
+            <div class="heart-box">
                  <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg">
             </div>
-            <p style="font-family:'Caveat'; font-size: 1.5rem; color:#fff; background:rgba(0,0,0,0.2); border-radius:10px;">You are my favorite honeybee! 🌻</p>
+            <p style="font-family:'Caveat'; font-size: 1.5rem; color:#fff; background:rgba(0,0,0,0.3); border-radius:10px; padding: 5px;">You are my favorite honeybee! 🌻</p>
         </div>
-        <button class="btn" onclick="nextPage('glimpses')">Watch Glimpses 🎬</button>
+        <button class="btn" onclick="nextPage('glimpses')">Glimpses 🎬</button>
     </div>
 
     <div class="screen" id="glimpses">
@@ -169,7 +157,7 @@
     <div class="screen" id="wish-for-u">
         <div class="wish-container animate__animated animate__fadeIn">
             <h2 style="font-family: 'Caveat'; color: var(--dark-pink); font-size: 2.5rem;">My Wish for U... 🥺❤️</h2>
-            <p class="wish-text">
+            <p style="font-family: 'Caveat'; font-size: 2rem; color: #3e2723;">
                 "I wish ki tumhari aankhon mein kabhi aansu na aaye, siwaye khushi ke. <br><br>
                 Tum meri life ki wo sukoon ho jise main kabhi khona nahi chahta. Stay with me forever, my honeybee."
             </p>
@@ -204,7 +192,8 @@
             rainInterval = setInterval(() => {
                 const p = document.createElement('div');
                 const types = ['🌻', '🌸', '💖', '✨', '🐝']; 
-                p.style.position = 'fixed'; p.style.top = '-50px';
+                p.style.position = 'fixed';
+                p.style.top = '-50px';
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.fontSize = '25px';
                 p.style.animation = 'fall 4s linear forwards';
