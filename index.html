@@ -31,7 +31,7 @@
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* --- Page 3: 3D Photo Grid --- */
+        /* --- 3D Gallery --- */
         .photo-grid-3d {
             display: grid; grid-template-columns: repeat(2, 1fr);
             gap: 20px; perspective: 1000px;
@@ -40,70 +40,71 @@
         .polaroid-3d {
             background: white; padding: 10px 10px 35px 10px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border-radius: 5px;
-            transition: 0.6s ease;
+            border-radius: 5px; transition: 0.6s ease;
             transform: rotateY(-15deg) rotateX(10deg);
         }
 
         .polaroid-3d img { width: 140px; height: 140px; object-fit: cover; }
 
-        .polaroid-3d:hover {
-            transform: rotateY(0deg) rotateX(0deg) scale(1.1) translateZ(50px);
-            z-index: 10;
+        /* --- Heart Photo Fix --- */
+        .heart-wrapper {
+            width: 280px; height: 280px;
+            background: white; /* Border effect */
+            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+            display: flex; justify-content: center; align-items: center;
+            animation: heartbeat 1.2s infinite;
+            transform: scale(10); /* Scaling the path to fit container */
         }
 
-        /* --- Page 4: Heart Frame --- */
-        .heart-container {
-            width: 250px; height: 250px;
+        /* Simplified Heart CSS for better image fit */
+        .heart-shape {
+            position: relative; width: 250px; height: 250px;
             background: var(--primary-pink);
             clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
+            transform: scale(11); /* Important to make the path big enough */
+        }
+
+        /* Alternative easier Heart method */
+        .heart-box {
+            width: 250px; height: 250px;
+            background-color: var(--primary-pink);
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            mask-repeat: no-repeat; mask-size: contain; mask-position: center;
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            -webkit-mask-repeat: no-repeat; -webkit-mask-size: contain; -webkit-mask-position: center;
             display: flex; justify-content: center; align-items: center;
             animation: heartbeat 1.5s infinite;
         }
 
-        .heart-container img {
-            width: 100%; height: 100%; object-fit: cover;
+        .heart-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- Wish Letter --- */
+        .wish-letter {
+            background: #fff; padding: 30px; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(255, 117, 143, 0.2);
+            max-width: 400px; width: 85%;
+            font-family: 'Caveat', cursive; border: 2px dashed var(--primary-pink);
+            position: relative; transform: rotate(-2deg);
         }
 
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .wish-letter::before { content: '💌'; position: absolute; top: -20px; right: -10px; font-size: 2rem; }
+
+        /* --- Music Player --- */
+        .music-card {
+            background: white; padding: 15px; border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 260px;
+        }
+        .music-card img { width: 100%; border-radius: 15px; height: 180px; object-fit: cover; }
+
+        .vintage-paper {
+            background: #fdf5e6; padding: 30px; border: 1px solid #d2b48c;
+            box-shadow: 8px 8px 0px #d2b48c; max-width: 500px; width: 85%;
+            font-family: 'Special Elite', cursive; text-align: left;
         }
 
-        /* --- Page 5: Music Player Design --- */
-        .music-box {
-            background: white; padding: 20px; border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 280px;
-        }
+        .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 20px; }
 
-        .album-art {
-            width: 100%; height: 200px; border-radius: 15px;
-            object-fit: cover; margin-bottom: 15px;
-        }
-
-        .player-controls {
-            background: #f0f0f0; border-radius: 50px; padding: 10px;
-            display: flex; align-items: center; justify-content: space-around;
-        }
-
-        /* --- Page 6: Vintage Letter --- */
-        .vintage-letter {
-            background: #f4e4bc url('https://www.transparenttextures.com/patterns/old-paper.png');
-            padding: 30px; border-radius: 2px;
-            box-shadow: 5px 5px 20px rgba(0,0,0,0.3);
-            border: 1px solid #d2b48c;
-            max-width: 500px; width: 85%; font-family: 'Special Elite', cursive;
-            line-height: 1.6; color: #3e2723;
-        }
-
-        .btn { 
-            background: var(--primary-pink); color: white; padding: 12px 30px; 
-            border: none; border-radius: 50px; cursor: pointer; font-weight: 600; 
-            margin-top: 20px;
-        }
-
-        .particle { position: fixed; top: -50px; pointer-events: none; animation: fall linear forwards; }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
     </style>
 </head>
 <body>
@@ -142,31 +143,38 @@
     </div>
 
     <div class="screen" id="wish-birthday">
-        <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3rem;">Happy Birthday! My madam jii 🎂</h1>
-        <div class="heart-container animate__animated animate__pulse infinite">
-             <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg" alt="Madam Ji">
+        <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:2.8rem;">Happy Birthday! madam jii 🎂</h1>
+        <div class="heart-box">
+             <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg">
         </div>
-        <button class="btn" onclick="nextPage('music-page')">More Magic 📸</button>
+        <button class="btn" onclick="nextPage('music-page')">Next 🎵</button>
     </div>
 
     <div class="screen" id="music-page">
         <h1 style="font-family:'Caveat'; color:#ff758f; font-size:2.5rem;">Some More Glimpses 🌸</h1>
-        <div class="music-box">
-            <img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg" class="album-art">
-            <div class="player-controls">
-                <span>⏮️</span>
-                <span style="font-size: 1.5rem;">▶️</span>
-                <span>⏭️</span>
-            </div>
-            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">Our Favorite Song...🎵</p>
+        <div class="music-card">
+            <img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg">
+            <div style="margin-top: 15px; font-size: 1.5rem;">⏮️ ⏸️ ⏭️</div>
+            <p style="font-family: 'Poppins'; font-size: 0.7rem; color: #777;">Now Playing: Our Song.mp3</p>
         </div>
-        <button class="btn" onclick="nextPage('final-letter')">Last Message 💌</button>
+        <button class="btn" onclick="nextPage('wish-for-u')">My Wish ✨</button>
+    </div>
+
+    <div class="screen" id="wish-for-u">
+        <div class="wish-letter">
+            <h2 style="margin-top: 0; color: var(--dark-pink);">My Wish for U... 🥺</h2>
+            <p style="font-size: 1.5rem; line-height: 1.3;">
+                "I wish ki tum hamesha aise hi hasti raho. Tumhari muskurahat meri duniya hai. Main hamesha tumhare saath rehna chahta hoon, har saal, har birthday par!"
+            </p>
+            <p style="text-align: right; font-weight: bold;">- Only Yours ❤️</p>
+        </div>
+        <button class="btn" onclick="nextPage('final-letter')">Read Last Message 💌</button>
     </div>
 
     <div class="screen" id="final-letter">
-        <div class="vintage-letter">
-            <h2 style="border-bottom: 1px solid #3e2723;">Last Message for U! ❤️</h2>
-            <p>
+        <div class="vintage-paper">
+            <h2 style="text-align:center; border-bottom: 2px solid #d2b48c;">Last Message for U! ❤️</h2>
+            <p><br>
                 My Dearest [Name], <br><br>
                 Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
                 <br><br>
@@ -199,6 +207,8 @@
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.fontSize = '25px';
                 p.style.animationDuration = '4s';
+                p.style.position = 'fixed';
+                p.style.top = '-50px';
                 document.body.appendChild(p);
                 setTimeout(() => p.remove(), 4000);
             }, 500);
