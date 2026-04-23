@@ -11,8 +11,7 @@
         :root {
             --primary-pink: #ff758f;
             --dark-pink: #ff4d6d;
-            /* Using a cute paper texture background */
-            --bg-texture: url('https://i.ibb.co/ed8ed8/image-ed8ed8.png'); 
+            --text-color: #5d4037;
         }
 
         body, html {
@@ -20,9 +19,10 @@
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
             background-color: #fff0f3;
-            background-image: var(--bg-texture);
-            background-size: cover;
-            background-position: center;
+            background-image: 
+                linear-gradient(90deg, rgba(255, 182, 193, 0.5) 50%, transparent 50%),
+                linear-gradient(rgba(216, 191, 216, 0.5) 50%, transparent 50%);
+            background-size: 60px 60px;
         }
 
         .screen {
@@ -30,89 +30,78 @@
             flex-direction: column; justify-content: center;
             align-items: center; text-align: center; padding: 15px;
             box-sizing: border-box; position: absolute;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* --- 3D Side-by-Side Gallery (Honeybee Page) --- */
-        .gallery-container {
-            display: flex;
-            gap: 15px;
-            perspective: 1200px;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-bottom: 20px;
+        .photo-grid { 
+            display: grid; grid-template-columns: repeat(2, 1fr); 
+            gap: 20px; max-width: 500px; perspective: 1000px;
         }
 
-        .polaroid-3d {
-            background: white;
-            padding: 10px 10px 30px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            border-radius: 4px;
-            transition: 0.5s ease;
-            animation: bounceInUp 1s;
+        .polaroid {
+            background: white; padding: 10px 10px 30px 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            transition: all 0.5s ease;
+            transform: rotateX(10deg) rotateY(-10deg);
+            animation: float3D 3s infinite ease-in-out;
         }
 
-        .polaroid-3d img {
-            width: 130px;
-            height: 130px;
-            object-fit: cover;
-            border: 1px solid #eee;
+        .polaroid img { width: 100%; height: 150px; object-fit: cover; border-radius: 3px; }
+
+        .polaroid:hover {
+            transform: rotateX(0deg) rotateY(0deg) scale(1.1);
+            z-index: 100;
         }
 
-        /* 3D Tilted angles for side-by-side look */
-        .polaroid-3d:nth-child(1) { transform: rotateY(-15deg) rotateZ(-3deg); }
-        .polaroid-3d:nth-child(2) { transform: rotateY(10deg) rotateZ(2deg); }
-        .polaroid-3d:nth-child(3) { transform: rotateY(-10deg) rotateZ(4deg); }
-        .polaroid-3d:nth-child(4) { transform: rotateY(15deg) rotateZ(-2deg); }
-
-        /* 3D Hover Animation */
-        .polaroid-3d:hover {
-            transform: rotateY(0deg) scale(1.1) translateZ(50px);
-            z-index: 10;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border-color: var(--primary-pink);
+        @keyframes float3D {
+            0%, 100% { transform: translateY(0) rotateX(10deg); }
+            50% { transform: translateY(-15px) rotateX(-5deg); }
         }
 
-        /* --- Artistic Elements --- */
-        .artistic-bg {
-            background: rgba(255, 255, 255, 0.7);
-            border: 10px solid #fff;
-            padding: 20px;
-            border-radius: 30px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        .heart-box {
-            width: 250px; height: 250px;
-            background-color: var(--primary-pink);
-            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
-            -webkit-mask-size: contain; mask-size: contain;
+        .heart-photo {
+            width: 220px; height: 220px;
+            background: var(--primary-pink);
+            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
             display: flex; justify-content: center; align-items: center;
-            animation: heartbeat 1.5s infinite;
+            margin: 10px auto;
         }
-        .heart-box img { width: 100%; height: 100%; object-fit: cover; }
+        .heart-photo img { width: 100%; height: 100%; object-fit: cover; clip-path: inherit; }
 
-        .video-box {
-            border: 10px solid white; border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            overflow: hidden; max-width: 300px;
+        .vintage-letter {
+            background: #f4e4bc;
+            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+            padding: 40px; border-radius: 5px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.2), 10px 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid #d2b48c;
+            max-width: 600px; width: 85%; height: 60vh; overflow-y: auto;
+            font-family: 'Special Elite', cursive;
         }
 
-        .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 20px; font-weight: bold; transition: 0.3s; }
-        .btn:hover { background: var(--dark-pink); transform: scale(1.05); }
+        .btn { 
+            background: var(--primary-pink); color: white; padding: 12px 30px; 
+            border: none; border-radius: 50px; cursor: pointer; font-weight: 600; 
+            margin-top: 15px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); 
+            text-transform: uppercase;
+        }
 
-        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
+        .video-side { 
+            border: 8px solid white; border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 100%; max-width: 500px; height: 280px; overflow: hidden;
+        }
+
+        .particle { position: fixed; top: -50px; z-index: 100; pointer-events: none; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
 <body>
 
     <div class="screen active" id="ask">
-        <img src="https://i.ibb.co/HLSBN13W/cute-cat.jpg" style="width:180px; border-radius:20px;">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">Ready for your gift? ✨</h1>
+        <img src="https://media.giphy.com/media/MDJ9IbM9GXc9G/giphy.gif" style="width:180px; border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">I have a surprise for you! ✨</h1>
         <div style="display:flex; gap:15px;">
             <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
             <button class="btn" style="background:#ff4d6d" onclick="nextPage('no-page')">No 😝</button>
@@ -120,69 +109,73 @@
     </div>
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
-        <img src="https://i.ibb.co/pvHDGLVc/angry-cat-sassy-cat.gif" style="width:250px;">
-        <h1 style="color:#ff4d6d; font-size: 2rem;">Thaye-Thaye incoming! 🔫</h1>
+        <img src="https://i.postimg.cc/mD7XF6rG/angry-cat-sassy-cat.png" style="width:250px; border-radius: 15px;">
+        <h1 style="color:#ff4d6d; font-size: 2.5rem; margin-top: 20px;">AAYE HOW DARE YOU! 🔫</h1>
+        <p style="font-size: 1.1rem; opacity: 0.9;">Thaye-Thaye incoming! Better press 'Yes' now!</p>
         <button class="btn" onclick="nextPage('ask')">Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
-        <img src="https://i.ibb.co/TqbwNP65/cute-cat-cat-cute.gif" style="width:200px;">
-        <h1 style="color:#ff758f; font-family:'Dancing Script'; font-size: 3rem;">Hehe, I knew it! 😉</h1>
-        <button class="btn" onclick="nextPage('honeybee')">See 3D Magic 🐝</button>
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZ3F0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/giphy-downsized.gif" style="width:220px; border-radius: 15px;">
+        <h1 style="color:#ff758f; margin-top: 20px;">Hehe, I knew it! 😉</h1>
+        <p style="font-size: 1.2rem; color: #ff758f; font-weight: bold;">good girl.</p>
+        <button class="btn" onclick="nextPage('gallery')">See Magic ✨</button>
     </div>
 
-    <div class="screen" id="honeybee">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom: 20px;">My Honeybee Cutie 🐝💖</h1>
-        <div class="gallery-container">
-            <div class="polaroid-3d"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
-            <div class="polaroid-3d"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
-            <div class="polaroid-3d"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
-            <div class="polaroid-3d"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
+    <div class="screen" id="gallery">
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom:20px;">Memories of You 📸</h1>
+        <div class="photo-grid">
+            <div class="polaroid"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
+            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
+            <div class="polaroid" style="animation-delay: 1s;"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
+            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
     </div>
 
     <div class="screen" id="wish-birthday">
-        <div class="artistic-bg">
-            <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:2.8rem;">Happy Birthday! madam jii 🎂</h1>
-            <div class="heart-box">
-                 <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg">
-            </div>
-            <p style="font-family:'Caveat'; font-size: 1.5rem; color:#3e2723; font-weight:bold;">You are my favorite honeybee! 🌻</p>
+        <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3.5rem; margin:0;">Happy Birthday! 🎂</h1>
+        <div class="heart-photo">
+             <img src="https://i.postimg.cc/qM7XF6rG/cute-cat.jpg">
         </div>
-        <button class="btn" onclick="nextPage('glimpses')">Glimpses 🎬</button>
+        <p style="font-size:1.3rem; color:#5d4037;">Today, the most beautiful soul was born. 🌸</p>
+        <button class="btn" onclick="nextPage('wishes')">Wishes 🌟</button>
     </div>
 
-    <div class="screen" id="glimpses">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">Our Special Moments 🌸</h1>
-        <div class="video-box">
-            <video width="100%" controls autoplay loop muted>
-                <source src="Video-230.mp4" type="video/mp4">
-            </video>
+    <div class="screen" id="wishes">
+        <div class="heart-photo animate__animated animate__pulse infinite">
+            <img src="https://i.postimg.cc/BZ4L4rS0/images.jpg">
         </div>
-        <button class="btn" onclick="nextPage('wish-for-u')">My Wish ✨</button>
-    </div>
-
-    <div class="screen" id="wish-for-u">
-        <div style="background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 20px; max-width: 500px; width: 85%; border: 2px solid var(--primary-pink); transform: rotate(-1deg);">
-            <h2 style="font-family: 'Caveat'; color: var(--dark-pink); font-size: 2.5rem;">My Wish for U... 🥺❤️</h2>
-            <p style="font-family: 'Caveat'; font-size: 2rem; color: #3e2723;">
-                "I wish ki tumhari aankhon mein kabhi aansu na aaye, siwaye khushi ke. <br><br>
-                Tum meri life ki wo sukoon ho jise main kabhi khona nahi chahta."
+        <div style="background: rgba(255,255,255,0.8); padding: 25px; border-radius: 25px; max-width: 450px; border: 2px solid white;">
+            <h2 style="color:#ff4d6d; font-family: 'Caveat'; font-size: 2.2rem; margin-top:0;">For My Love...🥺💖</h2>
+            <p style="font-family: 'Caveat'; font-size: 1.5rem; color: #5d4037;">
+                "Meri bas ek hi wish hai ki tumhari aankhon mein hamesha khushi ke hi aansu aayein." 🥺❤️
             </p>
-            <p style="text-align: right; font-family:'Dancing Script'; font-size: 1.8rem; color: var(--dark-pink);">- Only Yours</p>
         </div>
-        <button class="btn" onclick="nextPage('final-letter')">Final Letter 💌</button>
+        <button class="btn" onclick="nextPage('video-page')">Deep Message 🎵</button>
+    </div>
+
+    <div class="screen" id="video-page">
+        <div class="video-side">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Sshz298Z-38" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <h2 style="font-family:'Dancing Script'; font-size:1.8rem; color:#ff758f; margin-top:15px;">I like me better when I'm with you...🥺💖</h2>
+        <button class="btn" onclick="nextPage('final-letter')">Last Message 💌</button>
     </div>
 
     <div class="screen" id="final-letter">
-        <div style="background:#fdf5e6; padding:25px; border:1px solid #d2b48c; box-shadow: 10px 10px 0px #d2b48c; max-width:550px; width:90%; height:60vh; overflow-y:auto; text-align:left; font-family:'Special Elite', cursive;">
-            <p>Happy Birthday to my favorite 'honeybee'! 🌻<br><br>
-            I realized... you already have ME! What more could you want? 😂<br><br>
-            Zindagi boring hoti agar tum gun dikha kar entry na leti. Tum meri life ki wo <b>Lily</b> ho.<br><br>
-            Stay as amazing as you are!<br><br>
-            With Love & Hugs,<br>
-            <b>[Your Name]</b></p>
+        <div class="vintage-letter">
+            <h1 style="color:#3e2723; border-bottom:2px solid #3e2723; font-family:'Dancing Script';">Last Message for U! ❤️</h1>
+            <div style="font-size:1.2rem; line-height:1.7; color:#3e2723;">
+                <br> My Dearest [Name], <br><br>
+                Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
+                <br><br>
+                Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>.
+                <br><br>
+                Hamesha meri 'Namuni' banke rehna. 
+                <br><br>
+                <p style="text-align: right; font-weight: bold;">— Yours Forever ❤️</p>
+            </div>
         </div>
         <button class="btn" style="background:#3e2723" onclick="location.reload()">Start Again 🔄</button>
     </div>
@@ -200,12 +193,12 @@
             clearInterval(rainInterval);
             rainInterval = setInterval(() => {
                 const p = document.createElement('div');
-                const types = ['🌻', '🌸', '💖', '✨', '🐝']; 
-                p.style.position = 'fixed'; p.style.top = '-50px';
+                const types = ['🌻', '🌸', '💖', '✨']; 
+                p.classList.add('particle');
+                p.innerHTML = types[Math.floor(Math.random() * types.length)];
                 p.style.left = Math.random() * 100 + 'vw';
                 p.style.fontSize = '25px';
-                p.style.animation = 'fall 4s linear forwards';
-                p.innerHTML = types[Math.floor(Math.random() * types.length)];
+                p.style.animationDuration = '4s';
                 document.body.appendChild(p);
                 setTimeout(() => p.remove(), 4000);
             }, 500);
