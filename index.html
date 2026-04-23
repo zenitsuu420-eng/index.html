@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Honeybee 🌻</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&family=Caveat:wght@500;700&family=Special+Elite&display=swap');
 
@@ -16,90 +15,84 @@
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-            background-color: #fff0f3;
-            /* Aapka Pink & Purple Checkered Pattern */
+            overflow-x: hidden;
+            /* Pink & Purple Checkered Pattern Fix */
+            background-color: #fff;
             background-image: 
-                repeating-linear-gradient(90deg, rgba(255, 182, 193, 0.4) 0px, rgba(255, 182, 193, 0.4) 30px, transparent 30px, transparent 60px),
-                repeating-linear-gradient(0deg, rgba(216, 191, 216, 0.4) 0px, rgba(216, 191, 216, 0.4) 30px, transparent 30px, transparent 60px);
+                linear-gradient(90deg, rgba(255, 182, 193, 0.4) 50%, transparent 50%),
+                linear-gradient(rgba(216, 191, 216, 0.4) 50%, transparent 50%);
             background-size: 60px 60px;
-            background-attachment: fixed;
         }
 
         .screen {
-            display: none; height: 100vh; width: 100vw;
+            display: none; min-height: 100vh; width: 100vw;
             flex-direction: column; justify-content: center;
             align-items: center; text-align: center; padding: 20px;
-            box-sizing: border-box; position: absolute;
+            box-sizing: border-box;
         }
 
-        .active { display: flex; animation: fadeIn 1s ease; }
+        .active { display: flex; animation: fadeIn 0.8s ease; }
 
         /* --- 3D Side-by-Side Gallery --- */
         .gallery-container {
-            display: flex; gap: 15px; perspective: 1200px;
-            flex-wrap: wrap; justify-content: center;
+            display: flex; gap: 10px; perspective: 1000px;
+            flex-wrap: nowrap; overflow-x: auto; padding: 20px;
+            width: 100%; justify-content: center;
         }
 
         .polaroid-3d {
-            background: white; padding: 10px 10px 30px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-radius: 2px; transition: 0.5s;
+            background: white; padding: 8px 8px 20px 8px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border-radius: 2px; transition: 0.4s;
+            min-width: 130px;
         }
 
         .polaroid-3d img { width: 120px; height: 120px; object-fit: cover; }
         
-        .polaroid-3d:nth-child(1) { transform: rotate(-5deg); }
-        .polaroid-3d:nth-child(2) { transform: rotate(3deg); }
-        .polaroid-3d:nth-child(3) { transform: rotate(-3deg); }
-        .polaroid-3d:nth-child(4) { transform: rotate(5deg); }
+        /* Side-by-Side 3D Tilt */
+        .polaroid-3d:nth-child(1) { transform: rotateY(-10deg) rotateZ(-3deg); }
+        .polaroid-3d:nth-child(2) { transform: rotateY(5deg) rotateZ(2deg); }
+        .polaroid-3d:nth-child(3) { transform: rotateY(-5deg) rotateZ(3deg); }
+        .polaroid-3d:nth-child(4) { transform: rotateY(10deg) rotateZ(-2deg); }
 
         .polaroid-3d:hover {
-            transform: scale(1.1) rotate(0deg) translateZ(50px);
+            transform: scale(1.1) rotateY(0deg);
             z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
 
-        /* --- Wish Page (Sirf Paper look) --- */
+        /* --- Wish Page (Pure Paper Look) --- */
         .paper-note {
-            background: #fff;
-            padding: 40px;
-            box-shadow: 5px 5px 20px rgba(0,0,0,0.1);
-            border-radius: 5px;
-            max-width: 500px;
-            position: relative;
-            border-left: 5px solid #ff758f;
+            background: #fff; padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 8px; max-width: 450px;
+            border: 1px solid #eee; position: relative;
         }
 
         /* --- Final Letter Style --- */
         .final-letter-box {
-            background: #fdf5e6;
-            padding: 30px;
+            background: #fdf5e6; padding: 30px;
             border: 1px solid #d2b48c;
-            box-shadow: 12px 12px 0px #ffb6c1;
-            max-width: 600px;
-            width: 90%;
-            height: 70vh;
-            overflow-y: auto;
-            text-align: left;
-            font-family: 'Special Elite', cursive;
-            line-height: 1.6;
+            box-shadow: 8px 8px 0px #ffb6c1;
+            max-width: 550px; width: 90%;
+            height: 65vh; overflow-y: auto;
+            text-align: left; font-family: 'Special Elite', cursive;
         }
 
         .btn { 
             background: var(--primary-pink); color: white; 
             padding: 12px 25px; border: none; border-radius: 50px; 
-            cursor: pointer; margin-top: 20px; font-weight: bold;
+            cursor: pointer; margin-top: 25px; font-weight: bold;
         }
 
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
     </style>
 </head>
 <body>
 
     <div class="screen active" id="ask">
-        <img src="https://i.ibb.co/HLSBN13W/cute-cat.jpg" style="width:150px; border-radius:50%;">
-        <h1 style="font-family:'Dancing Script'; color:var(--dark-pink); font-size:3rem;">Ready for your gift? ✨</h1>
-        <button class="btn" onclick="nextPage('honeybee')">Yes, Let's Go! ❤️</button>
+        <h1 style="font-family:'Dancing Script'; color:var(--dark-pink); font-size:3rem;">Happy Birthday Honeybee! 🐝</h1>
+        <button class="btn" onclick="nextPage('honeybee')">Open Your Surprise ❤️</button>
     </div>
 
     <div class="screen" id="honeybee">
@@ -110,70 +103,50 @@
             <div class="polaroid-3d"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
             <div class="polaroid-3d"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
         </div>
-        <button class="btn" onclick="nextPage('wish-birthday')">Next Magic ✨</button>
-    </div>
-
-    <div class="screen" id="wish-birthday">
-        <div style="background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-            <h1 style="font-family:'Dancing Script'; color:var(--dark-pink);">Happy Birthday! madam jii 🎂</h1>
-            <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg" style="width:250px; border-radius:15px; border: 5px solid #ffb6c1;">
-        </div>
-        <button class="btn" onclick="nextPage('wish-for-u')">A Small Wish 🥺</button>
+        <button class="btn" onclick="nextPage('wish-for-u')">Next ✨</button>
     </div>
 
     <div class="screen" id="wish-for-u">
-        <div class="paper-note animate__animated animate__fadeInDown">
+        <div class="paper-note">
             <h2 style="font-family: 'Caveat'; color: var(--dark-pink); font-size: 2.5rem;">My Wish for U... 🥺❤️</h2>
             <p style="font-family: 'Caveat'; font-size: 1.8rem; color: #3e2723;">
                 "I wish ki tumhari aankhon mein kabhi aansu na aaye, siwaye khushi ke. <br><br>
                 Tum meri life ki wo sukoon ho jise main kabhi khona nahi chahta. Stay with me forever, my honeybee."
             </p>
         </div>
-        <button class="btn" onclick="nextPage('final-letter')">Read Final Letter 💌</button>
+        <button class="btn" onclick="nextPage('final-letter')">Read Letter 💌</button>
     </div>
 
     <div class="screen" id="final-letter">
-        <div class="final-letter-box animate__animated animate__zoomIn">
-            <h1 style="color: #5d4037; font-size: 1.8rem;">Dearest [Name], ❤️</h1>
-            <br>
-            Happy Birthday to my favorite 'Namuni'! 🌻
-            <br><br>
-            I was thinking about what to give you, and then I realized... you already have ME! What more could you want? 😂 Just kidding!
-            <br><br>
-            Zindagi thodi boring hoti agar tum mere life mein gun dikha kar entry na leti. Tum meri life ki wo <b>Lily</b> ho jiski khushboo mere har din ko special banati hai.
-            <br><br>
-            I hope ye saal tumhare liye utna hi bright ho jitna ek sunflower hota hai. Hamesha haste rehna, mere jokes par (chahe wo gande hon) aur mujhse lade bina rehne ki koshish karna (jo impossible hai).
-            <br><br>
-            Tum mere liye sabse special ho aur humesha rahogi. Stay as amazing as you are!
-            <br><br>
-            <b>With Love & Hugs,</b>
-            <br>
-            [Your Name]
-            <br><br>
-            <center>--- End of Letter ---</center>
+        <div class="final-letter-box">
+            <h2 style="color: #5d4037;">Dearest [Name], ❤️</h2>
+            <p>Happy Birthday to my favorite 'Namuni'! 🌻</p>
+            <p>I was thinking about what to give you, and then I realized... you already have ME! What more could you want? 😂 Just kidding!</p>
+            <p>Zindagi thodi boring hoti agar tum mere life mein gun dikha kar entry na leti. Tum meri life ki wo <b>Lily</b> ho jiski khushboo mere har din ko special banati hai.</p>
+            <p>I hope ye saal tumhare liye utna hi bright ho jitna ek sunflower hota hai. Hamesha haste rehna, mere jokes par aur mujhse lade bina rehne ki koshish karna.</p>
+            <p>Tum mere liye sabse special ho aur humesha rahogi. Stay as amazing as you are!</p>
+            <p><b>With Love & Hugs,</b><br>[Your Name]</p>
         </div>
-        <button class="btn" style="background:#3e2723" onclick="location.reload()">Re-watch 🔄</button>
+        <button class="btn" onclick="location.reload()">Start Again 🔄</button>
     </div>
 
     <script>
         function nextPage(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            startFlowerRain();
+            setInterval(createFlower, 500);
         }
 
-        function startFlowerRain() {
-            const p = document.createElement('div');
-            const types = ['🌻', '🌸', '💖', '✨', '🐝']; 
-            p.style.position = 'fixed'; p.style.top = '-50px';
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.fontSize = '25px';
-            p.style.animation = 'fall 4s linear forwards';
-            p.innerHTML = types[Math.floor(Math.random() * types.length)];
-            document.body.appendChild(p);
-            setTimeout(() => p.remove(), 4000);
+        function createFlower() {
+            const f = document.createElement('div');
+            f.innerHTML = '🌻';
+            f.style.position = 'fixed'; f.style.top = '-20px';
+            f.style.left = Math.random() * 100 + 'vw';
+            f.style.fontSize = '20px';
+            f.style.animation = 'fall 4s linear forwards';
+            document.body.appendChild(f);
+            setTimeout(() => f.remove(), 4000);
         }
-        setInterval(startFlowerRain, 400);
     </script>
 </body>
 </html>
