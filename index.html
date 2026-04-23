@@ -18,13 +18,11 @@
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            
-            /* Pure CSS Gingham Background (No Image Link Needed) */
             background-color: #fff0f3;
             background-image: 
-                linear-gradient(90deg, rgba(255, 182, 193, 0.5) 50%, transparent 50%),
-                linear-gradient(rgba(216, 191, 216, 0.5) 50%, transparent 50%);
-            background-size: 60px 60px; /* Size adjust kar sakte hain */
+                linear-gradient(90deg, rgba(255, 182, 193, 0.4) 50%, transparent 50%),
+                linear-gradient(rgba(216, 191, 216, 0.4) 50%, transparent 50%);
+            background-size: 60px 60px;
         }
 
         .screen {
@@ -32,15 +30,21 @@
             flex-direction: column; justify-content: center;
             align-items: center; text-align: center; padding: 15px;
             box-sizing: border-box; position: absolute;
-            background: rgba(255, 255, 255, 0.2); /* Thoda glass effect background ke upar */
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* 3D Photo Gallery */
+        /* 3D Photo Styles */
         .photo-grid { 
             display: grid; grid-template-columns: repeat(3, 1fr); 
             gap: 20px; max-width: 800px; perspective: 1000px;
+        }
+
+        /* Naye Page ki 2 image wali grid */
+        .photo-grid-2 {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 30px; max-width: 600px; perspective: 1000px;
         }
 
         .polaroid {
@@ -52,10 +56,11 @@
             animation: float3D 3s infinite ease-in-out;
         }
 
-        .polaroid img { width: 100%; height: 150px; object-fit: cover; border-radius: 3px; }
+        .polaroid img { width: 100%; height: 250px; object-fit: cover; border-radius: 3px; }
+        .gallery-img { height: 150px !important; }
 
         .polaroid:hover {
-            transform: rotateX(0deg) rotateY(0deg) scale(1.1);
+            transform: rotateX(0deg) rotateY(0deg) scale(1.05);
             z-index: 100;
         }
 
@@ -65,7 +70,9 @@
         }
 
         @media (max-width: 600px) {
-            .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .photo-grid { grid-template-columns: repeat(2, 1fr); }
+            .photo-grid-2 { gap: 15px; }
+            .polaroid img { height: 200px; }
         }
 
         /* Heart Photo */
@@ -78,7 +85,6 @@
         }
         .heart-photo img { width: 100%; height: 100%; object-fit: cover; clip-path: inherit; }
 
-        /* Vintage Letter */
         .vintage-letter {
             background: #f4e4bc;
             background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
@@ -92,7 +98,7 @@
         .btn { 
             background: var(--primary-pink); color: white; padding: 12px 30px; 
             border: none; border-radius: 50px; cursor: pointer; font-weight: 600; 
-            margin-top: 15px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); 
+            margin-top: 20px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); 
             text-transform: uppercase;
         }
 
@@ -134,12 +140,21 @@
     <div class="screen" id="gallery">
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom:20px;">Memories of You 📸</h1>
         <div class="photo-grid">
-            <div class="polaroid"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
-            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://i.postimg.cc/BZ4L4rS0/images.jpg"></div>
-            <div class="polaroid" style="animation-delay: 1s;"><img src="https://i.postimg.cc/qM7XF6rG/cute-cat.jpg"></div>
-            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
+            <div class="polaroid"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp" class="gallery-img"></div>
+            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://i.postimg.cc/BZ4L4rS0/images.jpg" class="gallery-img"></div>
+            <div class="polaroid" style="animation-delay: 1s;"><img src="https://i.postimg.cc/qM7XF6rG/cute-cat.jpg" class="gallery-img"></div>
+            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp" class="gallery-img"></div>
         </div>
-        <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
+        <button class="btn" onclick="nextPage('western-page')">Next ✨</button>
+    </div>
+
+    <div class="screen" id="western-page">
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem; margin-bottom:20px;">Western Vibes 👗</h1>
+        <div class="photo-grid-2">
+            <div class="polaroid"><img src="https://via.placeholder.com/400x600?text=Western+1"></div>
+            <div class="polaroid" style="animation-delay: 0.8s;"><img src="https://via.placeholder.com/400x600?text=Western+2"></div>
+        </div>
+        <button class="btn" onclick="nextPage('wish-birthday')">Keep Going ✨</button>
     </div>
 
     <div class="screen" id="wish-birthday">
