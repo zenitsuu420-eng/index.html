@@ -18,13 +18,11 @@
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            
-            /* Pure CSS Gingham Background (No Image Link Needed) */
             background-color: #fff0f3;
             background-image: 
                 linear-gradient(90deg, rgba(255, 182, 193, 0.5) 50%, transparent 50%),
                 linear-gradient(rgba(216, 191, 216, 0.5) 50%, transparent 50%);
-            background-size: 60px 60px; /* Size adjust kar sakte hain */
+            background-size: 60px 60px;
         }
 
         .screen {
@@ -32,15 +30,14 @@
             flex-direction: column; justify-content: center;
             align-items: center; text-align: center; padding: 15px;
             box-sizing: border-box; position: absolute;
-            background: rgba(255, 255, 255, 0.2); /* Thoda glass effect background ke upar */
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* 3D Photo Gallery */
         .photo-grid { 
-            display: grid; grid-template-columns: repeat(3, 1fr); 
-            gap: 20px; max-width: 800px; perspective: 1000px;
+            display: grid; grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; max-width: 500px; perspective: 1000px;
         }
 
         .polaroid {
@@ -52,7 +49,7 @@
             animation: float3D 3s infinite ease-in-out;
         }
 
-        .polaroid img { width: 100%; height: 150px; object-fit: cover; border-radius: 3px; }
+        .polaroid img { width: 100%; height: 150px; object-fit: cover; border-radius: 3px; background: #eee; }
 
         .polaroid:hover {
             transform: rotateX(0deg) rotateY(0deg) scale(1.1);
@@ -64,11 +61,6 @@
             50% { transform: translateY(-15px) rotateX(-5deg); }
         }
 
-        @media (max-width: 600px) {
-            .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-        }
-
-        /* Heart Photo */
         .heart-photo {
             width: 220px; height: 220px;
             background: var(--primary-pink);
@@ -78,7 +70,6 @@
         }
         .heart-photo img { width: 100%; height: 100%; object-fit: cover; clip-path: inherit; }
 
-        /* Vintage Letter */
         .vintage-letter {
             background: #f4e4bc;
             background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
@@ -134,10 +125,10 @@
     <div class="screen" id="gallery">
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom:20px;">Memories of You 📸</h1>
         <div class="photo-grid">
-            <div class="polaroid"><img src="https://drive.google.com/file/d/17h99chzhKhXX288hFJFcanvu5gtgfV4w/view?usp=drive_link"></div>
-            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://drive.google.com/file/d/17xlKF6g-IO03IGSlMFnxe812JfvPur6P/view?usp=drive_link"></div>
-            <div class="polaroid" style="animation-delay: 1s;"><img src="https://drive.google.com/file/d/17tlyFasmjo2iRTeGbxxolgNUGlfuGR8B/view?usp=drive_link"></div>
-            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://drive.google.com/file/d/188QG0w4uke5MAM5z9r-lsFXE_7kk0wWK/view?usp=drive_link"></div>
+            <div class="polaroid"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp" alt="Photo 1"></div>
+            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp" alt="Photo 2"></div>
+            <div class="polaroid" style="animation-delay: 1s;"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp" alt="Photo 3"></div>
+            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp" alt="Photo 4"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
     </div>
@@ -177,11 +168,11 @@
             <h1 style="color:#3e2723; border-bottom:2px solid #3e2723; font-family:'Dancing Script';">Last Message for U! ❤️</h1>
             <div style="font-size:1.2rem; line-height:1.7; color:#3e2723;">
                 <br> My Dearest [Name], <br><br>
-                Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
+                Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
                 <br><br>
                 Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>.
                 <br><br>
-                Hamesha meri 'Namuni' banke rehna. 
+                Hamesha meri 'Namuni' banke rehna. 
                 <br><br>
                 <p style="text-align: right; font-weight: bold;">— Yours Forever ❤️</p>
             </div>
