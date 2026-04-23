@@ -11,14 +11,13 @@
         :root {
             --primary-pink: #ff758f;
             --dark-pink: #ff4d6d;
-            --bg-color: #fff0f3;
         }
 
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            background-color: var(--bg-color);
+            background-color: #fff0f3;
             background-image: linear-gradient(90deg, rgba(255, 182, 193, 0.2) 50%, transparent 50%), linear-gradient(rgba(216, 191, 216, 0.2) 50%, transparent 50%);
             background-size: 60px 60px;
         }
@@ -32,7 +31,7 @@
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* --- STAGE 1: 3D Floating Stack (Same as first code) --- */
+        /* --- 3D Floating Stack Animation --- */
         .stack-3d {
             position: relative; width: 200px; height: 200px;
             perspective: 1000px; margin-bottom: 40px;
@@ -48,6 +47,7 @@
 
         .card-3d img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* Different 3D Positions */
         .c1 { transform: rotateY(-25deg) rotateX(10deg) translateZ(0px); animation: float1 4s infinite ease-in-out; }
         .c2 { transform: rotateY(25deg) rotateX(-10deg) translateZ(-50px); animation: float2 5s infinite ease-in-out; }
         .c3 { transform: rotateZ(10deg) translateZ(-100px); animation: float3 6s infinite ease-in-out; }
@@ -56,15 +56,14 @@
         @keyframes float2 { 0%, 100% { transform: rotateY(25deg) translateY(0); } 50% { transform: rotateY(15deg) translateY(20px); } }
         @keyframes float3 { 0%, 100% { transform: rotateZ(10deg) translateX(0); } 50% { transform: rotateZ(5deg) translateX(15px); } }
 
-        /* --- STAGE 2: Artistic Birthday & Beyond (Mixed Design) --- */
-        .artistic-bg {
-            background: url('https://i.ibb.co/ed8ed8/image-ed8ed8.png'); 
-            background-size: cover;
-            border: 15px solid #fff;
-            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"><circle cx="25" cy="25" r="10" fill="%23ff758f"/></svg>') 30 round;
-            padding: 20px; border-radius: 30px;
+        /* --- Video Box --- */
+        .video-container {
+            width: 90%; max-width: 320px; border: 8px solid white;
+            border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            overflow: hidden; background: #000;
         }
 
+        /* --- Heart Fix --- */
         .heart-box {
             width: 250px; height: 250px;
             background-color: var(--primary-pink);
@@ -77,26 +76,25 @@
         }
         .heart-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .video-box {
-            border: 10px solid white; border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            overflow: hidden; max-width: 300px;
-            animation: fadeInUp 1s;
+        /* --- Wish Card Animation --- */
+        .wish-card {
+            background: white; padding: 25px; border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(255, 117, 143, 0.3);
+            max-width: 350px; border-left: 5px solid var(--primary-pink);
+            animation: slideInUp 1s;
         }
 
-        .wish-container {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px; border-radius: 20px;
-            max-width: 500px; width: 85%;
-            box-shadow: 0 10px 40px rgba(255, 117, 143, 0.2);
-            border: 2px solid var(--primary-pink);
-            transform: rotate(-1deg);
+        /* --- Final Letter Style --- */
+        .final-letter-box {
+            background: #fdf5e6; padding: 25px; border: 1px solid #d2b48c;
+            box-shadow: 10px 10px 0px #d2b48c; max-width: 550px; width: 90%;
+            height: 70vh; overflow-y: auto; text-align: left;
+            font-family: 'Special Elite', cursive; line-height: 1.5;
         }
 
         .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 20px; font-weight: bold; }
 
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -130,50 +128,51 @@
             <div class="card-3d c2"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
             <div class="card-3d c3"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
         </div>
-        <button class="btn" onclick="nextPage('wish-birthday')">Next Magic ✨</button>
+        <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
     </div>
 
     <div class="screen" id="wish-birthday">
-        <div class="artistic-bg">
-            <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:2.8rem;">Happy Birthday! madam jii 🎂</h1>
-            <div class="heart-box">
-                 <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg">
-            </div>
-            <p style="font-family:'Caveat'; font-size: 1.5rem; color:#fff; background:rgba(0,0,0,0.3); border-radius:10px; padding: 5px;">You are my favorite honeybee! 🌻</p>
+        <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:2.8rem;">Happy Birthday! madam jii 🎂</h1>
+        <div class="heart-box">
+             <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg">
         </div>
         <button class="btn" onclick="nextPage('glimpses')">Glimpses 🎬</button>
     </div>
 
     <div class="screen" id="glimpses">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">Our Special Moments 🌸</h1>
-        <div class="video-box">
-            <video width="100%" controls autoplay loop muted>
-                <source src="Video-230.mp4" type="video/mp4">
+        <h1 style="font-family:'Caveat'; color:#ff758f; font-size:2.5rem;">Some More Glimpses 🌸</h1>
+        <div class="video-container">
+            <video width="100%" height="auto" controls autoplay muted loop>
+                <source src="APNA_VIDEO_LINK_YAHAN_DALEIN.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
         </div>
-        <button class="btn" onclick="nextPage('wish-for-u')">A Small Wish 🥺</button>
+        <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">Music & Memories... 🎵</p>
+        <button class="btn" onclick="nextPage('wish-for-u')">My Wish ✨</button>
     </div>
 
     <div class="screen" id="wish-for-u">
-        <div class="wish-container animate__animated animate__fadeIn">
-            <h2 style="font-family: 'Caveat'; color: var(--dark-pink); font-size: 2.5rem;">My Wish for U... 🥺❤️</h2>
-            <p style="font-family: 'Caveat'; font-size: 2rem; color: #3e2723;">
-                "I wish ki tumhari aankhon mein kabhi aansu na aaye, siwaye khushi ke. <br><br>
-                Tum meri life ki wo sukoon ho jise main kabhi khona nahi chahta. Stay with me forever, my honeybee."
+        <div class="wish-card animate__animated animate__zoomIn">
+            <h2 style="font-family: 'Caveat'; color: var(--dark-pink); font-size: 2.2rem;">My Wish for U... 🥺</h2>
+            <p style="font-family: 'Dancing Script'; font-size: 1.8rem;">
+                "May your smile stay as bright as the sun, today and forever."
             </p>
-            <p style="text-align: right; font-family:'Dancing Script'; font-size: 1.8rem; color: var(--dark-pink);">- Only Yours</p>
         </div>
-        <button class="btn" onclick="nextPage('final-letter')">Final Letter 💌</button>
+        <button class="btn" onclick="nextPage('final-letter')">Read Final Letter 💌</button>
     </div>
 
     <div class="screen" id="final-letter">
-        <div style="background:#fdf5e6; padding:25px; border:1px solid #d2b48c; box-shadow: 10px 10px 0px #d2b48c; max-width:550px; width:90%; height:60vh; overflow-y:auto; text-align:left; font-family:'Special Elite', cursive;">
-            <p>Happy Birthday to my favorite 'honeybee'! 🌻<br><br>
-            I realized... you already have ME! What more could you want? 😂<br><br>
-            Zindagi boring hoti agar tum gun dikha kar entry na leti. Tum meri life ki wo <b>Lily</b> ho.<br><br>
-            Stay as amazing as you are!<br><br>
-            With Love & Hugs,<br>
-            <b>[Your Name]</b></p>
+        <div class="final-letter-box">
+            <h2 style="text-align:center; color:#3e2723;">Last Message for U! ❤️</h2>
+            <p>
+                Happy Birthday to my favorite 'honeybee'! 🌻<br><br>
+                I was thinking about what to give you, and then I realized... you already have ME! What more could you want? 😂 Just kidding!<br><br>
+                Zindagi thodi boring hoti agar tum mere life mein gun dikha kar entry na leti. Tum meri life ki wo <b>Lily</b> ho jiski khushboo mere har din ko special banati hai.<br><br>
+                I hope ye saal tumhare liye utna hi bright ho jitna ek sunflower hota hai. Hamesha haste rehna, mere jokes par (chahe wo gande hon) aur mujhse lade bina rehne ki koshish karna (jo impossible hai).<br><br>
+                Tum mere liye sabse special ho aur humesha rahogi. Stay as amazing as you are!<br><br>
+                With Love & Hugs,<br>
+                <b>[Your Name]</b>
+            </p>
         </div>
         <button class="btn" style="background:#3e2723" onclick="location.reload()">Start Again 🔄</button>
     </div>
