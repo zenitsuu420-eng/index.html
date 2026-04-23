@@ -8,19 +8,41 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&family=Caveat:wght@500;700&family=Special+Elite&display=swap');
 
-        /* Base Styles & Universal Vintage Background (from image_45.png) */
+        :root {
+            --primary-pink: #ff758f;
+            --dark-pink: #ff4d6d;
+            --vintage-cream: #fdfaf1;
+            --text-color: #5d4037;
+        }
+
         body, html {
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            /* Vintage textured paper from image_45.png */
-            background: #fdfaf1 url('https://images.unsplash.com/photo-1594917631378-0131d258bd52?fm=jpg&q=60&w=1500') center/cover no-repeat;
+            background: #fdfaf1;
         }
 
-        /* Overall overlay for readability */
+        /* Animated Soft Background */
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(45deg, #fdfaf1, #ffedf0, #fdfaf1);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Vintage Overlay Texture */
         .page-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(253, 250, 241, 0.4); z-index: -1;
+            background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            opacity: 0.4; z-index: -1; pointer-events: none;
         }
 
         .screen {
@@ -28,106 +50,112 @@
             flex-direction: column; justify-content: center;
             align-items: center; text-align: center; padding: 20px;
             box-sizing: border-box; position: absolute;
+            backdrop-filter: blur(2px);
         }
 
-        .active { display: flex; animation: pageReveal 0.8s ease; }
+        .active { display: flex; animation: fadeInBlur 1s ease-out; }
 
-        @keyframes pageReveal { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        @keyframes fadeInBlur {
+            from { opacity: 0; filter: blur(10px); transform: scale(1.05); }
+            to { opacity: 1; filter: blur(0); transform: scale(1); }
+        }
 
-        /* Floating particles: Mix of flowers & hearts */
-        .particle { position: fixed; top: -50px; z-index: 100; pointer-events: none; animation: fall linear forwards; }
+        /* Floating Particles */
+        .particle { position: fixed; top: -50px; z-index: 100; pointer-events: none; animation: fall linear forwards; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* --- STYLISH PHOTO GRID (Bounce Animation) --- */
-        .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; max-width: 800px; margin-bottom: 20px; }
+        /* Premium Polaroid Grid */
+        .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 850px; margin-bottom: 20px; }
         .polaroid {
-            background: white; padding: 10px 10px 30px 10px;
-            box-shadow: 0 10px 20px rgba(255, 182, 193, 0.4);
-            border: 1px solid #ffe5ec; transition: 0.4s; animation: polaroidBounce 1s ease;
+            background: white; padding: 12px 12px 35px 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-radius: 2px; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        @keyframes polaroidBounce { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
-        .polaroid img { width: 120px; height: 140px; object-fit: cover; }
-        .polaroid:hover { transform: scale(1.1) rotate(0deg) !important; z-index: 5; border-color: #ffb3c1; }
+        .polaroid img { width: 130px; height: 150px; object-fit: cover; }
+        .polaroid:hover { transform: scale(1.15) rotate(0deg) !important; z-index: 10; box-shadow: 0 25px 50px rgba(255, 117, 143, 0.3); }
 
-        /* --- NEW BIRTHDAY PAGE DESIGN (Big & Cute) --- */
-        .birthday-main { display: flex; align-items: center; gap: 40px; max-width: 1000px; }
-        
-        /* 1. Heart Frame with Pulse & Glow */
+        /* Birthday Section Enhancements */
+        .birthday-main { display: flex; align-items: center; gap: 50px; max-width: 1000px; }
         .heart-photo {
-            width: 300px; height: 300px;
-            background: #ff758f;
+            width: 320px; height: 320px;
+            background: var(--primary-pink);
             clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
             display: flex; justify-content: center; align-items: center;
-            animation: pulseGlow 1.8s infinite;
+            animation: heartPulse 2s infinite ease-in-out;
+            filter: drop-shadow(0 10px 20px rgba(255, 117, 143, 0.5));
         }
-        @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(255, 117, 143, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 117, 143, 0.8); }
+        @keyframes heartPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        .heart-photo img { width: 92%; height: 92%; object-fit: cover; clip-path: inherit; }
+
+        /* Glassmorphism Buttons */
+        .btn { 
+            background: var(--primary-pink); color: white; padding: 16px 45px; 
+            border: none; border-radius: 50px; cursor: pointer; font-weight: 600; 
+            margin-top: 25px; box-shadow: 0 8px 20px rgba(255, 117, 143, 0.4); 
+            transition: all 0.4s; letter-spacing: 1px; text-transform: uppercase;
+            border: 2px solid rgba(255,255,255,0.2);
         }
-        .heart-photo img { width: 90%; height: 90%; object-fit: cover; clip-path: inherit; }
+        .btn:hover { background: var(--dark-pink); transform: translateY(-5px); box-shadow: 0 12px 25px rgba(255, 117, 143, 0.6); }
 
-        /* 2. Cake with Sparkles */
-        .cake-holder { position: relative; margin-top: -50px; }
-        .cake-holder img { width: 200px; animation: cakeAfloat 3s ease-in-out infinite; }
-        @keyframes cakeAfloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-        /* --- WISHES DESIGN (Heart + Letter Box) --- */
-        .wishes-layout { display: flex; align-items: center; gap: 40px; max-width: 1000px; }
+        /* Letter Box Upgrade */
         .wishes-letter-box {
-            background: white; padding: 30px; border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(255, 121, 198, 0.2);
-            border: 2px dashed #ffb3c1; text-align: left;
-            font-family: 'Caveat', cursive;
+            background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            border: 2px solid #fff; text-align: left;
+            font-family: 'Caveat', cursive; max-width: 500px;
         }
 
-        /* --- VIDEO SPLIT LAYOUT --- */
-        .split-box { display: flex; width: 95%; max-width: 1100px; gap: 20px; align-items: center; }
-        .video-side { flex: 1.2; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.3); height: 450px; border: 5px solid white; }
-        .text-side { flex: 1; text-align: left; padding: 20px; color: #5d4037; font-style: italic; }
+        /* Video Container */
+        .video-side { 
+            border-radius: 30px; overflow: hidden; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2); 
+            border: 8px solid white; height: 400px;
+        }
 
-        /* --- VINTAGE LETTER DESIGN --- */
+        /* Scrollbar for Vintage Letter */
+        .vintage-letter::-webkit-scrollbar { width: 5px; }
+        .vintage-letter::-webkit-scrollbar-thumb { background: #d2b48c; border-radius: 10px; }
+
         .vintage-letter {
-            background: #fdf4e3; background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
-            padding: 40px; max-width: 600px; width: 85%; height: 60vh; overflow-y: auto;
-            box-shadow: 10px 10px 30px rgba(0,0,0,0.2); border: 1px solid #d2b48c;
-            font-family: 'Special Elite', cursive; text-align: left;
+            background: #fffdf9 url('https://www.transparenttextures.com/patterns/old-paper.png');
+            padding: 50px; max-width: 650px; width: 85%; height: 65vh; overflow-y: auto;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.1); border: 1px solid #e8dec9;
+            font-family: 'Special Elite', cursive; text-align: left; border-radius: 5px;
         }
-
-        .btn { background: #ff758f; color: white; padding: 15px 40px; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; margin-top: 20px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); transition: 0.3s; }
-        .btn:hover { background: #ff4d6d; transform: scale(1.05); }
-        .meme-img { width: 220px; border-radius: 15px; margin-bottom: 20px; }
-
     </style>
 </head>
 <body>
 
+    <div class="animated-bg"></div>
     <div class="page-overlay"></div>
 
     <div class="screen active" id="ask">
-        <img src="https://media.giphy.com/media/MDJ9IbM9GXc9G/giphy.gif" style="width:200px; border-radius:50%">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem;">Please Accept! 🌻</h1>
-        <p style="color:#5d4037">A special surprise for my girl...</p>
-        <div style="display:flex; gap:20px;">
-            <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
-            <button class="btn" style="background:#ff4d6d" onclick="nextPage('no-page')">No 😝</button>
+        <div class="animate__animated animate__bounceIn">
+            <img src="https://media.giphy.com/media/MDJ9IbM9GXc9G/giphy.gif" style="width:180px; border-radius:50%; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+            <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3.5rem; margin-top: 20px;">Please Accept! 🌻</h1>
+            <p style="color:#5d4037; font-size: 1.1rem;">A special surprise for my girl...</p>
+            <div style="display:flex; gap:20px; justify-content: center;">
+                <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
+                <button class="btn" style="background:#ff4d6d" onclick="nextPage('no-page')">No 😝</button>
+            </div>
         </div>
     </div>
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
         <img src="https://media.giphy.com/media/6zdUOYH1nylIs/giphy.gif" style="width:250px;">
-        <h1 style="color:#ff4d6d">HOW DARE YOU! 🔫</h1>
-        <p>Thaye-Thaye incoming! Better press 'Yes' now!</p>
+        <h1 style="color:#ff4d6d; font-size: 3rem;">HOW DARE YOU! 🔫</h1>
+        <p style="font-size: 1.2rem;">Thaye-Thaye incoming! Better press 'Yes' now!</p>
         <button class="btn" onclick="nextPage('ask')">My mistake, Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
         <img src="https://media.giphy.com/media/KztT2c4u8mYYUiCiS7/giphy.gif" style="width:220px;">
-        <h1 style="color:#ff758f">Hehe, I knew it! 😉</h1>
+        <h1 style="color:#ff758f; font-size: 3rem;">Hehe, I knew it! 😉</h1>
         <button class="btn" onclick="nextPage('gallery')">See Magic ✨</button>
     </div>
 
     <div class="screen" id="gallery">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem; margin-bottom:20px;">Memories of You 📸</h1>
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3.2rem; margin-bottom:30px;">Memories of You 📸</h1>
         <div class="photo-grid">
             <div class="polaroid" style="transform:rotate(-5deg)"><img src="https://via.placeholder.com/150"></div>
             <div class="polaroid" style="transform:rotate(3deg)"><img src="https://via.placeholder.com/150"></div>
@@ -144,29 +172,29 @@
 
     <div class="screen" id="wish-birthday">
         <div class="birthday-main">
-            <div class="heart-photo animate__animated animate__zoomIn">
+            <div class="heart-photo">
                 <img src="https://via.placeholder.com/300" alt="Special Memory Photo">
             </div>
             <div style="text-align:left;">
                 <div class="cake-holder animate__animated animate__fadeInUp">
-                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-vector%2F20230303%2Fourmid%2Fpngtree-3d-birthday-cake-illustration-png-image_6628283.png&f=1&nofb=1&ipt=b2447990be47475d4f3b70868a88a0b0d3e583d735165d70e4171d1a8e1e7798&ipo=images" alt="Birthday Cake">
+                    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpng.pngtree.com%2Fpng-vector%2F20230303%2Fourmid%2Fpngtree-3d-birthday-cake-illustration-png-image_6628283.png&f=1&nofb=1&ipt=b2447990be47475d4f3b70868a88a0b0d3e583d735165d70e4171d1a8e1e7798&ipo=images" style="width: 180px;">
                 </div>
-                <h1 class="animate__animated animate__fadeInLeft" style="font-family:'Dancing Script'; color:#ff4d6d; font-size:4.5rem; margin-top:0px; text-shadow: 2px 2px 5px rgba(0,0,0,0.1);">Happy Birthday! 🎂</h1>
-                <p style="font-size:1.4rem; color:#5d4037;">Today, the most beautiful soul was born. 🌸</p>
+                <h1 class="animate__animated animate__fadeInLeft" style="font-family:'Dancing Script'; color:#ff4d6d; font-size:4.5rem; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.05);">Happy Birthday! 🎂</h1>
+                <p style="font-size:1.5rem; color:#5d4037; font-weight: 300;">Today, the most beautiful soul was born. 🌸</p>
             </div>
         </div>
         <button class="btn" onclick="nextPage('wishes')">Wishes for You 🌟</button>
     </div>
 
     <div class="screen" id="wishes">
-        <div class="wishes-layout">
-            <div class="heart-photo" style="width:250px; height:230px;">
+        <div class="wishes-layout" style="display:flex; align-items:center; gap:40px;">
+            <div class="heart-photo" style="width:280px; height:280px;">
                 <img src="https://via.placeholder.com/250">
             </div>
             <div class="wishes-letter-box animate__animated animate__fadeInRight">
-                <h2 style="margin-top:0; color:#ff4d6d;">For My Love...🥺💖</h2>
-                <p style="font-size:1.5rem; line-height:1.5; color:#5d4037;">
-                    "Meri bas ek hi wish hai ki tumhari aankhon mein hamesha khushi ke hi aansu aayein. <br>
+                <h2 style="margin-top:0; color:#ff4d6d; font-size: 2.2rem;">For My Love...🥺💖</h2>
+                <p style="font-size:1.4rem; line-height:1.6; color:#5d4037;">
+                    "Meri bas ek hi wish hai ki tumhari aankhon mein hamesha khushi ke hi aansu aayein. <br><br>
                     Tumhari har ek zidd poori ho aur main har pal tumhare saath rahun, har ek sapne ko poora hote dekhne ke liye." 🥺❤️
                 </p>
             </div>
@@ -175,13 +203,13 @@
     </div>
 
     <div class="screen" id="video-page">
-        <div class="split-box">
-            <div class="video-side">
+        <div class="split-box" style="display:flex; gap:30px; align-items:center; max-width: 1100px;">
+            <div class="video-side" style="flex:1.2;">
                 <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Sshz298Z-38?autoplay=0" frameborder="0" allowfullscreen></iframe>
             </div>
-            <div class="text-side animate__animated animate__fadeInRight">
-                <h2 style="font-family:'Dancing Script'; font-size:2.8rem; color:#ff758f;">I like me better when I'm with you...🥺💖</h2>
-                <p style="font-size:1.3rem; line-height:1.7;">
+            <div class="text-side animate__animated animate__fadeInRight" style="flex:1; text-align:left;">
+                <h2 style="font-family:'Dancing Script'; font-size:2.8rem; color:#ff758f; margin-bottom: 20px;">I like me better when I'm with you...🥺💖</h2>
+                <p style="font-size:1.2rem; line-height:1.8; color: #5d4037; font-style: italic;">
                     "Jaise Anuv Jain apne gaano se humein emotional kar deta hai... waise hi mere liye tumhari presence hai. 
                     Main bas yahi arz karna chahta hoon ki tumhare bina mere har din adhoore hain."
                 </p>
@@ -192,7 +220,7 @@
 
     <div class="screen" id="final-letter">
         <div class="vintage-letter animate__animated animate__fadeInUp">
-            <h1 style="color:#3e2723; border-bottom:1px solid #d2b48c;">Last Message for U! ❤️</h1>
+            <h1 style="color:#3e2723; border-bottom:2px solid #d2b48c; font-family:'Dancing Script'; font-size: 2.5rem; padding-bottom: 10px;">Last Message for U! ❤️</h1>
             <div style="font-size:1.3rem; line-height:1.8; color:#3e2723;">
                 <br>
                 My Dearest [Name], <br><br>
@@ -213,30 +241,31 @@
     <script>
         function nextPage(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
-            // Trigger floating rain on special pages
+            const target = document.getElementById(id);
+            target.classList.add('active');
+            
             if(['gallery', 'wish-birthday', 'wishes', 'video-page', 'final-letter'].includes(id)) {
                 startFlowerRain();
             } else {
-                // stop rain if on intro pages
                 clearInterval(rainInterval);
             }
         }
 
         let rainInterval;
         function startFlowerRain() {
-            clearInterval(rainInterval); // clear previous rain
+            clearInterval(rainInterval);
             rainInterval = setInterval(() => {
                 const p = document.createElement('div');
-                const types = ['🌻', '🌸', '💖', '✨', '🎈']; 
+                const types = ['🌻', '🌸', '💖', '✨', '🎈', '☁️']; 
                 p.classList.add('particle');
                 p.innerHTML = types[Math.floor(Math.random() * types.length)];
                 p.style.left = Math.random() * 100 + 'vw';
-                p.style.fontSize = Math.random() * 20 + 20 + 'px';
-                p.style.animationDuration = Math.random() * 3 + 2 + 's';
+                p.style.fontSize = Math.random() * 25 + 15 + 'px';
+                p.style.animationDuration = Math.random() * 3 + 3 + 's';
+                p.style.opacity = Math.random() * 0.5 + 0.5;
                 document.body.appendChild(p);
-                setTimeout(() => p.remove(), 4000);
-            }, 300);
+                setTimeout(() => p.remove(), 5000);
+            }, 400);
         }
     </script>
 </body>
