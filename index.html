@@ -11,7 +11,8 @@
         :root {
             --primary-pink: #ff758f;
             --dark-pink: #ff4d6d;
-            --bg-texture: url('https://i.ibb.co/ed8ed8/image-ed8ed8.png'); /* Pattern from image_0.png */
+            /* Using a cute paper texture background */
+            --bg-texture: url('https://i.ibb.co/ed8ed8/image-ed8ed8.png'); 
         }
 
         body, html {
@@ -19,7 +20,7 @@
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
             background-color: #fff0f3;
-            background-image: var(--bg-texture); /* Cute paper/pattern background */
+            background-image: var(--bg-texture);
             background-size: cover;
             background-position: center;
         }
@@ -33,75 +34,76 @@
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* --- STAGE 1: Side-by-Side 3D Gallery (Fixes previous stack issue) --- */
-        .gallery-container-3d {
-            display: flex; gap: 15px; perspective: 1200px;
-            flex-wrap: wrap; justify-content: center; margin-bottom: 20px;
+        /* --- 3D Side-by-Side Gallery (Honeybee Page) --- */
+        .gallery-container {
+            display: flex;
+            gap: 15px;
+            perspective: 1200px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
-        .polaroid-flip {
-            background: white; padding: 8px 8px 25px 8px;
+        .polaroid-3d {
+            background: white;
+            padding: 10px 10px 30px 10px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-            border-radius: 4px; transition: 0.8s;
+            border-radius: 4px;
+            transition: 0.5s ease;
             animation: bounceInUp 1s;
         }
 
-        .polaroid-flip img { width: 130px; height: 130px; object-fit: cover; }
+        .polaroid-3d img {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
 
-        /* 3D Initial Position (Tilted) */
-        .polaroid-flip:nth-child(odd) { transform: rotateY(-20deg) rotateZ(-2deg); }
-        .polaroid-flip:nth-child(even) { transform: rotateY(20deg) rotateZ(2deg); }
+        /* 3D Tilted angles for side-by-side look */
+        .polaroid-3d:nth-child(1) { transform: rotateY(-15deg) rotateZ(-3deg); }
+        .polaroid-3d:nth-child(2) { transform: rotateY(10deg) rotateZ(2deg); }
+        .polaroid-3d:nth-child(3) { transform: rotateY(-10deg) rotateZ(4deg); }
+        .polaroid-3d:nth-child(4) { transform: rotateY(15deg) rotateZ(-2deg); }
 
-        /* 3D Flip/Hover Effect */
-        .polaroid-flip:hover {
-            transform: rotateY(0deg) scale(1.15) translateZ(50px);
+        /* 3D Hover Animation */
+        .polaroid-3d:hover {
+            transform: rotateY(0deg) scale(1.1) translateZ(50px);
             z-index: 10;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: var(--primary-pink);
         }
 
-        /* Continuous Float animation on hover */
-        .polaroid-flip:hover img {
-            animation: subtlefloat 2s infinite ease-in-out;
-        }
-
-        /* Artistic Border Pattern Fix (Using pattern from image_0.png) */
+        /* --- Artistic Elements --- */
         .artistic-bg {
-            background-color: rgba(255,255,255,0.8);
+            background: rgba(255, 255, 255, 0.7);
             border: 10px solid #fff;
-            border-image: var(--bg-texture) 50 round;
-            padding: 20px; border-radius: 30px;
+            padding: 20px;
+            border-radius: 30px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-        }
-
-        .hb-title {
-            font-family: 'Dancing Script'; font-size: 3.5rem;
-            color: var(--dark-pink);
-            text-shadow: 2px 2px 0px rgba(255,255,255,0.8);
-            animation: bounceIn 1s;
         }
 
         .heart-box {
             width: 250px; height: 250px;
             background-color: var(--primary-pink);
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-            mask-size: contain; -webkit-mask-size: contain;
-            mask-repeat: no-repeat; -webkit-mask-repeat: no-repeat;
-            mask-position: center; -webkit-mask-position: center;
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            -webkit-mask-size: contain; mask-size: contain;
             display: flex; justify-content: center; align-items: center;
             animation: heartbeat 1.5s infinite;
         }
         .heart-box img { width: 100%; height: 100%; object-fit: cover; }
 
         .video-box {
-            border: 8px solid white; border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden; max-width: 320px;
+            border: 10px solid white; border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            overflow: hidden; max-width: 300px;
         }
 
-        .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 25px; font-weight: bold; }
+        .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 20px; font-weight: bold; transition: 0.3s; }
+        .btn:hover { background: var(--dark-pink); transform: scale(1.05); }
 
-        @keyframes subtlefloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
     </style>
@@ -118,35 +120,37 @@
     </div>
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
+        <img src="https://i.ibb.co/pvHDGLVc/angry-cat-sassy-cat.gif" style="width:250px;">
         <h1 style="color:#ff4d6d; font-size: 2rem;">Thaye-Thaye incoming! 🔫</h1>
-        <button class="btn" onclick="nextPage('ask')">Okay, Sorry! 🏃‍♀️</button>
+        <button class="btn" onclick="nextPage('ask')">Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
-        <h1 style="color:#ff758f; font-family:'Dancing Script'; font-size: 3rem;">Hehe, Good Choice! 😉</h1>
-        <button class="btn" onclick="nextPage('honeybee')">See 3D Gallery 🐝</button>
+        <img src="https://i.ibb.co/TqbwNP65/cute-cat-cat-cute.gif" style="width:200px;">
+        <h1 style="color:#ff758f; font-family:'Dancing Script'; font-size: 3rem;">Hehe, I knew it! 😉</h1>
+        <button class="btn" onclick="nextPage('honeybee')">See 3D Magic 🐝</button>
     </div>
 
     <div class="screen" id="honeybee">
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom: 20px;">My Honeybee Cutie 🐝💖</h1>
-        <div class="gallery-container-3d">
-            <div class="polaroid-flip"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
-            <div class="polaroid-flip"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
-            <div class="polaroid-flip"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
-            <div class="polaroid-flip"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
+        <div class="gallery-container">
+            <div class="polaroid-3d"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
+            <div class="polaroid-3d"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
+            <div class="polaroid-3d"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
+            <div class="polaroid-3d"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
         </div>
-        <button class="btn" onclick="nextPage('wish-birthday')">Next Magic ✨</button>
+        <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
     </div>
 
     <div class="screen" id="wish-birthday">
         <div class="artistic-bg">
-            <h1 class="hb-title">Happy Birthday! madam jii 🎂</h1>
-            <div class="heart-box animate__animated animate__pulse infinite">
+            <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:2.8rem;">Happy Birthday! madam jii 🎂</h1>
+            <div class="heart-box">
                  <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg">
             </div>
-            <p style="font-family:'Caveat'; font-size: 1.5rem; color:#fff; background:rgba(0,0,0,0.3); border-radius:10px; padding: 5px;">You are my favorite honeybee! 🌻</p>
+            <p style="font-family:'Caveat'; font-size: 1.5rem; color:#3e2723; font-weight:bold;">You are my favorite honeybee! 🌻</p>
         </div>
-        <button class="btn" onclick="nextPage('glimpses')">Watch Glimpses 🎬</button>
+        <button class="btn" onclick="nextPage('glimpses')">Glimpses 🎬</button>
     </div>
 
     <div class="screen" id="glimpses">
@@ -156,15 +160,15 @@
                 <source src="Video-230.mp4" type="video/mp4">
             </video>
         </div>
-        <button class="btn" onclick="nextPage('wish-for-u')">A Small Wish 🥺</button>
+        <button class="btn" onclick="nextPage('wish-for-u')">My Wish ✨</button>
     </div>
 
     <div class="screen" id="wish-for-u">
-        <div class="wish-container animate__animated animate__fadeIn">
+        <div style="background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 20px; max-width: 500px; width: 85%; border: 2px solid var(--primary-pink); transform: rotate(-1deg);">
             <h2 style="font-family: 'Caveat'; color: var(--dark-pink); font-size: 2.5rem;">My Wish for U... 🥺❤️</h2>
             <p style="font-family: 'Caveat'; font-size: 2rem; color: #3e2723;">
                 "I wish ki tumhari aankhon mein kabhi aansu na aaye, siwaye khushi ke. <br><br>
-                Tum meri life ki wo sukoon ho jise main kabhi khona nahi chahta. Stay with me forever, my honeybee."
+                Tum meri life ki wo sukoon ho jise main kabhi khona nahi chahta."
             </p>
             <p style="text-align: right; font-family:'Dancing Script'; font-size: 1.8rem; color: var(--dark-pink);">- Only Yours</p>
         </div>
