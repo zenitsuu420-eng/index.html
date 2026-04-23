@@ -55,7 +55,7 @@
         .particle { position: fixed; top: -50px; z-index: 100; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
 
-        /* Responsive Photo Grid */
+        /* Gallery Grid with Animation */
         .photo-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
@@ -64,20 +64,19 @@
             width: 100%;
         }
 
-        @media (max-width: 600px) {
-            .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .polaroid img { width: 100% !important; height: 120px !important; }
-            h1 { font-size: 2.2rem !important; }
-        }
-
         .polaroid {
             background: white; padding: 8px 8px 25px 8px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-radius: 2px; transition: 0.4s;
+            border-radius: 2px;
+            animation: animate__animated animate__zoomIn; /* Animation added */
         }
-        .polaroid img { width: 130px; height: 150px; object-fit: cover; }
+        .polaroid img { width: 100%; height: 150px; object-fit: cover; }
 
-        /* Heart Photo Enhancement */
+        @media (max-width: 600px) {
+            .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .polaroid img { height: 120px !important; }
+        }
+
         .heart-photo {
             width: 250px; height: 250px;
             background: var(--primary-pink);
@@ -107,6 +106,7 @@
             border-radius: 20px; overflow: hidden; 
             box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
             border: 5px solid white; width: 100%; max-width: 500px;
+            height: 280px;
         }
 
         .vintage-letter {
@@ -133,46 +133,44 @@
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
         <img src="https://media.giphy.com/media/6zdUOYH1nylIs/giphy.gif" style="width:220px;">
-        <h1 style="color:#ff4d6d">AAYE HOW DARE YOU! 🔫</h1>
-        <button class="btn" onclick="nextPage('ask')">Wapas Jao 🏃‍♀️</button>
+        <h1 style="color:#ff4d6d; font-size: 2.2rem;">Thaye-Thaye incoming!</h1>
+        <p style="font-size: 1.2rem;">Better press 'Yes' now!</p>
+        <button class="btn" onclick="nextPage('ask')">My mistake, Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
         <img src="https://media.giphy.com/media/KztT2c4u8mYYUiCiS7/giphy.gif" style="width:200px;">
-        <h1 style="color:#ff758f">Hehe, I knew it! 😉</h1>
+        <h1 style="color:#ff758f; margin-bottom: 5px;">Hehe, I knew it! 😉</h1>
+        <p style="color: #ff758f; font-size: 1rem; font-weight: bold; font-family: 'Poppins';">good girl.</p>
         <button class="btn" onclick="nextPage('gallery')">See Magic ✨</button>
     </div>
 
     <div class="screen" id="gallery">
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem; margin-bottom:20px;">Memories of You 📸</h1>
         <div class="photo-grid">
-            <div class="polaroid" style="transform:rotate(-3deg)"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
-            <div class="polaroid" style="transform:rotate(2deg)"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
-            <div class="polaroid" style="transform:rotate(-4deg)"><img src="https://via.placeholder.com/150"></div>
-            <div class="polaroid" style="transform:rotate(3deg)"><img src="https://via.placeholder.com/150"></div>
-            <div class="polaroid" style="transform:rotate(-2deg)"><img src="https://via.placeholder.com/150"></div>
-            <div class="polaroid" style="transform:rotate(4deg)"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="animation-delay: 0.1s;"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
+            <div class="polaroid" style="animation-delay: 0.2s;"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
+            <div class="polaroid" style="animation-delay: 0.3s;"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="animation-delay: 0.4s;"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="animation-delay: 0.6s;"><img src="https://via.placeholder.com/150"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-birthday')">Next Surprise ✨</button>
     </div>
 
     <div class="screen" id="wish-birthday">
         <h1 class="animate__animated animate__fadeInDown" style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3.5rem; margin:0;">Happy Birthday! 🎂</h1>
-        
         <div class="heart-photo animate__animated animate__zoomIn">
              <img src="https://lh3.googleusercontent.com/d/17oAjxbXuebDAwc4Yi0pJUEafRjWf1hbw" referrerpolicy="no-referrer">
         </div>
-
-        <p class="animate__animated animate__fadeInUp" style="font-size:1.3rem; color:#5d4037; max-width: 80%;">Today, the most beautiful soul was born. 🌸</p>
-        
+        <p class="animate__animated animate__fadeInUp" style="font-size:1.3rem; color:#5d4037;">Today, the most beautiful soul was born. 🌸</p>
         <button class="btn" onclick="nextPage('wishes')">Wishes for You 🌟</button>
     </div>
 
     <div class="screen" id="wishes">
-        <div class="animate__animated animate__bounceIn" style="margin-bottom: 20px;">
+        <div class="animate__animated animate__zoomIn" style="margin-bottom: 20px;">
             <img src="https://lh3.googleusercontent.com/d/17oAjxbXuebDAwc4Yi0pJUEafRjWf1hbw" referrerpolicy="no-referrer" style="width:150px; height:150px; border-radius:50%; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
         </div>
-        
         <div class="wishes-letter-box animate__animated animate__fadeInUp">
             <h2 style="margin-top:0; color:#ff4d6d; font-size: 1.8rem;">For My Love...🥺💖</h2>
             <p style="font-size:1.3rem; line-height:1.5; color:#5d4037;">
@@ -180,26 +178,19 @@
                 Tumhari har ek zidd poori ho aur main har pal tumhare saath rahun, har ek sapne ko poora hote dekhne ke liye." 🥺❤️
             </p>
         </div>
-        
         <button class="btn" onclick="nextPage('video-page')">Deep Message 🎵</button>
     </div>
 
     <div class="screen" id="video-page">
-        <div class="animate__animated animate__fadeInDown" style="margin-bottom: 15px;">
-             <img src="https://lh3.googleusercontent.com/d/17oAjxbXuebDAwc4Yi0pJUEafRjWf1hbw" referrerpolicy="no-referrer" style="width:100px; height:100px; border-radius:15px; border: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.2);">
-        </div>
-
         <div class="video-side animate__animated animate__zoomIn">
-            <iframe width="100%" height="250" src="https://www.youtube.com/embed/Sshz298Z-38" frameborder="0" allowfullscreen></iframe>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Sshz298Z-38" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-
         <div class="animate__animated animate__fadeInUp" style="text-align:center; padding: 20px;">
-            <h2 style="font-family:'Dancing Script'; font-size:2.2rem; color:#ff758f; margin: 10px 0;">I like me better when I'm with you...🥺💖</h2>
+            <h2 style="font-family:'Dancing Script'; font-size:2.2rem; color:#ff758f; margin: 15px 0;">I like me better when I'm with you...🥺💖</h2>
             <p style="font-size:1rem; line-height:1.6; color: #5d4037; font-style: italic; max-width: 90%; margin: auto;">
                 "Jaise Anuv Jain apne gaano se humein emotional kar deta hai... waise hi mere liye tumhari presence hai. Main bas yahi arz karna chahta hoon ki tumhare bina mere har din adhoore hain."
             </p>
         </div>
-        
         <button class="btn" onclick="nextPage('final-letter')">Last Message 💌</button>
     </div>
 
@@ -227,7 +218,6 @@
         function nextPage(id) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(id).classList.add('active');
-            
             if(['gallery', 'wish-birthday', 'wishes', 'video-page', 'final-letter'].includes(id)) {
                 startFlowerRain();
             } else {
