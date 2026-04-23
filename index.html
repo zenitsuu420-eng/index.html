@@ -30,89 +30,79 @@
             flex-direction: column; justify-content: center;
             align-items: center; text-align: center; padding: 15px;
             box-sizing: border-box; position: absolute;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* Photo Gallery Styles */
-        .photo-grid { 
-            display: grid; grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; max-width: 500px;
+        /* --- NEW: 3D PHOTO GALLERY --- */
+        .photo-grid-3d { 
+            display: flex; flex-wrap: wrap; gap: 20px;
+            max-width: 650px; justify-content: center;
+            perspective: 2000px; /* Strong 3D perspective */
+            margin-bottom: 20px;
         }
 
-        .polaroid-gallery {
-            background: white; padding: 8px 8px 25px 8px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transform: rotate(-3deg);
-        }
-        .polaroid-gallery img { width: 150px; height: 150px; object-fit: cover; }
-
-        /* --- NEW: 3D Snapshot Page Styles --- */
-        .snapshot-container {
-            perspective: 1000px; /* 3D effect ke liye zaroori */
-            margin: 20px 0;
-        }
-
-        .snapshot-card {
-            background: white;
-            padding: 12px 12px 40px 12px; /* Bottom space script ke liye */
-            border-radius: 2px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            transform: rotateX(15deg) rotateY(-10deg); /* Initial 3D angle */
-            animation: snapshotFloat 4s infinite ease-in-out;
-            max-width: 300px;
-            width: 90%;
+        .polaroid-3d {
+            background: white; padding: 10px 10px 30px 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            width: 200px; /* Badi photos */
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
+            transform-style: preserve-3d;
         }
 
-        .snapshot-card img {
-            width: 100%;
-            height: auto;
-            border: 1px solid #f0f0f0;
-            display: block;
+        .polaroid-3d img { width: 100%; height: 200px; object-fit: cover; border-radius: 3px; }
+
+        /* Initial 3D Positions & Random Floating Animations */
+        .photo-grid-3d .polaroid-3d:nth-child(1) { transform: rotateX(15deg) rotateY(-15deg) rotateZ(-5deg); animation: float1 4s infinite ease-in-out; }
+        .photo-grid-3d .polaroid-3d:nth-child(2) { transform: rotateX(10deg) rotateY(15deg) rotateZ(5deg); animation: float2 5s infinite ease-in-out; }
+        .photo-grid-3d .polaroid-3d:nth-child(3) { transform: rotateX(-15deg) rotateY(-10deg) rotateZ(3deg); animation: float3 6s infinite ease-in-out; }
+        .photo-grid-3d .polaroid-3d:nth-child(4) { transform: rotateX(-10deg) rotateY(15deg) rotateZ(-2deg); animation: float4 4.5s infinite ease-in-out; }
+
+        .polaroid-3d:hover {
+            transform: scale(1.1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) !important;
+            z-index: 100;
+            box-shadow: 0 30px 60px rgba(255, 117, 143, 0.4);
         }
 
-        /* Snapshot ke niche chota sa hand-written note effect */
-        .snapshot-note {
-            font-family: 'Caveat', cursive;
-            font-size: 1.5rem;
-            color: #5d4037;
-            position: absolute;
-            bottom: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-        }
-
-        @keyframes snapshotFloat {
-            0%, 100% { transform: translateY(0) rotateX(15deg) rotateY(-10deg); }
-            50% { transform: translateY(-20px) rotateX(10deg) rotateY(5deg); }
-        }
+        @keyframes float1 { 0%, 100% { transform: translateY(0) rotateX(15deg) rotateY(-15deg); } 50% { transform: translateY(-15px) rotateX(10deg) rotateY(-10deg); } }
+        @keyframes float2 { 0%, 100% { transform: translateY(0) rotateX(10deg) rotateY(15deg); } 50% { transform: translateY(-10px) rotateX(15deg) rotateY(10deg); } }
+        @keyframes float3 { 0%, 100% { transform: translateY(0) rotateX(-15deg) rotateY(-10deg); } 50% { transform: translateY(15px) rotateX(-10deg) rotateY(-15deg); } }
+        @keyframes float4 { 0%, 100% { transform: translateY(0) rotateX(-10deg) rotateY(15deg); } 50% { transform: translateY(10px) rotateX(-15deg) rotateY(10deg); } }
 
         @media (max-width: 600px) {
-            .snapshot-card { max-width: 250px; }
-            .heart-photo { width: 180px; height: 180px; }
+            .polaroid-3d { width: 140px; padding: 5px 5px 20px 5px; }
+            .polaroid-3d img { height: 140px; }
+            h1 { font-size: 2.2rem !important; }
         }
-        /* ------------------------------------ */
+        /* --------------------------------- */
+
+        /* Snapshot Frame (No Changes) */
+        .snapshot-card {
+            background: white; padding: 12px 12px 40px 12px;
+            border-radius: 2px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            transform: rotateX(15deg) rotateY(-10deg);
+            animation: snapshotFloat 4s infinite ease-in-out;
+            max-width: 300px; width: 90%;
+            position: relative;
+        }
+        .snapshot-card img { width: 100%; height: auto; border: 1px solid #f0f0f0; }
 
         .heart-photo {
             width: 220px; height: 220px;
             background: var(--primary-pink);
             clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
-            display: flex; justify-content: center; align-items: center;
-            margin: 10px auto;
+            display: flex; justify-content: center; align-items: center; margin: 10px auto;
         }
         .heart-photo img { width: 100%; height: 100%; object-fit: cover; clip-path: inherit; }
 
         .vintage-letter {
-            background: #f4e4bc;
-            background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
-            padding: 40px; border-radius: 5px;
-            box-shadow: inset 0 0 50px rgba(0,0,0,0.2), 10px 10px 30px rgba(0,0,0,0.3);
-            border: 2px solid #d2b48c;
-            max-width: 600px; width: 85%; height: 60vh; overflow-y: auto;
-            font-family: 'Special Elite', cursive;
+            background: #f4e4bc url('https://www.transparenttextures.com/patterns/old-paper.png');
+            padding: 40px; border-radius: 5px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            max-width: 600px; width: 85%; height: 60vh; overflow-y: auto; font-family: 'Special Elite', cursive;
         }
 
         .btn { 
@@ -121,13 +111,7 @@
             margin-top: 20px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); 
             text-transform: uppercase;
         }
-
-        .video-side { 
-            border: 8px solid white; border-radius: 15px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            width: 100%; max-width: 500px; height: 280px; overflow: hidden;
-        }
-
+        
         .particle { position: fixed; top: -50px; z-index: 100; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
@@ -135,8 +119,8 @@
 <body>
 
     <div class="screen active" id="ask">
-        <img src="https://media.giphy.com/media/MDJ9IbM9GXc9G/giphy.gif" style="width:180px; border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">I have a surprise for you! ✨</h1>
+        <img src="cute-cat-cat-cute.gif" style="width:160px; border-radius:50%">
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem;">I have a surprise for you! ✨</h1>
         <div style="display:flex; gap:15px;">
             <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
             <button class="btn" style="background:#ff4d6d" onclick="nextPage('no-page')">No 😝</button>
@@ -144,84 +128,56 @@
     </div>
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
-        <img src="https://i.postimg.cc/mD7XF6rG/angry-cat-sassy-cat.png" style="width:250px; border-radius: 15px;">
+        <img src="angry-cat-sassy-cat.png" style="width:250px; border-radius: 15px;">
         <h1 style="color:#ff4d6d; font-size: 2.5rem; margin-top: 20px;">AAYE HOW DARE YOU! 🔫</h1>
-        <p style="font-size: 1.1rem; opacity: 0.9;">Thaye-Thaye incoming! Better press 'Yes' now!</p>
         <button class="btn" onclick="nextPage('ask')">Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
-        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZ3F0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/giphy-downsized.gif" style="width:220px; border-radius: 15px;">
+        <img src="giphy-downsized.gif" style="width:200px; border-radius: 15px;">
         <h1 style="color:#ff758f; margin-top: 20px;">Hehe, I knew it! 😉</h1>
         <p style="font-size: 1.2rem; color: #ff758f; font-weight: bold;">good girl.</p>
         <button class="btn" onclick="nextPage('gallery')">See Magic ✨</button>
     </div>
 
     <div class="screen" id="gallery">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom:20px;">Memories of You 📸</h1>
-        <div class="photo-grid">
-            <div class="polaroid-gallery"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
-            <div class="polaroid-gallery" style="transform:rotate(3deg)"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
-            <div class="polaroid-gallery" style="transform:rotate(-4deg)"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
-            <div class="polaroid-gallery" style="transform:rotate(2deg)"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem; margin-bottom:30px;">Memories of You 📸</h1>
+        <div class="photo-grid-3d animate__animated animate__zoomIn">
+            <div class="polaroid-3d"><img src="LINK_1_YAHAN_DALEIN"></div>
+            <div class="polaroid-3d"><img src="LINK_2_YAHAN_DALEIN"></div>
+            <div class="polaroid-3d"><img src="LINK_3_YAHAN_DALEIN"></div>
+            <div class="polaroid-3d"><img src="LINK_4_YAHAN_DALEIN"></div>
         </div>
-        <button class="btn" onclick="nextPage('snapshot-page')">Next Surprise ✨</button>
+        <button class="btn" onclick="nextPage('snapshot-page')">Next ✨</button>
     </div>
 
     <div class="screen" id="snapshot-page">
-        <h1 class="animate__animated animate__heartBeat" style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3rem; margin-bottom:10px;">Caught in a Moment 📸</h1>
-        <p style="color: #5d4037; font-size: 1.1rem; margin-bottom: 20px;">A little memory just for us...</p>
-
+        <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3rem;">Caught in a Moment 📸</h1>
         <div class="snapshot-container animate__animated animate__jackInTheBox">
             <div class="snapshot-card">
-                <img src="https://via.placeholder.com/400x500?text=Your+Special+Snap" alt="Our Snapshot">
-                <div class="snapshot-note">forever yours ❤️</div>
+                <img src="LINK_SNAP_YAHAN_DALEIN">
+                <div class="snapshot-note" style="font-family: 'Caveat'; bottom: 8px; color: #5d4037; font-size: 1.5rem;">forever yours ❤️</div>
             </div>
         </div>
-
         <button class="btn" onclick="nextPage('wish-birthday')">Keep Going ✨</button>
     </div>
 
     <div class="screen" id="wish-birthday">
         <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3.5rem; margin:0;">Happy Birthday! 🎂</h1>
         <div class="heart-photo">
-             <img src="https://i.postimg.cc/qM7XF6rG/cute-cat.jpg">
+             <img src="cute-cat.jpg">
         </div>
-        <p style="font-size:1.3rem; color:#5d4037;">Today, the most beautiful soul was born. 🌸</p>
-        <button class="btn" onclick="nextPage('wishes')">Wishes 🌟</button>
-    </div>
-
-    <div class="screen" id="wishes">
-        <div class="heart-photo animate__animated animate__pulse infinite">
-            <img src="https://i.postimg.cc/BZ4L4rS0/images.jpg">
-        </div>
-        <div style="background: rgba(255,255,255,0.8); padding: 25px; border-radius: 25px; max-width: 450px; border: 2px solid white;">
-            <h2 style="color:#ff4d6d; font-family: 'Caveat'; font-size: 2.2rem; margin-top:0;">For My Love...🥺💖</h2>
-            <p style="font-family: 'Caveat'; font-size: 1.5rem; color: #5d4037;">
-                "Meri bas ek hi wish hai ki tumhari aankhon mein hamesha khushi ke hi aansu aayein." 🥺❤️
-            </p>
-        </div>
-        <button class="btn" onclick="nextPage('video-page')">Deep Message 🎵</button>
-    </div>
-
-    <div class="screen" id="video-page">
-        <div class="video-side">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Sshz298Z-38" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <h2 style="font-family:'Dancing Script'; font-size:1.8rem; color:#ff758f; margin-top:15px;">I like me better when I'm with you...🥺💖</h2>
         <button class="btn" onclick="nextPage('final-letter')">Last Message 💌</button>
     </div>
 
     <div class="screen" id="final-letter">
         <div class="vintage-letter">
-            <h1 style="color:#3e2723; border-bottom:2px solid #3e2723; font-family:'Dancing Script'; font-size: 2.2rem; padding-bottom: 10px;">Last Message for U! ❤️</h1>
+            <h1 style="color:#3e2723; border-bottom:2px solid #3e2723; font-family:'Dancing Script';">Last Message for U! ❤️</h1>
             <div style="font-size:1.2rem; line-height:1.7; color:#3e2723;">
                 <br> My Dearest [Name], <br><br>
-                Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
-                <br><br>
                 Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>.
                 <br><br>
-                Hamesha meri 'Namuni' banke rehna. 
+                Hamesha meri 'Namuni' banke rehna. 
                 <br><br>
                 <p style="text-align: right; font-weight: bold;">— Yours Forever ❤️</p>
             </div>
