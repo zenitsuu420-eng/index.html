@@ -11,7 +11,6 @@
         :root {
             --primary-pink: #ff758f;
             --dark-pink: #ff4d6d;
-            --text-color: #5d4037;
         }
 
         body, html {
@@ -19,9 +18,7 @@
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
             background-color: #fff0f3;
-            background-image: 
-                linear-gradient(90deg, rgba(255, 182, 193, 0.5) 50%, transparent 50%),
-                linear-gradient(rgba(216, 191, 216, 0.5) 50%, transparent 50%);
+            background-image: linear-gradient(90deg, rgba(255, 182, 193, 0.2) 50%, transparent 50%), linear-gradient(rgba(216, 191, 216, 0.2) 50%, transparent 50%);
             background-size: 60px 60px;
         }
 
@@ -30,91 +27,89 @@
             flex-direction: column; justify-content: center;
             align-items: center; text-align: center; padding: 15px;
             box-sizing: border-box; position: absolute;
-            background: rgba(255, 255, 255, 0.2);
         }
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* --- 3D Gallery: My Honeybee Cutie --- */
-        .photo-stack-3d {
-            display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
-            perspective: 1500px; max-width: 700px;
+        /* --- Page 3: 3D Photo Grid --- */
+        .photo-grid-3d {
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: 20px; perspective: 1000px;
         }
 
         .polaroid-3d {
-            background: white; padding: 8px 8px 25px 8px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            border-radius: 4px; transition: 0.5s;
-            animation: floatSlow 4s infinite ease-in-out;
+            background: white; padding: 10px 10px 35px 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            transition: 0.6s ease;
+            transform: rotateY(-15deg) rotateX(10deg);
         }
 
         .polaroid-3d img { width: 140px; height: 140px; object-fit: cover; }
 
-        /* Rotating angles for 3D feel */
-        .p1 { transform: rotateY(-20deg) rotateZ(-5deg); }
-        .p2 { transform: rotateY(20deg) rotateZ(5deg); animation-delay: 0.5s; }
-        .p3 { transform: rotateX(20deg) rotateZ(-3deg); animation-delay: 1s; }
-        .p4 { transform: rotateX(-20deg) rotateZ(3deg); animation-delay: 1.5s; }
-
-        .polaroid-3d:hover { transform: rotate(0) scale(1.2); z-index: 10; }
-
-        @keyframes floatSlow {
-            0%, 100% { translateY(0); }
-            50% { translateY(-15px); }
+        .polaroid-3d:hover {
+            transform: rotateY(0deg) rotateX(0deg) scale(1.1) translateZ(50px);
+            z-index: 10;
         }
 
-        /* Happy Birthday 3D Heart */
-        .heart-3d-box {
-            perspective: 1000px; animation: pulseHeart 1.5s infinite;
-        }
-
-        .heart-frame {
+        /* --- Page 4: Heart Frame --- */
+        .heart-container {
             width: 250px; height: 250px;
             background: var(--primary-pink);
             clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
             display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 20px 40px rgba(255, 117, 143, 0.5);
+            animation: heartbeat 1.5s infinite;
         }
 
-        .heart-frame img { width: 100%; height: 100%; object-fit: cover; clip-path: inherit; }
-
-        @keyframes pulseHeart {
-            0% { transform: scale(1) rotateX(10deg); }
-            50% { transform: scale(1.1) rotateX(0deg); }
-            100% { transform: scale(1) rotateX(10deg); }
+        .heart-container img {
+            width: 100%; height: 100%; object-fit: cover;
         }
 
-        /* --- More Magic Grid --- */
-        .magic-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 10px; max-width: 500px;
-        }
-        .magic-photo {
-            width: 100%; height: 100px; border: 3px solid white;
-            border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
         }
 
+        /* --- Page 5: Music Player Design --- */
+        .music-box {
+            background: white; padding: 20px; border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 280px;
+        }
+
+        .album-art {
+            width: 100%; height: 200px; border-radius: 15px;
+            object-fit: cover; margin-bottom: 15px;
+        }
+
+        .player-controls {
+            background: #f0f0f0; border-radius: 50px; padding: 10px;
+            display: flex; align-items: center; justify-content: space-around;
+        }
+
+        /* --- Page 6: Vintage Letter --- */
         .vintage-letter {
             background: #f4e4bc url('https://www.transparenttextures.com/patterns/old-paper.png');
-            padding: 40px; border-radius: 5px; max-width: 600px; width: 85%;
-            height: 60vh; overflow-y: auto; font-family: 'Special Elite', cursive;
+            padding: 30px; border-radius: 2px;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.3);
+            border: 1px solid #d2b48c;
+            max-width: 500px; width: 85%; font-family: 'Special Elite', cursive;
+            line-height: 1.6; color: #3e2723;
         }
 
         .btn { 
             background: var(--primary-pink); color: white; padding: 12px 30px; 
             border: none; border-radius: 50px; cursor: pointer; font-weight: 600; 
-            margin-top: 15px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); 
-            text-transform: uppercase;
+            margin-top: 20px;
         }
 
-        .particle { position: fixed; top: -50px; z-index: 100; pointer-events: none; animation: fall linear forwards; }
+        .particle { position: fixed; top: -50px; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
     </style>
 </head>
 <body>
 
     <div class="screen active" id="ask">
-        <img src="https://i.ibb.co/HLSBN13W/cute-cat.jpg" style="width:200px; border-radius:20px;">
+        <img src="https://i.ibb.co/HLSBN13W/cute-cat.jpg" style="width:180px; border-radius:20px;">
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">I have a surprise for you! ✨</h1>
         <div style="display:flex; gap:15px;">
             <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
@@ -123,63 +118,64 @@
     </div>
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
-        <img src="https://i.ibb.co/pvHDGLVc/angry-cat-sassy-cat.gif" style="width:250px; border-radius: 15px;">
-        <h1 style="color:#ff4d6d; font-size: 2.5rem; margin-top: 20px;">AAYE HOW DARE YOU! 🔫</h1>
+        <img src="https://i.ibb.co/pvHDGLVc/angry-cat-sassy-cat.gif" style="width:250px;">
+        <h1 style="color:#ff4d6d; font-size: 2rem; margin-top: 20px;">AAYE HOW DARE YOU! 🔫</h1>
+        <p style="margin-top: 50px; font-weight: bold; color: yellow;">Thaye-Thaye incoming! Better press 'Yes' now!</p>
         <button class="btn" onclick="nextPage('ask')">Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
-        <img src="https://i.ibb.co/TqbwNP65/cute-cat-cat-cute.gif" style="width:220px; border-radius: 15px;">
-        <h1 style="color:#ff758f; margin-top: 20px;">Hehe, I knew it! 😉</h1>
-        <p style="font-size: 1.2rem; color: #ff758f; font-weight: bold;">good girl.</p>
+        <img src="https://i.ibb.co/TqbwNP65/cute-cat-cat-cute.gif" style="width:200px;">
+        <h1 style="color:#ff758f;">Hehe, I knew it! 😉</h1>
         <button class="btn" onclick="nextPage('honeybee')">See Magic ✨</button>
     </div>
 
     <div class="screen" id="honeybee">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:3rem; margin-bottom:20px;">My Honeybee Cutie 🐝💖</h1>
-        <div class="photo-stack-3d">
-            <div class="polaroid-3d p1"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
-            <div class="polaroid-3d p2"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
-            <div class="polaroid-3d p3"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
-            <div class="polaroid-3d p4"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem;">My Honeybee Cutie 🐝💖</h1>
+        <div class="photo-grid-3d">
+            <div class="polaroid-3d"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
+            <div class="polaroid-3d"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
+            <div class="polaroid-3d"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
+            <div class="polaroid-3d"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
     </div>
 
     <div class="screen" id="wish-birthday">
-        <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3.5rem; margin:0;">Happy Birthday! 🎂</h1>
-        <div class="heart-3d-box">
-            <div class="heart-frame">
-                 <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg">
-            </div>
+        <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3rem;">Happy Birthday! My madam jii 🎂</h1>
+        <div class="heart-container animate__animated animate__pulse infinite">
+             <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg" alt="Madam Ji">
         </div>
-        <button class="btn" onclick="nextPage('extra-photos')">More Memories 📸</button>
+        <button class="btn" onclick="nextPage('music-page')">More Magic 📸</button>
     </div>
 
-    <div class="screen" id="extra-photos">
-        <h1 style="font-family:'Caveat'; color:#ff758f; font-size:2.8rem; margin-bottom:20px;">Some More Glimpses 🌸</h1>
-        <div class="magic-grid animate__animated animate__fadeInUp">
-            <img src="https://via.placeholder.com/150" class="magic-photo">
-            <img src="https://via.placeholder.com/150" class="magic-photo">
-            <img src="https://via.placeholder.com/150" class="magic-photo">
-            <img src="https://via.placeholder.com/150" class="magic-photo">
-            <img src="https://via.placeholder.com/150" class="magic-photo">
-            <img src="https://via.placeholder.com/150" class="magic-photo">
+    <div class="screen" id="music-page">
+        <h1 style="font-family:'Caveat'; color:#ff758f; font-size:2.5rem;">Some More Glimpses 🌸</h1>
+        <div class="music-box">
+            <img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg" class="album-art">
+            <div class="player-controls">
+                <span>⏮️</span>
+                <span style="font-size: 1.5rem;">▶️</span>
+                <span>⏭️</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">Our Favorite Song...🎵</p>
         </div>
         <button class="btn" onclick="nextPage('final-letter')">Last Message 💌</button>
     </div>
 
     <div class="screen" id="final-letter">
         <div class="vintage-letter">
-            <h1 style="color:#3e2723; border-bottom:2px solid #3e2723; font-family:'Dancing Script';">Last Message for U! ❤️</h1>
-            <div style="font-size:1.2rem; line-height:1.7; color:#3e2723;">
-                <br> My Dearest [Name], <br><br>
+            <h2 style="border-bottom: 1px solid #3e2723;">Last Message for U! ❤️</h2>
+            <p>
+                My Dearest [Name], <br><br>
+                Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
+                <br><br>
                 Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>.
                 <br><br>
                 Hamesha meri 'Namuni' banke rehna. 
                 <br><br>
-                <p style="text-align: right; font-weight: bold;">— Yours Forever ❤️</p>
-            </div>
+                <span style="display:block; text-align:right;">— Yours Forever ❤️</span>
+            </p>
         </div>
         <button class="btn" style="background:#3e2723" onclick="location.reload()">Start Again 🔄</button>
     </div>
