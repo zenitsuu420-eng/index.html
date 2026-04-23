@@ -18,11 +18,13 @@
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
+            
+            /* Pure CSS Gingham Background (No Image Link Needed) */
             background-color: #fff0f3;
             background-image: 
                 linear-gradient(90deg, rgba(255, 182, 193, 0.5) 50%, transparent 50%),
                 linear-gradient(rgba(216, 191, 216, 0.5) 50%, transparent 50%);
-            background-size: 60px 60px;
+            background-size: 60px 60px; /* Size adjust kar sakte hain */
         }
 
         .screen {
@@ -30,15 +32,15 @@
             flex-direction: column; justify-content: center;
             align-items: center; text-align: center; padding: 15px;
             box-sizing: border-box; position: absolute;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.2); /* Thoda glass effect background ke upar */
         }
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
         /* 3D Photo Gallery */
         .photo-grid { 
-            display: grid; grid-template-columns: repeat(2, 1fr); 
-            gap: 20px; max-width: 500px; perspective: 1000px;
+            display: grid; grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; max-width: 800px; perspective: 1000px;
         }
 
         .polaroid {
@@ -50,7 +52,7 @@
             animation: float3D 3s infinite ease-in-out;
         }
 
-        .polaroid img { width: 100%; height: 150px; object-fit: cover; border-radius: 3px; background: #f0f0f0; }
+        .polaroid img { width: 100%; height: 150px; object-fit: cover; border-radius: 3px; }
 
         .polaroid:hover {
             transform: rotateX(0deg) rotateY(0deg) scale(1.1);
@@ -60,6 +62,10 @@
         @keyframes float3D {
             0%, 100% { transform: translateY(0) rotateX(10deg); }
             50% { transform: translateY(-15px) rotateX(-5deg); }
+        }
+
+        @media (max-width: 600px) {
+            .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
         }
 
         /* Heart Photo */
@@ -103,7 +109,7 @@
 <body>
 
     <div class="screen active" id="ask">
-        <img src="cute-cat-cat-cute.gif" style="width:180px; border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+        <img src="https://media.giphy.com/media/MDJ9IbM9GXc9G/giphy.gif" style="width:180px; border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">I have a surprise for you! ✨</h1>
         <div style="display:flex; gap:15px;">
             <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
@@ -112,14 +118,14 @@
     </div>
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
-        <img src="angry-cat-sassy-cat.png" style="width:250px; border-radius: 15px;">
+        <img src="https://i.postimg.cc/mD7XF6rG/angry-cat-sassy-cat.png" style="width:250px; border-radius: 15px;">
         <h1 style="color:#ff4d6d; font-size: 2.5rem; margin-top: 20px;">AAYE HOW DARE YOU! 🔫</h1>
         <p style="font-size: 1.1rem; opacity: 0.9;">Thaye-Thaye incoming! Better press 'Yes' now!</p>
         <button class="btn" onclick="nextPage('ask')">Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
-        <img src="giphy-downsized.gif" style="width:220px; border-radius: 15px;">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZ3F0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/giphy-downsized.gif" style="width:220px; border-radius: 15px;">
         <h1 style="color:#ff758f; margin-top: 20px;">Hehe, I knew it! 😉</h1>
         <p style="font-size: 1.2rem; color: #ff758f; font-weight: bold;">good girl.</p>
         <button class="btn" onclick="nextPage('gallery')">See Magic ✨</button>
@@ -128,10 +134,10 @@
     <div class="screen" id="gallery">
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom:20px;">Memories of You 📸</h1>
         <div class="photo-grid">
-            <div class="polaroid"><img src="https://i.ibb.co/cXvtTZxR/photo1.webp" alt="Photo 1"></div>
-            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://i.ibb.co/cXvtTZxR/photo2.webp" alt="Photo 2"></div>
-            <div class="polaroid" style="animation-delay: 1s;"><img src="https://i.ibb.co/cXvtTZxR/photo3.webp" alt="Photo 3"></div>
-            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://i.ibb.co/cXvtTZxR/photo4.webp" alt="Photo 4"></div>
+            <div class="polaroid"><img src="[url=https://ibb.co/sdJWM9tC][img]https://i.ibb.co/XrkYvxVD/1776925569405.jpg[/img][/url]"></div>
+            <div class="polaroid" style="animation-delay: 0.5s;"><[url=https://ibb.co/0j6VsnvB][img]https://i.ibb.co/ynZB4N7h/1776925569427.jpg[/img][/url]"></div>
+            <div class="polaroid" style="animation-delay: 1s;"><[url=https://ibb.co/7Nt7Ybxf][img]https://i.ibb.co/TqMzvrDf/1776925569431.jpg[/img][/url]"></div>
+            <div class="polaroid" style="animation-delay: 1.5s;"><[url=https://ibb.co/p6x3BFjR][img]https://i.ibb.co/qLdR3QYW/1776925569444.jpg[/img][/url]"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
     </div>
@@ -139,7 +145,7 @@
     <div class="screen" id="wish-birthday">
         <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3.5rem; margin:0;">Happy Birthday! 🎂</h1>
         <div class="heart-photo">
-             <img src="cute-cat.jpg">
+             <img src="https://i.postimg.cc/qM7XF6rG/cute-cat.jpg">
         </div>
         <p style="font-size:1.3rem; color:#5d4037;">Today, the most beautiful soul was born. 🌸</p>
         <button class="btn" onclick="nextPage('wishes')">Wishes 🌟</button>
@@ -147,7 +153,7 @@
 
     <div class="screen" id="wishes">
         <div class="heart-photo animate__animated animate__pulse infinite">
-            <img src="images.jpg">
+            <img src="https://i.postimg.cc/BZ4L4rS0/images.jpg">
         </div>
         <div style="background: rgba(255,255,255,0.8); padding: 25px; border-radius: 25px; max-width: 450px; border: 2px solid white;">
             <h2 style="color:#ff4d6d; font-family: 'Caveat'; font-size: 2.2rem; margin-top:0;">For My Love...🥺💖</h2>
@@ -171,11 +177,11 @@
             <h1 style="color:#3e2723; border-bottom:2px solid #3e2723; font-family:'Dancing Script';">Last Message for U! ❤️</h1>
             <div style="font-size:1.2rem; line-height:1.7; color:#3e2723;">
                 <br> My Dearest [Name], <br><br>
-                Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
+                Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
                 <br><br>
                 Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>.
                 <br><br>
-                Hamesha meri 'Namuni' banke rehna. 
+                Hamesha meri 'Namuni' banke rehna. 
                 <br><br>
                 <p style="text-align: right; font-weight: bold;">— Yours Forever ❤️</p>
             </div>
