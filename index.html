@@ -31,78 +31,68 @@
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* --- 3D Gallery --- */
-        .photo-grid-3d {
-            display: grid; grid-template-columns: repeat(2, 1fr);
-            gap: 20px; perspective: 1000px;
+        /* --- 3D Floating Stack Animation --- */
+        .stack-3d {
+            position: relative; width: 200px; height: 200px;
+            perspective: 1000px; margin-bottom: 40px;
         }
 
-        .polaroid-3d {
-            background: white; padding: 10px 10px 35px 10px;
+        .card-3d {
+            position: absolute; width: 100%; height: 100%;
+            background: white; padding: 10px 10px 30px 10px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            border-radius: 5px; transition: 0.6s ease;
-            transform: rotateY(-15deg) rotateX(10deg);
+            border-radius: 5px; transition: 0.8s ease;
+            transform-style: preserve-3d;
         }
 
-        .polaroid-3d img { width: 140px; height: 140px; object-fit: cover; }
+        .card-3d img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- Heart Photo Fix --- */
-        .heart-wrapper {
-            width: 280px; height: 280px;
-            background: white; /* Border effect */
-            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
-            display: flex; justify-content: center; align-items: center;
-            animation: heartbeat 1.2s infinite;
-            transform: scale(10); /* Scaling the path to fit container */
+        /* Different 3D Positions */
+        .c1 { transform: rotateY(-25deg) rotateX(10deg) translateZ(0px); animation: float1 4s infinite ease-in-out; }
+        .c2 { transform: rotateY(25deg) rotateX(-10deg) translateZ(-50px); animation: float2 5s infinite ease-in-out; }
+        .c3 { transform: rotateZ(10deg) translateZ(-100px); animation: float3 6s infinite ease-in-out; }
+
+        @keyframes float1 { 0%, 100% { transform: rotateY(-25deg) translateY(0); } 50% { transform: rotateY(-15deg) translateY(-20px); } }
+        @keyframes float2 { 0%, 100% { transform: rotateY(25deg) translateY(0); } 50% { transform: rotateY(15deg) translateY(20px); } }
+        @keyframes float3 { 0%, 100% { transform: rotateZ(10deg) translateX(0); } 50% { transform: rotateZ(5deg) translateX(15px); } }
+
+        /* --- Video Box --- */
+        .video-container {
+            width: 90%; max-width: 320px; border: 8px solid white;
+            border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            overflow: hidden; background: #000;
         }
 
-        /* Simplified Heart CSS for better image fit */
-        .heart-shape {
-            position: relative; width: 250px; height: 250px;
-            background: var(--primary-pink);
-            clip-path: path('M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z');
-            transform: scale(11); /* Important to make the path big enough */
-        }
-
-        /* Alternative easier Heart method */
+        /* --- Heart Fix --- */
         .heart-box {
             width: 250px; height: 250px;
             background-color: var(--primary-pink);
-            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-            mask-repeat: no-repeat; mask-size: contain; mask-position: center;
             -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-            -webkit-mask-repeat: no-repeat; -webkit-mask-size: contain; -webkit-mask-position: center;
+            mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+            -webkit-mask-size: contain; mask-size: contain;
             display: flex; justify-content: center; align-items: center;
             animation: heartbeat 1.5s infinite;
         }
-
         .heart-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- Wish Letter --- */
-        .wish-letter {
-            background: #fff; padding: 30px; border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(255, 117, 143, 0.2);
-            max-width: 400px; width: 85%;
-            font-family: 'Caveat', cursive; border: 2px dashed var(--primary-pink);
-            position: relative; transform: rotate(-2deg);
+        /* --- Wish Card Animation --- */
+        .wish-card {
+            background: white; padding: 25px; border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(255, 117, 143, 0.3);
+            max-width: 350px; border-left: 5px solid var(--primary-pink);
+            animation: slideInUp 1s;
         }
 
-        .wish-letter::before { content: '💌'; position: absolute; top: -20px; right: -10px; font-size: 2rem; }
-
-        /* --- Music Player --- */
-        .music-card {
-            background: white; padding: 15px; border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 260px;
-        }
-        .music-card img { width: 100%; border-radius: 15px; height: 180px; object-fit: cover; }
-
-        .vintage-paper {
-            background: #fdf5e6; padding: 30px; border: 1px solid #d2b48c;
-            box-shadow: 8px 8px 0px #d2b48c; max-width: 500px; width: 85%;
-            font-family: 'Special Elite', cursive; text-align: left;
+        /* --- Final Letter Style --- */
+        .final-letter-box {
+            background: #fdf5e6; padding: 25px; border: 1px solid #d2b48c;
+            box-shadow: 10px 10px 0px #d2b48c; max-width: 550px; width: 90%;
+            height: 70vh; overflow-y: auto; text-align: left;
+            font-family: 'Special Elite', cursive; line-height: 1.5;
         }
 
-        .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 20px; }
+        .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 20px; font-weight: bold; }
 
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
     </style>
@@ -132,12 +122,11 @@
     </div>
 
     <div class="screen" id="honeybee">
-        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem;">My Honeybee Cutie 🐝💖</h1>
-        <div class="photo-grid-3d">
-            <div class="polaroid-3d"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
-            <div class="polaroid-3d"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
-            <div class="polaroid-3d"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
-            <div class="polaroid-3d"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg"></div>
+        <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom: 30px;">My Honeybee Cutie 🐝💖</h1>
+        <div class="stack-3d">
+            <div class="card-3d c1"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg"></div>
+            <div class="card-3d c2"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg"></div>
+            <div class="card-3d c3"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
     </div>
@@ -147,42 +136,42 @@
         <div class="heart-box">
              <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg">
         </div>
-        <button class="btn" onclick="nextPage('music-page')">Next 🎵</button>
+        <button class="btn" onclick="nextPage('glimpses')">Glimpses 🎬</button>
     </div>
 
-    <div class="screen" id="music-page">
+    <div class="screen" id="glimpses">
         <h1 style="font-family:'Caveat'; color:#ff758f; font-size:2.5rem;">Some More Glimpses 🌸</h1>
-        <div class="music-card">
-            <img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg">
-            <div style="margin-top: 15px; font-size: 1.5rem;">⏮️ ⏸️ ⏭️</div>
-            <p style="font-family: 'Poppins'; font-size: 0.7rem; color: #777;">Now Playing: Our Song.mp3</p>
+        <div class="video-container">
+            <video width="100%" height="auto" controls autoplay muted loop>
+                <source src="APNA_VIDEO_LINK_YAHAN_DALEIN.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
+        <p style="font-size: 0.8rem; color: #888; margin-top: 10px;">Music & Memories... 🎵</p>
         <button class="btn" onclick="nextPage('wish-for-u')">My Wish ✨</button>
     </div>
 
     <div class="screen" id="wish-for-u">
-        <div class="wish-letter">
-            <h2 style="margin-top: 0; color: var(--dark-pink);">My Wish for U... 🥺</h2>
-            <p style="font-size: 1.5rem; line-height: 1.3;">
-                "I wish ki tum hamesha aise hi hasti raho. Tumhari muskurahat meri duniya hai. Main hamesha tumhare saath rehna chahta hoon, har saal, har birthday par!"
+        <div class="wish-card animate__animated animate__zoomIn">
+            <h2 style="font-family: 'Caveat'; color: var(--dark-pink); font-size: 2.2rem;">My Wish for U... 🥺</h2>
+            <p style="font-family: 'Dancing Script'; font-size: 1.8rem;">
+                "May your smile stay as bright as the sun, today and forever."
             </p>
-            <p style="text-align: right; font-weight: bold;">- Only Yours ❤️</p>
         </div>
-        <button class="btn" onclick="nextPage('final-letter')">Read Last Message 💌</button>
+        <button class="btn" onclick="nextPage('final-letter')">Read Final Letter 💌</button>
     </div>
 
     <div class="screen" id="final-letter">
-        <div class="vintage-paper">
-            <h2 style="text-align:center; border-bottom: 2px solid #d2b48c;">Last Message for U! ❤️</h2>
-            <p><br>
-                My Dearest [Name], <br><br>
-                Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
-                <br><br>
-                Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>.
-                <br><br>
-                Hamesha meri 'Namuni' banke rehna. 
-                <br><br>
-                <span style="display:block; text-align:right;">— Yours Forever ❤️</span>
+        <div class="final-letter-box">
+            <h2 style="text-align:center; color:#3e2723;">Last Message for U! ❤️</h2>
+            <p>
+                Happy Birthday to my favorite 'honeybee'! 🌻<br><br>
+                I was thinking about what to give you, and then I realized... you already have ME! What more could you want? 😂 Just kidding!<br><br>
+                Zindagi thodi boring hoti agar tum mere life mein gun dikha kar entry na leti. Tum meri life ki wo <b>Lily</b> ho jiski khushboo mere har din ko special banati hai.<br><br>
+                I hope ye saal tumhare liye utna hi bright ho jitna ek sunflower hota hai. Hamesha haste rehna, mere jokes par (chahe wo gande hon) aur mujhse lade bina rehne ki koshish karna (jo impossible hai).<br><br>
+                Tum mere liye sabse special ho aur humesha rahogi. Stay as amazing as you are!<br><br>
+                With Love & Hugs,<br>
+                <b>[Your Name]</b>
             </p>
         </div>
         <button class="btn" style="background:#3e2723" onclick="location.reload()">Start Again 🔄</button>
@@ -201,14 +190,13 @@
             clearInterval(rainInterval);
             rainInterval = setInterval(() => {
                 const p = document.createElement('div');
-                const types = ['🌻', '🌸', '💖', '✨']; 
-                p.classList.add('particle');
-                p.innerHTML = types[Math.floor(Math.random() * types.length)];
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.fontSize = '25px';
-                p.style.animationDuration = '4s';
+                const types = ['🌻', '🌸', '💖', '✨', '🐝']; 
                 p.style.position = 'fixed';
                 p.style.top = '-50px';
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.fontSize = '25px';
+                p.style.animation = 'fall 4s linear forwards';
+                p.innerHTML = types[Math.floor(Math.random() * types.length)];
                 document.body.appendChild(p);
                 setTimeout(() => p.remove(), 4000);
             }, 500);
