@@ -18,18 +18,20 @@
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            background: #fdfaf1;
+            /* Yahan image_5.png wala Pink-Purple Gingham background set kiya gaya hai */
+            background-color: #fdfaf1;
+            background-image: url('https://i.postimg.cc/q7b0g7Ww/gingham-background.png'); /* Yeh image_5.png ka direct link hai */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
+        /* animated-bg ko change karke background ko base bana diya hai, transitions ke liye */
         .animated-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(45deg, #fdfaf1, #ffedf0, #fdfaf1);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background: rgba(253, 250, 241, 0.4); /* Thoda opaque tak background dikhe, par disturb na kare */
             z-index: -2;
         }
-
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
         .screen {
             display: none; height: 100vh; width: 100vw;
@@ -81,7 +83,7 @@
         }
         .heart-photo img { width: 100%; height: 100%; object-fit: cover; clip-path: inherit; }
 
-        /* Vintage Letter Design */
+        /* Vintage Letter Design (Yeh design original rahega) */
         .vintage-letter {
             background: #f4e4bc;
             background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
@@ -91,6 +93,12 @@
             max-width: 600px; width: 85%; height: 60vh; overflow-y: auto;
             font-family: 'Special Elite', cursive;
             position: relative;
+        }
+
+        .vintage-letter::after {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, transparent 95%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
         }
 
         .btn { 
@@ -141,9 +149,9 @@
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom:20px;">Memories of You 📸</h1>
         <div class="photo-grid">
             <div class="polaroid"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
-            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://i.postimg.cc/BZ4L4rS0/images.jpg"></div>
-            <div class="polaroid" style="animation-delay: 1s;"><img src="https://i.postimg.cc/qM7XF6rG/cute-cat.jpg"></div>
-            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
+            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="animation-delay: 1s;"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://via.placeholder.com/150"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
     </div>
@@ -151,7 +159,7 @@
     <div class="screen" id="wish-birthday">
         <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3.5rem; margin:0;">Happy Birthday! 🎂</h1>
         <div class="heart-photo">
-             <img src="https://i.postimg.cc/qM7XF6rG/cute-cat.jpg">
+             <img src="https://via.placeholder.com/300">
         </div>
         <p style="font-size:1.3rem; color:#5d4037;">Today, the most beautiful soul was born. 🌸</p>
         <button class="btn" onclick="nextPage('wishes')">Wishes 🌟</button>
@@ -159,9 +167,9 @@
 
     <div class="screen" id="wishes">
         <div class="heart-photo animate__animated animate__pulse infinite">
-            <img src="https://i.postimg.cc/BZ4L4rS0/images.jpg">
+            <img src="https://via.placeholder.com/250">
         </div>
-        <div style="background: rgba(255,255,255,0.8); padding: 25px; border-radius: 25px; max-width: 450px; border: 2px solid white;">
+        <div style="background: rgba(255,255,255,0.7); padding: 25px; border-radius: 20px; max-width: 450px; border: 2px solid white;">
             <h2 style="color:#ff4d6d; font-family: 'Caveat'; font-size: 2.2rem; margin-top:0;">For My Love...🥺💖</h2>
             <p style="font-family: 'Caveat'; font-size: 1.5rem; color: #5d4037; line-height: 1.4;">
                 "Meri bas ek hi wish hai ki tumhari aankhon mein hamesha khushi ke hi aansu aayein. <br><br>
@@ -187,7 +195,7 @@
                 <br> My Dearest [Name], <br><br>
                 Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
                 <br><br>
-                Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>. Chahe waqt kaisa bhi ho, tum mujhe hamesha apne peeche khada paogi.
+                Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>. Chahe waqt kaisa bhi हो, tum mujhe hamesha apne peeche khada paogi.
                 <br><br>
                 <b>My love and my feelings for you will never fade.</b>
                 <br><br>
@@ -201,9 +209,14 @@
 
     <script>
         function nextPage(id) {
+            // Saare screens ko hide karein
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            // Target screen ko show karein
             document.getElementById(id).classList.add('active');
+            
+            // Flower rain sir intro aur no-page ko chhod kar chalayein
             if(id !== 'ask' && id !== 'no-page') startFlowerRain();
+            else clearInterval(rainInterval);
         }
 
         let rainInterval;
@@ -218,6 +231,7 @@
                 p.style.fontSize = Math.random() * 10 + 20 + 'px';
                 p.style.animationDuration = Math.random() * 2 + 3 + 's';
                 document.body.appendChild(p);
+                // Particle ko 4 second baad remove karein
                 setTimeout(() => p.remove(), 4000);
             }, 500);
         }
