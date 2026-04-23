@@ -18,19 +18,13 @@
             margin: 0; padding: 0; height: 100%; width: 100%;
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            /* Yahan image_5.png wala Pink-Purple Gingham background set kiya gaya hai */
-            background-color: #fdfaf1;
-            background-image: url('https://i.postimg.cc/q7b0g7Ww/gingham-background.png'); /* Yeh image_5.png ka direct link hai */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        /* animated-bg ko change karke background ko base bana diya hai, transitions ke liye */
-        .animated-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(253, 250, 241, 0.4); /* Thoda opaque tak background dikhe, par disturb na kare */
-            z-index: -2;
+            
+            /* Pure CSS Gingham Background (No Image Link Needed) */
+            background-color: #fff0f3;
+            background-image: 
+                linear-gradient(90deg, rgba(255, 182, 193, 0.5) 50%, transparent 50%),
+                linear-gradient(rgba(216, 191, 216, 0.5) 50%, transparent 50%);
+            background-size: 60px 60px; /* Size adjust kar sakte hain */
         }
 
         .screen {
@@ -38,11 +32,12 @@
             flex-direction: column; justify-content: center;
             align-items: center; text-align: center; padding: 15px;
             box-sizing: border-box; position: absolute;
+            background: rgba(255, 255, 255, 0.2); /* Thoda glass effect background ke upar */
         }
 
         .active { display: flex; animation: fadeIn 1s ease; }
 
-        /* 3D Photo Gallery Animation */
+        /* 3D Photo Gallery */
         .photo-grid { 
             display: grid; grid-template-columns: repeat(3, 1fr); 
             gap: 20px; max-width: 800px; perspective: 1000px;
@@ -73,7 +68,7 @@
             .photo-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
         }
 
-        /* Heart Photo Style */
+        /* Heart Photo */
         .heart-photo {
             width: 220px; height: 220px;
             background: var(--primary-pink);
@@ -83,7 +78,7 @@
         }
         .heart-photo img { width: 100%; height: 100%; object-fit: cover; clip-path: inherit; }
 
-        /* Vintage Letter Design (Yeh design original rahega) */
+        /* Vintage Letter */
         .vintage-letter {
             background: #f4e4bc;
             background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
@@ -92,20 +87,13 @@
             border: 2px solid #d2b48c;
             max-width: 600px; width: 85%; height: 60vh; overflow-y: auto;
             font-family: 'Special Elite', cursive;
-            position: relative;
-        }
-
-        .vintage-letter::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, transparent 95%, rgba(0,0,0,0.1) 100%);
-            pointer-events: none;
         }
 
         .btn { 
             background: var(--primary-pink); color: white; padding: 12px 30px; 
             border: none; border-radius: 50px; cursor: pointer; font-weight: 600; 
             margin-top: 15px; box-shadow: 0 5px 15px rgba(255, 117, 143, 0.4); 
-            text-transform: uppercase; letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         .video-side { 
@@ -120,8 +108,6 @@
 </head>
 <body>
 
-    <div class="animated-bg"></div>
-
     <div class="screen active" id="ask">
         <img src="https://media.giphy.com/media/MDJ9IbM9GXc9G/giphy.gif" style="width:180px; border-radius:20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.8rem;">I have a surprise for you! ✨</h1>
@@ -133,14 +119,14 @@
 
     <div class="screen" id="no-page" style="background:#1a1a1a; color:white">
         <img src="https://i.postimg.cc/mD7XF6rG/angry-cat-sassy-cat.png" style="width:250px; border-radius: 15px;">
-        <h1 style="color:#ff4d6d; font-size: 2.5rem; margin-top: 20px; margin-bottom: 0;">AAYE HOW DARE YOU! 🔫</h1>
-        <p style="font-size: 1.1rem; opacity: 0.9; margin-top: 10px;">Thaye-Thaye incoming! Better press 'Yes' now!</p>
+        <h1 style="color:#ff4d6d; font-size: 2.5rem; margin-top: 20px;">AAYE HOW DARE YOU! 🔫</h1>
+        <p style="font-size: 1.1rem; opacity: 0.9;">Thaye-Thaye incoming! Better press 'Yes' now!</p>
         <button class="btn" onclick="nextPage('ask')">Wapas Jao 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
         <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJtZ3F0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0Znd0JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/giphy-downsized.gif" style="width:220px; border-radius: 15px;">
-        <h1 style="color:#ff758f; margin-top: 20px; margin-bottom: 0;">Hehe, I knew it! 😉</h1>
+        <h1 style="color:#ff758f; margin-top: 20px;">Hehe, I knew it! 😉</h1>
         <p style="font-size: 1.2rem; color: #ff758f; font-weight: bold;">good girl.</p>
         <button class="btn" onclick="nextPage('gallery')">See Magic ✨</button>
     </div>
@@ -149,9 +135,9 @@
         <h1 style="font-family:'Dancing Script'; color:#ff758f; font-size:2.5rem; margin-bottom:20px;">Memories of You 📸</h1>
         <div class="photo-grid">
             <div class="polaroid"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
-            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://via.placeholder.com/150"></div>
-            <div class="polaroid" style="animation-delay: 1s;"><img src="https://via.placeholder.com/150"></div>
-            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://via.placeholder.com/150"></div>
+            <div class="polaroid" style="animation-delay: 0.5s;"><img src="https://i.postimg.cc/BZ4L4rS0/images.jpg"></div>
+            <div class="polaroid" style="animation-delay: 1s;"><img src="https://i.postimg.cc/qM7XF6rG/cute-cat.jpg"></div>
+            <div class="polaroid" style="animation-delay: 1.5s;"><img src="https://i.ibb.co/cXvtTZxR/death-pool.webp"></div>
         </div>
         <button class="btn" onclick="nextPage('wish-birthday')">Next ✨</button>
     </div>
@@ -159,7 +145,7 @@
     <div class="screen" id="wish-birthday">
         <h1 style="font-family:'Dancing Script'; color:#ff4d6d; font-size:3.5rem; margin:0;">Happy Birthday! 🎂</h1>
         <div class="heart-photo">
-             <img src="https://via.placeholder.com/300">
+             <img src="https://i.postimg.cc/qM7XF6rG/cute-cat.jpg">
         </div>
         <p style="font-size:1.3rem; color:#5d4037;">Today, the most beautiful soul was born. 🌸</p>
         <button class="btn" onclick="nextPage('wishes')">Wishes 🌟</button>
@@ -167,13 +153,12 @@
 
     <div class="screen" id="wishes">
         <div class="heart-photo animate__animated animate__pulse infinite">
-            <img src="https://via.placeholder.com/250">
+            <img src="https://i.postimg.cc/BZ4L4rS0/images.jpg">
         </div>
-        <div style="background: rgba(255,255,255,0.7); padding: 25px; border-radius: 20px; max-width: 450px; border: 2px solid white;">
+        <div style="background: rgba(255,255,255,0.8); padding: 25px; border-radius: 25px; max-width: 450px; border: 2px solid white;">
             <h2 style="color:#ff4d6d; font-family: 'Caveat'; font-size: 2.2rem; margin-top:0;">For My Love...🥺💖</h2>
-            <p style="font-family: 'Caveat'; font-size: 1.5rem; color: #5d4037; line-height: 1.4;">
-                "Meri bas ek hi wish hai ki tumhari aankhon mein hamesha khushi ke hi aansu aayein. <br><br>
-                Tumhari har ek zidd poori ho aur main har pal tumhare saath rahun." 🥺❤️
+            <p style="font-family: 'Caveat'; font-size: 1.5rem; color: #5d4037;">
+                "Meri bas ek hi wish hai ki tumhari aankhon mein hamesha khushi ke hi aansu aayein." 🥺❤️
             </p>
         </div>
         <button class="btn" onclick="nextPage('video-page')">Deep Message 🎵</button>
@@ -181,23 +166,20 @@
 
     <div class="screen" id="video-page">
         <div class="video-side">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Sshz298Z-38" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Sshz298Z-38" frameborder="0" allowfullscreen></iframe>
         </div>
         <h2 style="font-family:'Dancing Script'; font-size:1.8rem; color:#ff758f; margin-top:15px;">I like me better when I'm with you...🥺💖</h2>
-        <p style="font-size:1rem; font-style: italic; color: #5d4037; max-width: 80%;">"Jaise Anuv Jain apne gaano se humein emotional kar deta hai..."</p>
         <button class="btn" onclick="nextPage('final-letter')">Last Message 💌</button>
     </div>
 
     <div class="screen" id="final-letter">
         <div class="vintage-letter">
-            <h1 style="color:#3e2723; border-bottom:2px solid #3e2723; font-family:'Dancing Script'; font-size: 2.2rem; padding-bottom: 10px;">Last Message for U! ❤️</h1>
+            <h1 style="color:#3e2723; border-bottom:2px solid #3e2723; font-family:'Dancing Script';">Last Message for U! ❤️</h1>
             <div style="font-size:1.2rem; line-height:1.7; color:#3e2723;">
                 <br> My Dearest [Name], <br><br>
                 Zindagi mein bohot log aate aur jaate hain, par kuch log dil mein ghar kar lete hain. Tum wahi ho. 
                 <br><br>
-                Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>. Chahe waqt kaisa bhi हो, tum mujhe hamesha apne peeche khada paogi.
-                <br><br>
-                <b>My love and my feelings for you will never fade.</b>
+                Aaj tumse ek waada hai mera—<b>Main tumhe kabhi chodd kar nahi jaunga</b>.
                 <br><br>
                 Hamesha meri 'Namuni' banke rehna. 
                 <br><br>
@@ -209,12 +191,8 @@
 
     <script>
         function nextPage(id) {
-            // Saare screens ko hide karein
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            // Target screen ko show karein
             document.getElementById(id).classList.add('active');
-            
-            // Flower rain sir intro aur no-page ko chhod kar chalayein
             if(id !== 'ask' && id !== 'no-page') startFlowerRain();
             else clearInterval(rainInterval);
         }
@@ -224,14 +202,13 @@
             clearInterval(rainInterval);
             rainInterval = setInterval(() => {
                 const p = document.createElement('div');
-                const types = ['🌻', '🌸', '💖', '✨', '🎈']; 
+                const types = ['🌻', '🌸', '💖', '✨']; 
                 p.classList.add('particle');
                 p.innerHTML = types[Math.floor(Math.random() * types.length)];
                 p.style.left = Math.random() * 100 + 'vw';
-                p.style.fontSize = Math.random() * 10 + 20 + 'px';
-                p.style.animationDuration = Math.random() * 2 + 3 + 's';
+                p.style.fontSize = '25px';
+                p.style.animationDuration = '4s';
                 document.body.appendChild(p);
-                // Particle ko 4 second baad remove karein
                 setTimeout(() => p.remove(), 4000);
             }, 500);
         }
