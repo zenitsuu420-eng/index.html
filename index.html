@@ -72,6 +72,27 @@
       .polaroid-3d img { width: 120px; height: 120px; object-fit: cover; border: 1px solid #eee; }
       .polaroid-3d:hover { transform: scale(1.1) rotate(0deg) translateZ(100px) !important; z-index: 50; box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
 
+      /* VIDEO PAGE STYLING */
+      #glimpses {
+        background: radial-gradient(circle, rgba(255,117,143,0.3) 0%, rgba(255,240,243,1) 100%);
+      }
+      .video-wrapper {
+        position: relative;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        border: 2px dashed var(--primary-pink);
+      }
+      .future-text {
+        font-family: 'Caveat', cursive;
+        font-size: 1.8rem;
+        color: var(--dark-pink);
+        margin: 15px 0;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        animation: pulse 2s infinite;
+      }
+
       /* PAPER WISH PAGE */
       .paper-wish {
         background: #fff;
@@ -95,16 +116,13 @@
       }
       .heart-box img { width: 100%; height: 100%; object-fit: cover; }
 
-      /* VINTAGE LETTER DESIGN FOR LAST PAGE */
       .vintage-letter { 
         background: #fdf5e6; 
         padding: 40px; 
         border: 1px solid #d2b48c; 
         box-shadow: 15px 15px 0px #d2b48c; 
-        max-width: 550px; 
-        width: 90%; 
-        height: 70vh; 
-        overflow-y: auto; 
+        max-width: 550px; width: 90%; 
+        height: 70vh; overflow-y: auto; 
         text-align: left; 
         font-family: 'Special Elite', cursive; 
         color: #5d4037; 
@@ -117,6 +135,7 @@
 
       @keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-15px) rotate(3deg); } }
       @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+      @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
       @keyframes paperEntry { from { opacity: 0; transform: translateY(50px) rotate(-10deg); } to { opacity: 1; transform: translateY(0) rotate(-1deg); } }
       @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
     </style>
@@ -179,10 +198,13 @@
     </div>
 
     <div class="screen" id="glimpses">
-      <h1 style="font-family: 'Dancing Script'; color: #ff758f;">Our Moments 🌸</h1>
-      <div class="video-box">
-        <video width="100%" controls autoplay loop muted><source src="Video-230.mp4" type="video/mp4" /></video>
+      <h1 style="font-family: 'Dancing Script'; color: #ff758f; font-size: 2.5rem; margin-bottom: 10px;">Our Moments 🌸</h1>
+      <div class="video-wrapper">
+        <div class="video-box">
+          <video width="100%" controls autoplay loop muted><source src="Video-230.mp4" type="video/mp4" /></video>
+        </div>
       </div>
+      <p class="future-text">Hold my hand and you are my future... ✨❤️</p>
       <button class="btn" onclick="nextPage('wish-for-u')">A Small Wish 🥺</button>
     </div>
 
