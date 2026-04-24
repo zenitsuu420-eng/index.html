@@ -72,27 +72,6 @@
       .polaroid-3d img { width: 120px; height: 120px; object-fit: cover; border: 1px solid #eee; }
       .polaroid-3d:hover { transform: scale(1.1) rotate(0deg) translateZ(100px) !important; z-index: 50; box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
 
-      /* VIDEO PAGE STYLING */
-      #glimpses {
-        background: radial-gradient(circle, rgba(255,117,143,0.3) 0%, rgba(255,240,243,1) 100%);
-      }
-      .video-wrapper {
-        position: relative;
-        padding: 20px;
-        background: rgba(255, 255, 255, 0.5);
-        border-radius: 20px;
-        backdrop-filter: blur(5px);
-        border: 2px dashed var(--primary-pink);
-      }
-      .future-text {
-        font-family: 'Caveat', cursive;
-        font-size: 1.8rem;
-        color: var(--dark-pink);
-        margin: 15px 0;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        animation: pulse 2s infinite;
-      }
-
       /* PAPER WISH PAGE */
       .paper-wish {
         background: #fff;
@@ -116,13 +95,16 @@
       }
       .heart-box img { width: 100%; height: 100%; object-fit: cover; }
 
+      /* VINTAGE LETTER DESIGN FOR LAST PAGE */
       .vintage-letter { 
         background: #fdf5e6; 
         padding: 40px; 
         border: 1px solid #d2b48c; 
         box-shadow: 15px 15px 0px #d2b48c; 
-        max-width: 550px; width: 90%; 
-        height: 70vh; overflow-y: auto; 
+        max-width: 550px; 
+        width: 90%; 
+        height: 70vh; 
+        overflow-y: auto; 
         text-align: left; 
         font-family: 'Special Elite', cursive; 
         color: #5d4037; 
@@ -135,7 +117,6 @@
 
       @keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-15px) rotate(3deg); } }
       @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-      @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
       @keyframes paperEntry { from { opacity: 0; transform: translateY(50px) rotate(-10deg); } to { opacity: 1; transform: translateY(0) rotate(-1deg); } }
       @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
     </style>
@@ -156,7 +137,7 @@
 
     <div class="screen" id="ask">
       <img src="https://i.ibb.co/TBRBWSrk/6xlbkw.jpg" style="width: 200px; border-radius: 20px" />
-      <h1 style="font-family: 'Dancing Script'; color: #ff758f; font-size: 2.8rem">Ready for your gift? ✨</h1>
+      <h1 style="font-family: 'Dancing Script'; color: #ff758f; font-size: 2.8rem">PLS ACCEPT THE GIFT? ✨</h1>
       <div style="display: flex; gap: 15px">
         <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
         <button class="btn" style="background: #ff4d6d" onclick="nextPage('no-page')">No 😝</button>
@@ -172,13 +153,13 @@
 
     <div class="screen" id="yes-intro">
       <img src="https://i.ibb.co/TqbwNP65/cute-cat-cat-cute.gif" style="width: 200px" />
-      <h1 style="color: #ff758f; font-family: 'Dancing Script'; font-size: 3rem; margin-bottom: 5px;">Hehe, Let's Go! 😉</h1>
+      <h1 style="color: #ff758f; font-family: 'Dancing Script'; font-size: 3rem; margin-bottom: 5px;">Hehe,Good Choice! 😉</h1>
       <p style="font-size: 0.9rem; color: #ff758f;">good my gurlll</p>
       <button class="btn" onclick="nextPage('honeybee')">See 3D Gallery 🐝</button>
     </div>
 
     <div class="screen" id="honeybee">
-      <h1 style="font-family: 'Dancing Script'; color: #ff758f; font-size: 2.5rem; margin-bottom: 30px;">My Honeybee Cutie 🐝💖</h1>
+      <h1 style="font-family: 'Dancing Script'; color: #ff758f; font-size: 2.5rem; margin-bottom: 30px;">MY HONEYBEE 🐝💖</h1>
       <div class="gallery-container-3d">
         <div class="polaroid-3d" style="transform: rotate(-5deg);"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg" /></div>
         <div class="polaroid-3d" style="transform: rotate(3deg); animation-delay: 0.5s;"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg" /></div>
@@ -198,13 +179,10 @@
     </div>
 
     <div class="screen" id="glimpses">
-      <h1 style="font-family: 'Dancing Script'; color: #ff758f; font-size: 2.5rem; margin-bottom: 10px;">Our Moments 🌸</h1>
-      <div class="video-wrapper">
-        <div class="video-box">
-          <video width="100%" controls autoplay loop muted><source src="Video-230.mp4" type="video/mp4" /></video>
-        </div>
+      <h1 style="font-family: 'Dancing Script'; color: #ff758f;">DARLING 🌸</h1>
+      <div class="video-box">
+        <video width="100%" controls autoplay loop muted><source src="Video-230.mp4" type="video/mp4" /></video>
       </div>
-      <p class="future-text">Hold my hand and you are my future... ✨❤️</p>
       <button class="btn" onclick="nextPage('wish-for-u')">A Small Wish 🥺</button>
     </div>
 
@@ -223,7 +201,7 @@
 
     <div class="screen" id="letter">
         <div class="vintage-letter animate__animated animate__fadeInUp">
-            <h1 style="font-size: 1.4rem; border-bottom: 1px solid #d2b48c; padding-bottom: 10px;">Last letter ❤️</h1>
+            <h1 style="font-size: 1.4rem; border-bottom: 1px solid #d2b48c; padding-bottom: 10px;">Last Massgae for U❤️</h1>
             <div style="line-height: 1.6; font-size: 1.05rem; margin-top: 20px;">
                 Happy Birthday to my favorite 'honeybee'! 🌻
                 <br><br>
@@ -237,7 +215,7 @@
                 <br><br>
                 <b>With Love & Hugs,</b>
                 <br>
-                [Your Name]
+                [Vishal]
                 <br><br>
                 <p style="text-align: center; border-top: 1px solid #d2b48c; padding-top: 10px;">--- End of Letter ---</p>
             </div>
@@ -246,7 +224,7 @@
     </div>
 
     <script>
-      const correctPin = "2026"; 
+      const correctPin = "0615"; 
 
       function checkPin() {
         if (document.getElementById('pinInput').value === correctPin) nextPage('ask');
