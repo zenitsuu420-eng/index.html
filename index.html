@@ -156,6 +156,26 @@
         border: 1px solid #ddd;
       }
 
+      /* --- NEW VINTAGE LETTER STYLING --- */
+      .vintage-letter {
+        background: #fdf5e6;
+        padding: 30px;
+        border: 1px solid #d2b48c;
+        box-shadow: 10px 10px 0px #d2b48c;
+        max-width: 550px;
+        width: 90%;
+        height: 70vh;
+        overflow-y: auto;
+        text-align: left;
+        font-family: 'Special Elite', cursive;
+        color: #5d4037;
+        position: relative;
+      }
+      .letter-content {
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+
       .video-box {
         border: 8px solid white;
         border-radius: 15px;
@@ -287,22 +307,32 @@
         </p>
         <p style="text-align: right; font-family: 'Dancing Script'; font-size: 1.6rem; color: var(--dark-pink); margin-bottom: 0;">- Only Yours</p>
       </div>
-      <button class="btn" onclick="nextPage('final-letter')">Final Letter 💌</button>
+      <button class="btn" onclick="nextPage('letter')">Final Letter 💌</button>
     </div>
 
-    <div class="screen" id="final-letter">
-      <div style="background: #fdf5e6; padding: 25px; border: 1px solid #d2b48c; box-shadow: 10px 10px 0px #d2b48c; max-width: 550px; width: 90%; height: 60vh; overflow-y: auto; text-align: left; font-family: 'Special Elite', cursive;">
-        <p>
-          Happy Birthday to my favorite 'honeybee'! 🌻<br /><br />
-          I realized... you already have ME! What more could you want? 😂<br /><br />
-          Zindagi boring hoti agar tum gun dikha kar entry na leti. Tum meri
-          life ki wo <b>Lily</b> ho.<br /><br />
-          Stay as amazing as you are!<br /><br />
-          With Love & Hugs,<br />
-          <b>[Your Name]</b>
-        </p>
-      </div>
-      <button class="btn" style="background: #3e2723" onclick="location.reload()">Start Again 🔄</button>
+    <div class="screen" id="letter">
+        <div class="vintage-letter animate__animated animate__fadeInUp">
+            <h1 style="font-family: 'Special Elite', cursive; color: #5d4037; font-size: 1.8rem;">Dearest [Name], ❤️</h1>
+            <div class="letter-content">
+                <br>
+                Happy Birthday to my favorite 'Namuni'! 🌻
+                <br><br>
+                I was thinking about what to give you, and then I realized... you already have ME! What more could you want? 😂 Just kidding!
+                <br><br>
+                Zindagi thodi boring hoti agar tum mere life mein gun dikha kar entry na leti. Tum meri life ki wo <b>Lily</b> ho jiski khushboo mere har din ko special banati hai.
+                <br><br>
+                I hope ye saal tumhare liye utna hi bright ho jitna ek sunflower hota hai. Hamesha haste rehna, mere jokes par (chahe wo gande hon) aur mujhse lade bina rehne ki koshish karna (jo impossible hai).
+                <br><br>
+                Tum mere liye sabse special ho aur humesha rahogi. Stay as amazing as you are!
+                <br><br>
+                <b>With Love & Hugs,</b>
+                <br>
+                [Your Name]
+                <br><br>
+                --- End of Letter ---
+            </div>
+            <button class="btn" style="background: #3e2723; margin-top: 20px;" onclick="location.reload()">Start Again 🔄</button>
+        </div>
     </div>
 
     <script>
