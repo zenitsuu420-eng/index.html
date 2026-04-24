@@ -22,6 +22,7 @@
         overflow: hidden;
       }
 
+      /* BACKGROUND PATTERN */
       .bg-pattern {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
         background-color: #fff0f3;
@@ -41,6 +42,7 @@
 
       .active { display: flex; animation: fadeIn 1s ease; }
 
+      /* LOCK SCREEN */
       #lock-screen {
         background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.ibb.co/TDxqDP6x/1776955721591.jpg');
         background-size: cover; background-position: center;
@@ -59,31 +61,18 @@
       .pin-input { background: rgba(255, 255, 255, 0.2); border: 2px solid white; border-radius: 10px; color: white; font-size: 1.5rem; text-align: center; width: 80%; padding: 10px; margin: 20px 0; outline: none; letter-spacing: 5px; }
       .error-msg { color: #ff4d6d; font-size: 0.8rem; margin-top: -10px; display: none; }
 
-      /* --- 3D GALLERY EFFECTS RESTORED --- */
-      .gallery-container-3d { 
-        display: flex; gap: 20px; perspective: 1500px; flex-wrap: wrap; justify-content: center; 
-      }
+      /* 3D GALLERY EFFECTS */
+      .gallery-container-3d { display: flex; gap: 20px; perspective: 1500px; flex-wrap: wrap; justify-content: center; }
       .polaroid-3d { 
         background: white; padding: 10px 10px 30px 10px; 
         box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        cursor: pointer;
         animation: float 3s ease-in-out infinite;
       }
-      .polaroid-3d img { width: 130px; height: 130px; object-fit: cover; border: 1px solid #eee; }
-      
-      .polaroid-3d:nth-child(1) { transform: rotate(-5deg); animation-delay: 0s; }
-      .polaroid-3d:nth-child(2) { transform: rotate(3deg); animation-delay: 0.5s; }
-      .polaroid-3d:nth-child(3) { transform: rotate(-3deg); animation-delay: 1s; }
-      .polaroid-3d:nth-child(4) { transform: rotate(5deg); animation-delay: 1.5s; }
+      .polaroid-3d img { width: 120px; height: 120px; object-fit: cover; border: 1px solid #eee; }
+      .polaroid-3d:hover { transform: scale(1.1) rotate(0deg) translateZ(100px) !important; z-index: 50; box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
 
-      .polaroid-3d:hover {
-        transform: scale(1.1) rotate(0deg) translateZ(100px) !important;
-        z-index: 50;
-        box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-      }
-
-      /* --- PAPER WISH PAGE --- */
+      /* PAPER WISH PAGE */
       .paper-wish {
         background: #fff;
         background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
@@ -95,14 +84,11 @@
         transform: rotate(-1deg);
         animation: paperEntry 1s ease-out;
       }
-      .paper-wish::before {
-        content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: repeating-linear-gradient(transparent, transparent 24px, #e7eff1 24px, #e7eff1 26px);
-      }
 
       .artistic-bg { background-color: rgba(255, 255, 255, 0.8); border: 8px solid #fff; padding: 20px; border-radius: 30px; }
-      .hb-title { font-family: "Dancing Script"; font-size: 3rem; color: var(--dark-pink); }
-      .heart-box { width: 200px; height: 200px; background-color: var(--primary-pink); display: flex; justify-content: center; align-items: center; animation: heartbeat 1.5s infinite;
+      .hb-title { font-family: "Dancing Script"; font-size: 2.8rem; color: var(--dark-pink); margin: 0; }
+      
+      .heart-box { width: 180px; height: 180px; background-color: var(--primary-pink); display: flex; justify-content: center; align-items: center; animation: heartbeat 1.5s infinite; margin: 15px auto;
         mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
         -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
         mask-size: contain; -webkit-mask-size: contain; mask-repeat: no-repeat;
@@ -110,9 +96,9 @@
       .heart-box img { width: 100%; height: 100%; object-fit: cover; }
 
       .vintage-letter { background: #fdf5e6; padding: 30px; border: 1px solid #d2b48c; box-shadow: 10px 10px 0px #d2b48c; max-width: 500px; width: 90%; height: 60vh; overflow-y: auto; text-align: left; font-family: 'Special Elite', cursive; }
-      .video-box { border: 8px solid white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); overflow: hidden; max-width: 320px; }
+      .video-box { border: 8px solid white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); overflow: hidden; max-width: 300px; }
 
-      .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 15px; font-weight: bold; transition: 0.3s; z-index: 10; }
+      .btn { background: var(--primary-pink); color: white; padding: 12px 30px; border: none; border-radius: 50px; cursor: pointer; margin-top: 15px; font-weight: bold; transition: 0.3s; position: relative; z-index: 10; }
 
       @keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-15px) rotate(3deg); } }
       @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
@@ -135,7 +121,7 @@
     </div>
 
     <div class="screen" id="ask">
-      <img src="https://i.ibb.co/HLSBN13W/cute-cat.jpg" style="width: 180px; border-radius: 20px" />
+      <img src="https://i.ibb.co/TBRBWSrk/6xlbkw.jpg" style="width: 200px; border-radius: 20px" />
       <h1 style="font-family: 'Dancing Script'; color: #ff758f; font-size: 2.8rem">Ready for your gift? ✨</h1>
       <div style="display: flex; gap: 15px">
         <button class="btn" onclick="nextPage('yes-intro')">Yes! ❤️</button>
@@ -144,32 +130,35 @@
     </div>
 
     <div class="screen" id="no-page" style="background: #1a1a1a; color: white">
-      <img src="https://i.ibb.co/vCgqdpd8/evil-cat-floppy.gif" style="width: 200px; border-radius: 10px;">
-      <h1 style="color: #ff4d6d;">How dare you!</h1>
-      <button class="btn" onclick="nextPage('ask')">Sorry! 🏃‍♀️</button>
+      <img src="https://i.ibb.co/vCgqdpd8/evil-cat-floppy.gif" style="width: 200px; border-radius: 10px; margin-bottom: 20px;">
+      <h1 style="color: #ff4d6d; font-size: 2rem;">AAYE HOW DARE YOU! 🔫</h1>
+      <p style="font-size: 1.2rem;">Thaye-Thaye incoming! Better press 'Yes' now</p>
+      <button class="btn" onclick="nextPage('ask')">Sorry, I'll click Yes! 🏃‍♀️</button>
     </div>
 
     <div class="screen" id="yes-intro">
       <img src="https://i.ibb.co/TqbwNP65/cute-cat-cat-cute.gif" style="width: 200px" />
-      <h1 style="color: #ff758f; font-family: 'Dancing Script'; font-size: 3rem">Hehe, Let's Go! 😉</h1>
+      <h1 style="color: #ff758f; font-family: 'Dancing Script'; font-size: 3rem; margin-bottom: 5px;">Hehe, Let's Go! 😉</h1>
+      <p style="font-size: 0.9rem; color: #ff758f;">good my gurlll</p>
       <button class="btn" onclick="nextPage('honeybee')">See 3D Gallery 🐝</button>
     </div>
 
     <div class="screen" id="honeybee">
       <h1 style="font-family: 'Dancing Script'; color: #ff758f; font-size: 2.5rem; margin-bottom: 30px;">My Honeybee Cutie 🐝💖</h1>
       <div class="gallery-container-3d">
-        <div class="polaroid-3d"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg" /></div>
-        <div class="polaroid-3d"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg" /></div>
-        <div class="polaroid-3d"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg" /></div>
-        <div class="polaroid-3d"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg" /></div>
+        <div class="polaroid-3d" style="transform: rotate(-5deg);"><img src="https://i.ibb.co/XrkYvxVD/1776925569405.jpg" /></div>
+        <div class="polaroid-3d" style="transform: rotate(3deg); animation-delay: 0.5s;"><img src="https://i.ibb.co/ynZB4N7h/1776925569427.jpg" /></div>
+        <div class="polaroid-3d" style="transform: rotate(-3deg); animation-delay: 1s;"><img src="https://i.ibb.co/TqMzvrDf/1776925569431.jpg" /></div>
+        <div class="polaroid-3d" style="transform: rotate(5deg); animation-delay: 1.5s;"><img src="https://i.ibb.co/qLdR3QYW/1776925569444.jpg" /></div>
       </div>
       <button class="btn" onclick="nextPage('wish-birthday')">Next Magic ✨</button>
     </div>
 
     <div class="screen" id="wish-birthday">
       <div class="artistic-bg">
-        <h1 class="hb-title">Happy Birthday! 🎂</h1>
+        <h1 class="hb-title">Happy Birthday! my love 🎂</h1>
         <div class="heart-box"><img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg" /></div>
+        <p style="font-family: 'Caveat'; font-size: 1.2rem; color: #ff4d6d; margin: 0;">You make my world so much brighter just by being in it. ❤️</p>
       </div>
       <button class="btn" onclick="nextPage('glimpses')">Watch Glimpses 🎬</button>
     </div>
@@ -184,24 +173,31 @@
 
     <div class="screen" id="wish-for-u">
       <div class="paper-wish">
-        <div style="position: relative; z-index: 2;">
-            <h2 style="font-family: 'Caveat'; color: var(--dark-pink); font-size: 2.5rem; margin:0;">My Wish for U... 🥺❤️</h2>
-            <p style="font-family: 'Caveat'; font-size: 1.6rem; color: #3e2723; line-height: 1.4; margin-top: 20px;">
-              "Main bas itna chahta hoon ki tumhari life mein kabhi dukh na aaye. Tumhari aankhon mein wahi chamak rahe jo mere liye sabse pyaari hai. 
-              <br><br>
-              Stay with me forever, meri sabse pyaari aur pagal honeybee. You deserve all the happiness in the world!"
-            </p>
-            <p style="text-align: right; font-family: 'Dancing Script'; font-size: 1.5rem; color: var(--dark-pink); margin-top: 10px;">— Only Yours</p>
-        </div>
+        <h2 style="font-family: 'Caveat'; color: var(--dark-pink); font-size: 2.5rem; margin:0;">My Wish for U... 🥺❤️</h2>
+        <p style="font-family: 'Caveat'; font-size: 1.6rem; color: #3e2723; line-height: 1.4; margin-top: 20px;">
+          "Main bas itna chahta hoon ki tumhari life mein kabhi dukh na aaye. Tumhari aankhon mein wahi chamak rahe jo mere liye sabse pyaari hai. 
+          <br><br>
+          Stay with me forever, meri sabse pyaari aur pagal honeybee. You deserve all the happiness in the world!"
+        </p>
+        <p style="text-align: right; font-family: 'Dancing Script'; font-size: 1.5rem; color: var(--dark-pink);">— Only Yours</p>
       </div>
       <button class="btn" onclick="nextPage('letter')">Final Letter 💌</button>
     </div>
 
     <div class="screen" id="letter">
-        <div class="vintage-letter">
-            <h1 style="font-family: 'Special Elite'; color: #5d4037;">Dearest [Name], ❤️</h1>
-            <p>Happy Birthday to my favorite 'Namuni'! 🌻 Zindagi thodi boring hoti agar tum na hoti. Stay amazing!</p>
-            <button class="btn" style="background: #3e2723;" onclick="location.reload()">Start Again 🔄</button>
+        <div class="vintage-letter animate__animated animate__fadeInUp">
+            <h1 style="font-family: 'Special Elite'; color: #5d4037; font-size: 1.5rem;">last massage for u. ❤️</h1>
+            <div style="line-height: 1.5; font-size: 1rem;">
+                <br>Happy Birthday again, my favorite 'Namuni'! 🌻
+                <br><br>
+                Zindagi thodi boring hoti agar tum mere life mein gun dikha kar entry na leti. Tum meri life ki wo Lily ho jiski khushboo mere har din ko special banati hai.
+                <br><br>
+                Hamesha haste rehna aur mere gande jokes par smile karte rehna. Tum mere liye sabse special ho aur humesha rahogi.
+                <br><br>
+                <b>Stay amazing!</b><br>
+                [Your Name]
+            </div>
+            <button class="btn" style="background: #3e2723; margin-top: 20px;" onclick="location.reload()">Re-watch Surprise 🔄</button>
         </div>
     </div>
 
@@ -220,6 +216,7 @@
       function nextPage(id) {
         document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
         document.getElementById(id).classList.add("active");
+        
         if (id !== "lock-screen" && id !== "no-page") {
             document.getElementById('main-bg').style.display = 'block';
             startFlowerRain();
@@ -236,7 +233,8 @@
           const p = document.createElement("div");
           p.style.position = "fixed"; p.style.top = "-50px";
           p.style.left = Math.random() * 100 + "vw";
-          p.style.fontSize = "25px"; p.style.animation = "fall 4s linear forwards";
+          p.style.fontSize = "25px"; p.style.zIndex = "100";
+          p.style.animation = "fall 4s linear forwards";
           p.innerHTML = ["🌻", "🌸", "💖", "✨", "🐝"][Math.floor(Math.random() * 5)];
           document.body.appendChild(p);
           setTimeout(() => p.remove(), 4000);
