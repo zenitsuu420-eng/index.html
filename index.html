@@ -20,15 +20,17 @@
         margin: 0; padding: 0; height: 100%; width: 100%;
         font-family: "Poppins", sans-serif;
         overflow: hidden;
-        background-color: #fff0f3;
       }
 
-      /* Background Pattern */
+      /* --- UPDATED BACKGROUND PATTERN (IMAGE STYLE) --- */
       .bg-pattern {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-        background-image: repeating-linear-gradient(90deg, rgba(255, 182, 193, 0.4) 0px, rgba(255, 182, 193, 0.4) 30px, transparent 30px, transparent 60px),
-                          repeating-linear-gradient(0deg, rgba(216, 191, 216, 0.4) 0px, rgba(216, 191, 216, 0.4) 30px, transparent 30px, transparent 60px);
-        background-size: 60px 60px;
+        background-color: #fff0f3;
+        background-image: 
+          repeating-linear-gradient(90deg, rgba(255, 182, 193, 0.6) 0px, rgba(255, 182, 193, 0.6) 40px, transparent 40px, transparent 80px),
+          repeating-linear-gradient(0deg, rgba(216, 191, 216, 0.5) 0px, rgba(216, 191, 216, 0.5) 40px, transparent 40px, transparent 80px);
+        background-size: 80px 80px;
+        display: none; /* Default hidden, code se show hoga */
       }
 
       .screen {
@@ -36,12 +38,11 @@
         flex-direction: column; justify-content: center;
         align-items: center; text-align: center; padding: 15px;
         box-sizing: border-box; position: absolute;
-        background: rgba(255, 255, 255, 0.2);
       }
 
       .active { display: flex; animation: fadeIn 1s ease; }
 
-      /* --- LOCK SCREEN WITH PIN --- */
+      /* --- LOCK SCREEN (FIRST PAGE - DARK) --- */
       #lock-screen {
         background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.ibb.co/TDxqDP6x/1776955721591.jpg');
         background-size: cover; background-position: center;
@@ -56,33 +57,19 @@
         width: 300px;
       }
 
-      .lock-photo {
-        width: 100px; height: 100px; border-radius: 50%;
-        border: 3px solid white; margin-bottom: 15px; object-fit: cover;
-      }
-
-      .pin-input {
-        background: rgba(255, 255, 255, 0.2);
-        border: 2px solid white; border-radius: 10px;
-        color: white; font-size: 1.5rem; text-align: center;
-        width: 80%; padding: 10px; margin: 20px 0;
-        outline: none; letter-spacing: 5px;
-      }
-
+      .lock-photo { width: 100px; height: 100px; border-radius: 50%; border: 3px solid white; margin-bottom: 15px; object-fit: cover; }
+      .pin-input { background: rgba(255, 255, 255, 0.2); border: 2px solid white; border-radius: 10px; color: white; font-size: 1.5rem; text-align: center; width: 80%; padding: 10px; margin: 20px 0; outline: none; letter-spacing: 5px; }
       .pin-input::placeholder { color: rgba(255, 255, 255, 0.6); letter-spacing: normal; font-size: 1rem; }
-
       .error-msg { color: #ff4d6d; font-size: 0.8rem; margin-top: -10px; display: none; }
 
-      /* --- MAIN SURPRISE ELEMENTS --- */
+      /* --- CONTENT STYLING --- */
       .gallery-container-3d { display: flex; gap: 15px; perspective: 1200px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
       .polaroid-flip { background: white; padding: 8px 8px 25px 8px; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); border-radius: 4px; transition: 0.8s; }
-      .polaroid-flip img { width: 130px; height: 130px; object-fit: cover; }
-      .polaroid-flip:nth-child(odd) { transform: rotateY(-20deg) rotateZ(-2deg); }
-      .polaroid-flip:nth-child(even) { transform: rotateY(20deg) rotateZ(2deg); }
-      .polaroid-flip:hover { transform: rotateY(0deg) scale(1.15) translateZ(50px); z-index: 10; }
-
-      .artistic-bg { background-color: rgba(255, 255, 255, 0.7); border: 10px solid #fff; padding: 20px; border-radius: 30px; }
-      .hb-title { font-family: "Dancing Script"; font-size: 3.5rem; color: var(--dark-pink); }
+      .polaroid-flip img { width: 120px; height: 120px; object-fit: cover; }
+      
+      .artistic-bg { background-color: rgba(255, 255, 255, 0.8); border: 8px solid #fff; padding: 20px; border-radius: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+      .hb-title { font-family: "Dancing Script"; font-size: 3rem; color: var(--dark-pink); }
+      
       .heart-box { width: 200px; height: 200px; background-color: var(--primary-pink); display: flex; justify-content: center; align-items: center; animation: heartbeat 1.5s infinite;
         mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
         -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
@@ -101,17 +88,15 @@
     </style>
   </head>
   <body>
-    <div class="bg-pattern"></div>
+    <div class="bg-pattern" id="main-bg"></div>
 
     <div class="screen active" id="lock-screen">
         <div class="lock-container animate__animated animate__fadeInDown">
             <img src="https://i.ibb.co/TDxqDP6x/1776955721591.jpg" class="lock-photo" alt="Profile">
             <h2 style="margin: 0; font-size: 1.2rem;">Hello, Madam Jii ❤️</h2>
             <p style="font-size: 0.8rem; opacity: 0.7;">Enter PIN to Unlock Surprise</p>
-            
             <input type="password" id="pinInput" class="pin-input" placeholder="XXXX" maxlength="4">
             <p id="errorMessage" class="error-msg">Incorrect PIN! Try again ❌</p>
-            
             <button class="btn" onclick="checkPin()">Unlock 🔓</button>
         </div>
     </div>
@@ -191,7 +176,7 @@
     </div>
 
     <script>
-      const correctPin = "2026"; // <--- Aap yahan PIN change kar sakte hain
+      const correctPin = "2026"; 
 
       function checkPin() {
         const input = document.getElementById('pinInput').value;
@@ -202,7 +187,6 @@
         } else {
           error.style.display = 'block';
           document.getElementById('pinInput').value = '';
-          // Shake animation for error
           const container = document.querySelector('.lock-container');
           container.classList.add('animate__shakeX');
           setTimeout(() => container.classList.remove('animate__shakeX'), 500);
@@ -212,8 +196,15 @@
       function nextPage(id) {
         document.querySelectorAll(".screen").forEach((s) => s.classList.remove("active"));
         document.getElementById(id).classList.add("active");
-        if (id !== "ask" && id !== "no-page" && id !== "lock-screen") startFlowerRain();
-        else clearInterval(rainInterval);
+        
+        // Show background pattern only after lock screen
+        if (id !== "lock-screen" && id !== "no-page") {
+            document.getElementById('main-bg').style.display = 'block';
+            startFlowerRain();
+        } else {
+            if(id === "lock-screen") document.getElementById('main-bg').style.display = 'none';
+            clearInterval(rainInterval);
+        }
       }
 
       let rainInterval;
